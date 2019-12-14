@@ -18,7 +18,6 @@ namespace Color_Calibration
             InitializeComponent();
         }
 
-
         private int Get_x(float x_v)
         {
             double len;
@@ -141,5 +140,70 @@ namespace Color_Calibration
         {
             Draw_Pic();
         }
+
+        #region  Lable_Mouse function
+        private void lbl_MouseDown(object sender)
+        {
+            Label LB = sender as Label;
+            LB.Image = Color_Calibration.Properties.Resources.btn2_Dwn;
+            LB.Location = new Point(LB.Location.X + 1, LB.Location.Y + 1);
+        }
+
+        private void lbl_MouseUp(object sender)
+        {
+            Label LB = sender as Label;
+            LB.Location = new Point(LB.Location.X - 1, LB.Location.Y - 1);
+        }
+        private void lbl_MouseEnter(object sender)
+        {
+            Label LB = sender as Label;
+            LB.Image = Color_Calibration.Properties.Resources.btn2_Ent;
+        }
+        private void lbl_MouseLeave(object sender)
+        {
+            Label LB = sender as Label;
+            LB.Image = null;
+        }
+        #endregion
+        #region Lable_Mouse opreate
+        private void lbl_x_add_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_x.Value = Math.Min((float)(ucTrack_x.Value + 0.001), (float)0.7);
+        }
+
+        private void lbl_x_add_MouseEnter(object sender, EventArgs e)
+        {
+            lbl_MouseEnter(sender);
+        }
+
+        private void lbl_x_add_MouseLeave(object sender, EventArgs e)
+        {
+            lbl_MouseLeave(sender);
+        }
+
+        private void lbl_x_add_MouseUp(object sender, MouseEventArgs e)
+        {
+            lbl_MouseUp(sender);
+        }
+
+        private void lbl_y_add_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_y.Value = Math.Min((float)(ucTrack_y.Value + 0.001), (float)0.7);
+        }
+
+        private void lbl_x_down_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_x.Value = Math.Max((float)(ucTrack_x.Value - 0.001), 0);
+        }
+
+        private void lbl_y_down_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_y.Value = Math.Max((float)(ucTrack_y.Value - 0.001), 0);
+        }
+        #endregion
     }
 }

@@ -33,9 +33,9 @@
             this.ucDataGridView_result = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.ucBtn_setid = new HZH_Controls.Controls.UCBtnExt();
-            this.ucBtnExt1 = new HZH_Controls.Controls.UCBtnExt();
-            this.ucBtnExt2 = new HZH_Controls.Controls.UCBtnExt();
+            this.ucBtn_save = new EASkins.Ami_Button_1();
+            this.ucBtn_clear = new EASkins.Ami_Button_1();
+            this.ucBtn_Execute = new EASkins.Ami_Button_1();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@
             this.ucCheckBox_out.Size = new System.Drawing.Size(171, 30);
             this.ucCheckBox_out.TabIndex = 7;
             this.ucCheckBox_out.TextValue = "Outcome Measures";
+            this.ucCheckBox_out.Visible = false;
             this.ucCheckBox_out.CheckedChangeEvent += new System.EventHandler(this.ucCheckBox_out_CheckedChangeEvent);
             // 
             // ucDataGridView_result
@@ -106,80 +107,48 @@
             this.label1.Text = "Put the sensor on monitor : ID 1 , and then click the Execute button.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ucBtn_setid
+            // ucBtn_save
             // 
-            this.ucBtn_setid.BackColor = System.Drawing.Color.White;
-            this.ucBtn_setid.BtnBackColor = System.Drawing.Color.White;
-            this.ucBtn_setid.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_setid.BtnForeColor = System.Drawing.Color.Purple;
-            this.ucBtn_setid.BtnText = "Execute";
-            this.ucBtn_setid.ConerRadius = 10;
-            this.ucBtn_setid.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ucBtn_setid.FillColor = System.Drawing.SystemColors.Control;
-            this.ucBtn_setid.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_setid.IsRadius = true;
-            this.ucBtn_setid.IsShowRect = true;
-            this.ucBtn_setid.IsShowTips = false;
-            this.ucBtn_setid.Location = new System.Drawing.Point(788, 71);
-            this.ucBtn_setid.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBtn_setid.Name = "ucBtn_setid";
-            this.ucBtn_setid.RectColor = System.Drawing.Color.Purple;
-            this.ucBtn_setid.RectWidth = 2;
-            this.ucBtn_setid.Size = new System.Drawing.Size(110, 33);
-            this.ucBtn_setid.TabIndex = 36;
-            this.ucBtn_setid.TabStop = false;
-            this.ucBtn_setid.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.ucBtn_setid.TipsText = "";
+            this.ucBtn_save.BackColor = System.Drawing.Color.Transparent;
+            this.ucBtn_save.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucBtn_save.Image = null;
+            this.ucBtn_save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ucBtn_save.Location = new System.Drawing.Point(734, 213);
+            this.ucBtn_save.Name = "ucBtn_save";
+            this.ucBtn_save.Size = new System.Drawing.Size(76, 28);
+            this.ucBtn_save.TabIndex = 66;
+            this.ucBtn_save.Text = "Save";
+            this.ucBtn_save.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.ucBtn_save.Click += new System.EventHandler(this.ucBtn_save_Click);
             // 
-            // ucBtnExt1
+            // ucBtn_clear
             // 
-            this.ucBtnExt1.BackColor = System.Drawing.Color.White;
-            this.ucBtnExt1.BtnBackColor = System.Drawing.Color.White;
-            this.ucBtnExt1.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtnExt1.BtnForeColor = System.Drawing.Color.Purple;
-            this.ucBtnExt1.BtnText = "Save";
-            this.ucBtnExt1.ConerRadius = 10;
-            this.ucBtnExt1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ucBtnExt1.FillColor = System.Drawing.SystemColors.Control;
-            this.ucBtnExt1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtnExt1.IsRadius = true;
-            this.ucBtnExt1.IsShowRect = true;
-            this.ucBtnExt1.IsShowTips = false;
-            this.ucBtnExt1.Location = new System.Drawing.Point(734, 213);
-            this.ucBtnExt1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBtnExt1.Name = "ucBtnExt1";
-            this.ucBtnExt1.RectColor = System.Drawing.Color.Purple;
-            this.ucBtnExt1.RectWidth = 2;
-            this.ucBtnExt1.Size = new System.Drawing.Size(76, 28);
-            this.ucBtnExt1.TabIndex = 37;
-            this.ucBtnExt1.TabStop = false;
-            this.ucBtnExt1.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.ucBtnExt1.TipsText = "";
+            this.ucBtn_clear.BackColor = System.Drawing.Color.Transparent;
+            this.ucBtn_clear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucBtn_clear.Image = null;
+            this.ucBtn_clear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ucBtn_clear.Location = new System.Drawing.Point(822, 213);
+            this.ucBtn_clear.Name = "ucBtn_clear";
+            this.ucBtn_clear.Size = new System.Drawing.Size(76, 28);
+            this.ucBtn_clear.TabIndex = 67;
+            this.ucBtn_clear.Text = "Clear";
+            this.ucBtn_clear.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.ucBtn_clear.Click += new System.EventHandler(this.ucBtn_clear_BtnClick);
             // 
-            // ucBtnExt2
+            // ucBtn_Execute
             // 
-            this.ucBtnExt2.BackColor = System.Drawing.Color.White;
-            this.ucBtnExt2.BtnBackColor = System.Drawing.Color.White;
-            this.ucBtnExt2.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtnExt2.BtnForeColor = System.Drawing.Color.Purple;
-            this.ucBtnExt2.BtnText = "Clear";
-            this.ucBtnExt2.ConerRadius = 10;
-            this.ucBtnExt2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ucBtnExt2.FillColor = System.Drawing.SystemColors.Control;
-            this.ucBtnExt2.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtnExt2.IsRadius = true;
-            this.ucBtnExt2.IsShowRect = true;
-            this.ucBtnExt2.IsShowTips = false;
-            this.ucBtnExt2.Location = new System.Drawing.Point(822, 213);
-            this.ucBtnExt2.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBtnExt2.Name = "ucBtnExt2";
-            this.ucBtnExt2.RectColor = System.Drawing.Color.Purple;
-            this.ucBtnExt2.RectWidth = 2;
-            this.ucBtnExt2.Size = new System.Drawing.Size(76, 28);
-            this.ucBtnExt2.TabIndex = 38;
-            this.ucBtnExt2.TabStop = false;
-            this.ucBtnExt2.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.ucBtnExt2.TipsText = "";
+            this.ucBtn_Execute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucBtn_Execute.BackColor = System.Drawing.Color.Transparent;
+            this.ucBtn_Execute.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucBtn_Execute.Image = null;
+            this.ucBtn_Execute.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ucBtn_Execute.Location = new System.Drawing.Point(788, 18);
+            this.ucBtn_Execute.Name = "ucBtn_Execute";
+            this.ucBtn_Execute.Size = new System.Drawing.Size(110, 33);
+            this.ucBtn_Execute.TabIndex = 68;
+            this.ucBtn_Execute.Text = "Execute";
+            this.ucBtn_Execute.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.ucBtn_Execute.Click += new System.EventHandler(this.ucBtn_Execute_BtnClick);
             // 
             // UnColorForm
             // 
@@ -187,9 +156,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = global::Color_Calibration.Properties.Resources.mainLogo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.ucBtnExt2);
-            this.Controls.Add(this.ucBtnExt1);
-            this.Controls.Add(this.ucBtn_setid);
+            this.Controls.Add(this.ucBtn_Execute);
+            this.Controls.Add(this.ucBtn_clear);
+            this.Controls.Add(this.ucBtn_save);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ucCheckBox_out);
             this.Controls.Add(this.label_cm);
@@ -210,8 +179,8 @@
         private HZH_Controls.Controls.UCCheckBox ucCheckBox_out;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private HZH_Controls.Controls.UCBtnExt ucBtn_setid;
-        private HZH_Controls.Controls.UCBtnExt ucBtnExt1;
-        private HZH_Controls.Controls.UCBtnExt ucBtnExt2;
+        private EASkins.Ami_Button_1 ucBtn_save;
+        private EASkins.Ami_Button_1 ucBtn_clear;
+        private EASkins.Ami_Button_1 ucBtn_Execute;
     }
 }

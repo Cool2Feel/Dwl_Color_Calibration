@@ -40,9 +40,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ucNumTextBox1 = new HZH_Controls.Controls.UCNumTextBox();
-            this.ucBtn_setid = new HZH_Controls.Controls.UCBtnExt();
+            this.ucNum_SN = new HZH_Controls.Controls.UCNumTextBox();
             this.ucBtnImg1 = new HZH_Controls.Controls.UCBtnImg();
+            this.Btn_setid = new EASkins.Ami_Button_1();
+            this.ucArrow1 = new HZH_Controls.Controls.UCArrow();
+            this.ucArrow2 = new HZH_Controls.Controls.UCArrow();
             this.SuspendLayout();
             // 
             // ucStep_set
@@ -51,9 +53,9 @@
             this.ucStep_set.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ucStep_set.ImgCompleted = null;
             this.ucStep_set.LineWidth = 3;
-            this.ucStep_set.Location = new System.Drawing.Point(108, 28);
+            this.ucStep_set.Location = new System.Drawing.Point(94, 28);
             this.ucStep_set.Name = "ucStep_set";
-            this.ucStep_set.Size = new System.Drawing.Size(565, 71);
+            this.ucStep_set.Size = new System.Drawing.Size(589, 71);
             this.ucStep_set.StepBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
             this.ucStep_set.StepFontColor = System.Drawing.Color.White;
             this.ucStep_set.StepForeColor = System.Drawing.Color.Purple;
@@ -94,7 +96,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox1.ForeColor = System.Drawing.Color.Purple;
-            this.richTextBox1.Location = new System.Drawing.Point(47, 130);
+            this.richTextBox1.Location = new System.Drawing.Point(37, 130);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(162, 130);
             this.richTextBox1.TabIndex = 3;
@@ -118,7 +120,7 @@
             this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox3.ForeColor = System.Drawing.Color.Purple;
-            this.richTextBox3.Location = new System.Drawing.Point(555, 130);
+            this.richTextBox3.Location = new System.Drawing.Point(575, 130);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(162, 130);
             this.richTextBox3.TabIndex = 5;
@@ -141,8 +143,8 @@
             // ucComVM
             // 
             this.ucComVM.BackColor = System.Drawing.Color.Transparent;
-            this.ucComVM.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComVM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComVM.BackColorExt = System.Drawing.Color.White;
+            this.ucComVM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComVM.ConerRadius = 5;
             this.ucComVM.DropPanelHeight = -1;
             this.ucComVM.FillColor = System.Drawing.Color.White;
@@ -153,7 +155,7 @@
             this.ucComVM.Location = new System.Drawing.Point(483, 306);
             this.ucComVM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComVM.Name = "ucComVM";
-            this.ucComVM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComVM.RectColor = System.Drawing.Color.White;
             this.ucComVM.RectWidth = 1;
             this.ucComVM.SelectedIndex = -1;
             this.ucComVM.SelectedValue = "";
@@ -166,8 +168,8 @@
             // ucComHM
             // 
             this.ucComHM.BackColor = System.Drawing.Color.Transparent;
-            this.ucComHM.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComHM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComHM.BackColorExt = System.Drawing.Color.Silver;
+            this.ucComHM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComHM.ConerRadius = 5;
             this.ucComHM.DropPanelHeight = -1;
             this.ucComHM.FillColor = System.Drawing.Color.White;
@@ -178,7 +180,7 @@
             this.ucComHM.Location = new System.Drawing.Point(299, 306);
             this.ucComHM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComHM.Name = "ucComHM";
-            this.ucComHM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComHM.RectColor = System.Drawing.Color.Silver;
             this.ucComHM.RectWidth = 1;
             this.ucComHM.SelectedIndex = -1;
             this.ucComHM.SelectedValue = "";
@@ -221,62 +223,36 @@
             this.label3.TabIndex = 33;
             this.label3.Text = "SN Moniters:";
             // 
-            // ucNumTextBox1
+            // ucNum_SN
             // 
-            this.ucNumTextBox1.Increment = new decimal(new int[] {
+            this.ucNum_SN.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.ucNumTextBox1.InputType = HZH_Controls.TextInputType.Number;
-            this.ucNumTextBox1.IsNumCanInput = true;
-            this.ucNumTextBox1.KeyBoardType = HZH_Controls.Controls.KeyBoardType.UCKeyBorderNum;
-            this.ucNumTextBox1.Location = new System.Drawing.Point(350, 258);
-            this.ucNumTextBox1.MaxValue = new decimal(new int[] {
+            this.ucNum_SN.InputType = HZH_Controls.TextInputType.Number;
+            this.ucNum_SN.IsNumCanInput = true;
+            this.ucNum_SN.KeyBoardType = HZH_Controls.Controls.KeyBoardType.UCKeyBorderNum;
+            this.ucNum_SN.Location = new System.Drawing.Point(350, 258);
+            this.ucNum_SN.MaxValue = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.ucNumTextBox1.MinValue = new decimal(new int[] {
+            this.ucNum_SN.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.ucNumTextBox1.Name = "ucNumTextBox1";
-            this.ucNumTextBox1.Num = new decimal(new int[] {
+            this.ucNum_SN.Name = "ucNum_SN";
+            this.ucNum_SN.Num = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.ucNumTextBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.ucNumTextBox1.Size = new System.Drawing.Size(175, 37);
-            this.ucNumTextBox1.TabIndex = 34;
-            // 
-            // ucBtn_setid
-            // 
-            this.ucBtn_setid.BackColor = System.Drawing.Color.White;
-            this.ucBtn_setid.BtnBackColor = System.Drawing.Color.White;
-            this.ucBtn_setid.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_setid.BtnForeColor = System.Drawing.Color.Purple;
-            this.ucBtn_setid.BtnText = "Set";
-            this.ucBtn_setid.ConerRadius = 10;
-            this.ucBtn_setid.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ucBtn_setid.FillColor = System.Drawing.SystemColors.Control;
-            this.ucBtn_setid.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_setid.IsRadius = true;
-            this.ucBtn_setid.IsShowRect = true;
-            this.ucBtn_setid.IsShowTips = false;
-            this.ucBtn_setid.Location = new System.Drawing.Point(320, 354);
-            this.ucBtn_setid.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBtn_setid.Name = "ucBtn_setid";
-            this.ucBtn_setid.RectColor = System.Drawing.Color.Purple;
-            this.ucBtn_setid.RectWidth = 2;
-            this.ucBtn_setid.Size = new System.Drawing.Size(139, 36);
-            this.ucBtn_setid.TabIndex = 35;
-            this.ucBtn_setid.TabStop = false;
-            this.ucBtn_setid.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.ucBtn_setid.TipsText = "";
-            this.ucBtn_setid.BtnClick += new System.EventHandler(this.ucBtn_setid_BtnClick);
+            this.ucNum_SN.Padding = new System.Windows.Forms.Padding(2);
+            this.ucNum_SN.Size = new System.Drawing.Size(175, 37);
+            this.ucNum_SN.TabIndex = 34;
             // 
             // ucBtnImg1
             // 
@@ -310,15 +286,55 @@
             this.ucBtnImg1.TipsText = "";
             this.ucBtnImg1.BtnClick += new System.EventHandler(this.ucBtnImg1_Click);
             // 
+            // Btn_setid
+            // 
+            this.Btn_setid.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_setid.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_setid.Image = null;
+            this.Btn_setid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_setid.Location = new System.Drawing.Point(320, 354);
+            this.Btn_setid.Name = "Btn_setid";
+            this.Btn_setid.Size = new System.Drawing.Size(139, 36);
+            this.Btn_setid.TabIndex = 37;
+            this.Btn_setid.Text = "Set";
+            this.Btn_setid.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.Btn_setid.Click += new System.EventHandler(this.Btn_setid_Click);
+            // 
+            // ucArrow1
+            // 
+            this.ucArrow1.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucArrow1.BorderColor = null;
+            this.ucArrow1.Direction = HZH_Controls.Controls.ArrowDirection.Right;
+            this.ucArrow1.ForeColor = System.Drawing.Color.White;
+            this.ucArrow1.Location = new System.Drawing.Point(210, 176);
+            this.ucArrow1.Name = "ucArrow1";
+            this.ucArrow1.Size = new System.Drawing.Size(66, 23);
+            this.ucArrow1.TabIndex = 38;
+            this.ucArrow1.Text = null;
+            // 
+            // ucArrow2
+            // 
+            this.ucArrow2.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucArrow2.BorderColor = null;
+            this.ucArrow2.Direction = HZH_Controls.Controls.ArrowDirection.Right;
+            this.ucArrow2.ForeColor = System.Drawing.Color.White;
+            this.ucArrow2.Location = new System.Drawing.Point(494, 176);
+            this.ucArrow2.Name = "ucArrow2";
+            this.ucArrow2.Size = new System.Drawing.Size(66, 23);
+            this.ucArrow2.TabIndex = 39;
+            this.ucArrow2.Text = null;
+            // 
             // IDSetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(779, 421);
+            this.Controls.Add(this.ucArrow2);
+            this.Controls.Add(this.ucArrow1);
+            this.Controls.Add(this.Btn_setid);
             this.Controls.Add(this.ucBtnImg1);
-            this.Controls.Add(this.ucBtn_setid);
-            this.Controls.Add(this.ucNumTextBox1);
+            this.Controls.Add(this.ucNum_SN);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ucComVM);
             this.Controls.Add(this.ucComHM);
@@ -352,8 +368,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private HZH_Controls.Controls.UCNumTextBox ucNumTextBox1;
-        private HZH_Controls.Controls.UCBtnExt ucBtn_setid;
+        private HZH_Controls.Controls.UCNumTextBox ucNum_SN;
         private HZH_Controls.Controls.UCBtnImg ucBtnImg1;
+        private EASkins.Ami_Button_1 Btn_setid;
+        private HZH_Controls.Controls.UCArrow ucArrow1;
+        private HZH_Controls.Controls.UCArrow ucArrow2;
     }
 }

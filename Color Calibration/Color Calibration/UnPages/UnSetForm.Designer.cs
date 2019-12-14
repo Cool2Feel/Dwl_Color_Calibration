@@ -47,13 +47,13 @@
             this.Uncom_meter = new HZH_Controls.Controls.UCCombox();
             this.Uncom_port = new HZH_Controls.Controls.UCCombox();
             this.ucBtn_set = new HZH_Controls.Controls.UCBtnExt();
-            this.Btn_connect = new HZH_Controls.Controls.UCBtnExt();
-            this.Unbt_meter = new HZH_Controls.Controls.UCBtnExt();
             this.ucSplitLine_H3 = new HZH_Controls.Controls.UCSplitLine_H();
             this.ucSplitLine_H2 = new HZH_Controls.Controls.UCSplitLine_H();
             this.ucSplitLine_H1 = new HZH_Controls.Controls.UCSplitLine_H();
             this.ucBtn_id = new HZH_Controls.Controls.UCBtnExt();
             this.label7 = new System.Windows.Forms.Label();
+            this.Btn_connect = new EASkins.Ami_Button_1();
+            this.Unbt_meter = new EASkins.Ami_Button_1();
             this.SuspendLayout();
             // 
             // label_cp
@@ -160,10 +160,10 @@
             // 
             this.ucComTL.BackColor = System.Drawing.Color.Transparent;
             this.ucComTL.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComTL.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComTL.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComTL.ConerRadius = 5;
             this.ucComTL.DropPanelHeight = -1;
-            this.ucComTL.FillColor = System.Drawing.Color.White;
+            this.ucComTL.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTL.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ucComTL.IsRadius = true;
             this.ucComTL.IsShowRect = false;
@@ -171,7 +171,7 @@
             this.ucComTL.Location = new System.Drawing.Point(790, 169);
             this.ucComTL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTL.Name = "ucComTL";
-            this.ucComTL.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComTL.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTL.RectWidth = 1;
             this.ucComTL.SelectedIndex = -1;
             this.ucComTL.SelectedValue = "";
@@ -185,10 +185,10 @@
             // 
             this.ucComTC.BackColor = System.Drawing.Color.Transparent;
             this.ucComTC.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComTC.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComTC.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComTC.ConerRadius = 5;
             this.ucComTC.DropPanelHeight = -1;
-            this.ucComTC.FillColor = System.Drawing.Color.White;
+            this.ucComTC.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTC.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ucComTC.IsRadius = true;
             this.ucComTC.IsShowRect = false;
@@ -196,7 +196,7 @@
             this.ucComTC.Location = new System.Drawing.Point(790, 133);
             this.ucComTC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTC.Name = "ucComTC";
-            this.ucComTC.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComTC.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTC.RectWidth = 1;
             this.ucComTC.SelectedIndex = -1;
             this.ucComTC.SelectedValue = "";
@@ -211,11 +211,11 @@
             // 
             this.ucComTG.BackColor = System.Drawing.Color.Transparent;
             this.ucComTG.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComTG.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComTG.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComTG.ConerRadius = 5;
             this.ucComTG.DropPanelHeight = -1;
             this.ucComTG.Enabled = false;
-            this.ucComTG.FillColor = System.Drawing.Color.White;
+            this.ucComTG.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTG.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ucComTG.IsRadius = true;
             this.ucComTG.IsShowRect = false;
@@ -223,7 +223,7 @@
             this.ucComTG.Location = new System.Drawing.Point(790, 97);
             this.ucComTG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTG.Name = "ucComTG";
-            this.ucComTG.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComTG.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComTG.RectWidth = 1;
             this.ucComTG.SelectedIndex = -1;
             this.ucComTG.SelectedValue = "";
@@ -237,10 +237,10 @@
             // 
             this.ucComVM.BackColor = System.Drawing.Color.Transparent;
             this.ucComVM.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComVM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComVM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComVM.ConerRadius = 5;
             this.ucComVM.DropPanelHeight = -1;
-            this.ucComVM.FillColor = System.Drawing.Color.White;
+            this.ucComVM.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComVM.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.ucComVM.IsRadius = true;
             this.ucComVM.IsShowRect = false;
@@ -248,7 +248,7 @@
             this.ucComVM.Location = new System.Drawing.Point(790, 61);
             this.ucComVM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComVM.Name = "ucComVM";
-            this.ucComVM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComVM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComVM.RectWidth = 1;
             this.ucComVM.SelectedIndex = -1;
             this.ucComVM.SelectedValue = "";
@@ -257,15 +257,16 @@
             this.ucComVM.TabIndex = 28;
             this.ucComVM.TextValue = null;
             this.ucComVM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComVM.SelectedChangedEvent += new System.EventHandler(this.ucComVM_SelectedChangedEvent);
             // 
             // ucComHM
             // 
             this.ucComHM.BackColor = System.Drawing.Color.Transparent;
             this.ucComHM.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ucComHM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.ucComHM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComHM.ConerRadius = 5;
             this.ucComHM.DropPanelHeight = -1;
-            this.ucComHM.FillColor = System.Drawing.Color.White;
+            this.ucComHM.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComHM.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.ucComHM.IsRadius = true;
             this.ucComHM.IsShowRect = false;
@@ -273,7 +274,7 @@
             this.ucComHM.Location = new System.Drawing.Point(790, 25);
             this.ucComHM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComHM.Name = "ucComHM";
-            this.ucComHM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.ucComHM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ucComHM.RectWidth = 1;
             this.ucComHM.SelectedIndex = -1;
             this.ucComHM.SelectedValue = "";
@@ -282,6 +283,7 @@
             this.ucComHM.TabIndex = 27;
             this.ucComHM.TextValue = null;
             this.ucComHM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComHM.SelectedChangedEvent += new System.EventHandler(this.ucComHM_SelectedChangedEvent);
             // 
             // Uncom_model
             // 
@@ -385,57 +387,6 @@
             this.ucBtn_set.Visible = false;
             this.ucBtn_set.BtnClick += new System.EventHandler(this.ucBtn_set_BtnClick);
             // 
-            // Btn_connect
-            // 
-            this.Btn_connect.BackColor = System.Drawing.Color.White;
-            this.Btn_connect.BtnBackColor = System.Drawing.Color.White;
-            this.Btn_connect.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Btn_connect.BtnForeColor = System.Drawing.Color.Purple;
-            this.Btn_connect.BtnText = "Connect";
-            this.Btn_connect.ConerRadius = 5;
-            this.Btn_connect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_connect.FillColor = System.Drawing.SystemColors.Control;
-            this.Btn_connect.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Btn_connect.IsRadius = true;
-            this.Btn_connect.IsShowRect = false;
-            this.Btn_connect.IsShowTips = false;
-            this.Btn_connect.Location = new System.Drawing.Point(36, 96);
-            this.Btn_connect.Margin = new System.Windows.Forms.Padding(0);
-            this.Btn_connect.Name = "Btn_connect";
-            this.Btn_connect.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
-            this.Btn_connect.RectWidth = 1;
-            this.Btn_connect.Size = new System.Drawing.Size(161, 30);
-            this.Btn_connect.TabIndex = 10;
-            this.Btn_connect.TabStop = false;
-            this.Btn_connect.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.Btn_connect.TipsText = "";
-            this.Btn_connect.BtnClick += new System.EventHandler(this.Btn_connect_BtnClick);
-            // 
-            // Unbt_meter
-            // 
-            this.Unbt_meter.BackColor = System.Drawing.Color.White;
-            this.Unbt_meter.BtnBackColor = System.Drawing.Color.White;
-            this.Unbt_meter.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Unbt_meter.BtnForeColor = System.Drawing.Color.Purple;
-            this.Unbt_meter.BtnText = "Connect";
-            this.Unbt_meter.ConerRadius = 5;
-            this.Unbt_meter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Unbt_meter.FillColor = System.Drawing.SystemColors.Control;
-            this.Unbt_meter.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Unbt_meter.IsRadius = true;
-            this.Unbt_meter.IsShowRect = false;
-            this.Unbt_meter.IsShowTips = false;
-            this.Unbt_meter.Location = new System.Drawing.Point(36, 217);
-            this.Unbt_meter.Margin = new System.Windows.Forms.Padding(0);
-            this.Unbt_meter.Name = "Unbt_meter";
-            this.Unbt_meter.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
-            this.Unbt_meter.RectWidth = 1;
-            this.Unbt_meter.Size = new System.Drawing.Size(161, 30);
-            this.Unbt_meter.TabIndex = 9;
-            this.Unbt_meter.TabStop = false;
-            this.Unbt_meter.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.Unbt_meter.TipsText = "";
-            // 
             // ucSplitLine_H3
             // 
             this.ucSplitLine_H3.BackColor = System.Drawing.Color.Purple;
@@ -500,12 +451,42 @@
             this.label7.TabIndex = 32;
             this.label7.Text = "Splicing wall ID setting:";
             // 
+            // Btn_connect
+            // 
+            this.Btn_connect.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_connect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_connect.Image = null;
+            this.Btn_connect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_connect.Location = new System.Drawing.Point(37, 95);
+            this.Btn_connect.Name = "Btn_connect";
+            this.Btn_connect.Size = new System.Drawing.Size(161, 30);
+            this.Btn_connect.TabIndex = 34;
+            this.Btn_connect.Text = "Connect";
+            this.Btn_connect.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.Btn_connect.Click += new System.EventHandler(this.Btn_connect_BtnClick);
+            // 
+            // Unbt_meter
+            // 
+            this.Unbt_meter.BackColor = System.Drawing.Color.Transparent;
+            this.Unbt_meter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Unbt_meter.Image = null;
+            this.Unbt_meter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Unbt_meter.Location = new System.Drawing.Point(38, 217);
+            this.Unbt_meter.Name = "Unbt_meter";
+            this.Unbt_meter.Size = new System.Drawing.Size(161, 30);
+            this.Unbt_meter.TabIndex = 35;
+            this.Unbt_meter.Text = "Connect";
+            this.Unbt_meter.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.Unbt_meter.Click += new System.EventHandler(this.Unbt_meter_BtnClick);
+            // 
             // UnSetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.Unbt_meter);
+            this.Controls.Add(this.Btn_connect);
             this.Controls.Add(this.ucBtn_id);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ucComTL);
@@ -523,8 +504,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Btn_connect);
-            this.Controls.Add(this.Unbt_meter);
             this.Controls.Add(this.label_mm);
             this.Controls.Add(this.ucSplitLine_H3);
             this.Controls.Add(this.label_cm);
@@ -533,6 +512,7 @@
             this.Controls.Add(this.ucSplitLine_H1);
             this.Name = "UnSetForm";
             this.Size = new System.Drawing.Size(915, 374);
+            this.Load += new System.EventHandler(this.UnSetForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,8 +525,6 @@
         private HZH_Controls.Controls.UCSplitLine_H ucSplitLine_H2;
         private System.Windows.Forms.Label label_mm;
         private HZH_Controls.Controls.UCSplitLine_H ucSplitLine_H3;
-        private HZH_Controls.Controls.UCBtnExt Unbt_meter;
-        private HZH_Controls.Controls.UCBtnExt Btn_connect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -564,5 +542,7 @@
         private HZH_Controls.Controls.UCCombox ucComTL;
         private HZH_Controls.Controls.UCBtnExt ucBtn_id;
         private System.Windows.Forms.Label label7;
+        private EASkins.Ami_Button_1 Btn_connect;
+        private EASkins.Ami_Button_1 Unbt_meter;
     }
 }

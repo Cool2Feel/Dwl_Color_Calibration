@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 
@@ -20,16 +23,36 @@ namespace Color_Calibration
         private UnSetForm _setpage = new UnSetForm();
         private UnColorForm _colorpage = new UnColorForm();
         private UnAdjustForm _adjustpage = new UnAdjustForm();
+        private string _path = Application.StartupPath + "\\Model";
+        //private MainColorModel _colorModel = new MainColorModel();
         public MainForm()
         {
+            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
             InitializeComponent();
             InitFormMove(Title_panel);
             Main_content.Controls.Add(_logopage);
-            Main_content.Dock = DockStyle.Fill;
+            //Main_content.Dock = DockStyle.Fill;
             _setpage.DataReceived += new ComEvent.DataReceivedHandler(Com_DataReceived);
             _colorpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
             _adjustpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
+
+            if (!Directory.Exists(_path + "\\"))
+            {
+                Directory.CreateDirectory(_path + "\\");
+                Console.WriteLine("create");
+            }
         }
+
+        System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            string dllName = args.Name.Contains(",") ? args.Name.Substring(0, args.Name.IndexOf(',')) : args.Name.Replace(".dll", "");
+            dllName = dllName.Replace(".", "_");
+            if (dllName.EndsWith("_resources")) return null;
+            System.Resources.ResourceManager rm = new System.Resources.ResourceManager(GetType().Namespace + ".Properties.Resources", System.Reflection.Assembly.GetExecutingAssembly());
+            byte[] bytes = (byte[])rm.GetObject(dllName);
+            return System.Reflection.Assembly.Load(bytes);
+        }
+
         /// <summary>
         /// 切换到Set Page
         /// </summary>
@@ -51,7 +74,8 @@ namespace Color_Calibration
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_setpage);
-            Main_content.Dock = DockStyle.Fill;
+            MainColorModel.M_PageIndex = 1;
+            //Main_content.Dock = DockStyle.Fill;
         }
         /// <summary>
         /// 切换到 Calibration Page
@@ -74,7 +98,8 @@ namespace Color_Calibration
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_colorpage);
-            Main_content.Dock = DockStyle.Fill;
+            //Main_content.Dock = DockStyle.Fill;
+            MainColorModel.M_PageIndex = 2;
         }
         /// <summary>
         /// 切换到Adjustment Page
@@ -97,7 +122,44 @@ namespace Color_Calibration
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_adjustpage);
-            Main_content.Dock = DockStyle.Fill;
+            //Main_content.Dock = DockStyle.Fill;
+            MainColorModel.M_PageIndex = 3;
+            _adjustpage.Data_Update();
+        }
+        
+        /// <summary>
+        /// 将对象保存到指定路径中,
+        /// </summary>
+        /// <param name="path">要保存的路径</param>
+        /// <param name="obj">要保存的对象</param>
+        public void SaveObject()
+        {
+            try
+            {
+
+                SerializeModel.PathFile = _path + "\\main_set.xml";
+                MainSetModel setModel = new MainSetModel();
+                setModel.H_Row = MainColorModel.H_Row;
+                setModel.V_Colu = MainColorModel.V_Colu;
+                setModel.M_MeterType = MainColorModel.M_MeterType;
+                setModel.M_ModelType = MainColorModel.M_ModelType;
+                setModel.M_PageIndex = MainColorModel.M_PageIndex;
+                setModel.M_ComIndex = MainColorModel.M_ComIndex;
+                setModel.T_Gamma = MainColorModel.T_Gamma;
+                setModel.T_Temp = MainColorModel.T_Temp;
+                setModel.T_Lum = MainColorModel.T_Lum;
+                setModel.T_Custom = MainColorModel.T_Custom;
+                setModel.T_ID = MainColorModel.T_ID;
+
+                string ok = SerializeModel.XMLSerialize<MainSetModel>(setModel);
+                //Console.WriteLine("[" + ok + "]文件保存成功...");
+                //将对象写入到本地
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("[" + "]文件保存失败...");
+            }
+
         }
 
         #region 窗体移动
@@ -128,10 +190,34 @@ namespace Color_Calibration
             SendMessage(form1.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);//*********************调用移动无窗体控件函数 
         }
         #endregion
-
+        /// <summary>
+        /// 加载窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
+            CalibrationSDK.i1dColorSDK.i1d3Status_t tt = CalibrationSDK.i1dColorSDK.i1d3Initialize();
             //this.WindowState = System.Windows.Forms.FormWindowState.Normal;
+        }
+        /// <summary>
+        /// 关闭窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                CalibrationSDK.i1dColorSDK.i1d3Status_t tt = CalibrationSDK.i1dColorSDK.i1d3Destroy(); ;
+                Console.WriteLine("i1d3Destroy OK =  " + tt.ToString());
+            }
+            catch
+            {
+                Console.WriteLine("i1d3Destroy err.");
+            }
+            
+            SaveObject();
         }
         /// <summary>
         /// 设置窗体居中显示
@@ -144,6 +230,8 @@ namespace Color_Calibration
             int w = (System.Windows.Forms.SystemInformation.WorkingArea.Width - this.Size.Width) / 2;
             int h = (System.Windows.Forms.SystemInformation.WorkingArea.Height - this.Size.Height) / 2;
             this.Location = new Point(w, h);
+
+            //Console.WriteLine("Debug:= " + MainColorModel.M_PageIndex);
         }
         /// <summary>
         /// 关闭
@@ -165,9 +253,17 @@ namespace Color_Calibration
         {
             if (data.Length > 1)
             {
-                string ss = Encoding.Unicode.GetString(data);
+                string ss = Encoding.Default.GetString(data);
 
-                Console.WriteLine(ss);
+                //Console.WriteLine(ss);
+                if (MainColorModel.M_PageIndex == 2)
+                    _colorpage.DataReceived(data);
+                else if(MainColorModel.M_PageIndex == 3)
+                    _adjustpage.DataReceived(data);
+                else
+                {
+                    Console.WriteLine("this page:" + ss);
+                }
             }
 
             //LogHelper.WriteLog("串口 DataReceived：" + Encoding.Default.GetString(ReDatas));

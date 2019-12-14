@@ -83,6 +83,36 @@ namespace Color_Calibration.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap btn2_Dwn {
+            get {
+                object obj = ResourceManager.GetObject("btn2_Dwn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap btn2_Ent {
+            get {
+                object obj = ResourceManager.GetObject("btn2_Ent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap btn2_Nor {
+            get {
+                object obj = ResourceManager.GetObject("btn2_Nor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Calib {
             get {
                 object obj = ResourceManager.GetObject("Calib", resourceCulture);
@@ -127,6 +157,26 @@ namespace Color_Calibration.Properties {
             get {
                 object obj = ResourceManager.GetObject("color_cie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] DWL_Controls {
+            get {
+                object obj = ResourceManager.GetObject("DWL_Controls", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] log4net {
+            get {
+                object obj = ResourceManager.GetObject("log4net", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

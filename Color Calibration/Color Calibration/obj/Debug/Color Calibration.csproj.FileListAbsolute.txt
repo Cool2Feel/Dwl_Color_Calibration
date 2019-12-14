@@ -1,19 +1,17 @@
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.exe.config
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csprojResolveAssemblyReference.cache
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.MainForm.resources
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Properties.Resources.resources
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csproj.GenerateResource.Cache
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.exe
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.pdb
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\HZH_Controls.dll
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\HZH_Controls.pdb
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.exe
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.pdb
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnSetForm.resources
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.ColorForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.IDSetForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.MainForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Properties.Resources.resources
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnAdjustForm.resources
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnColorForm.resources
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnMainLogo.resources
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\log4net.dll
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\log4net.xml
-F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.IDSetForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnSetForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csproj.GenerateResource.Cache
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.exe
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.pdb
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csprojResolveAssemblyReference.cache
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.dll
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.pdb

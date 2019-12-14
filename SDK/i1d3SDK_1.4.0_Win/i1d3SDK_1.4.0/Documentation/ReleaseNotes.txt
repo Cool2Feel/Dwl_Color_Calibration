@@ -1,0 +1,134 @@
+i1d3SDK Release Notes
+=======================
+
+
+Compatible Platforms/Products
+=============================
+
+This product has been tested on the following platforms:
+Windows
+  -Windows 8.1   (x86 / x64)
+  -Windows 8     (x86 / x64)
+  -Windows 7     (x86 / x64)
+  -Windows Vista (x86 / x64)
+  -Windows XP    (x86 / x64)
+Mac OS X	
+  -Mac OS X 10.9.x (i386 / x64)
+  -Mac OS X 10.8.x (i386 / x64)
+  -Mac OS X 10.7.x (i386 / x64)
+  -Mac OS X 10.6.x (i386 / x64)
+Linux
+  -Ubuntu 13.10 (i386 / x64)
+  -Ubuntu 14.04 (i386 / x64)
+  -Fedora Core 18 (x64)
+  -Fedora Core 20 (x64)
+
+This product has been tested with the following instruments:
+  -i1Display 3 (Rev.: A-01 / Fw.: 1.01 - 1.03)
+  -i1Display 3 (Rev.: A-02 / Fw.: 1.01 - 1.03)
+  -i1Display 3 (Rev.: B-01 / Fw.: 2.05 - 2.28)
+
+
+The SDK supports all vendor-specific devices and keys.
+
+
+Requirements
+============
+Linux only:
+  The i1d3SDK requires libusb-1.0.9. (http://www.libusb.org)
+  Alternatively libusb 1.0 in conjuction with libusb-compat-1.0.4 may be used
+
+Problems
+========
+Thanks for reporting bugs to: devsupport@xrite.com
+
+
+Version History
+===============
+
+1.4.0  (2014-04-17)
+-----------------
+
+New features
+  -x64 libraries for OSX + Windows
+
+  -New measurement mode i1d3MeasModeAIO has been provided. This mode can only be used with
+      firmware v2.28 and later. It provides faster and improved measuring results for all
+      monitor types.
+
+  -Added support functions for AIO mode:
+    i1d3SupportsAIOMode()
+    i1d3GetBacklightFreq()
+    i1d3SetBacklightFreq()
+    i1d3GetBacklightFreqSync()
+    i1d3SetBacklightFreqSync()
+  -See Application Note on "Backlight Frequency" to get to know how to make use of the new functions above.
+  
+  -Added new function i1d3MeasureBacklightFrequency for AIO mode capable devices to measure backlight frequency
+    of devices with unstable backlight technology
+    
+  -Added EEPROM sanity check for EEPROM. If EEPROM is corrupted, i1d3DeviceOpen will return 
+    i1d3ErrIncorrectChecksum (-513).
+  
+Bug fixes
+  -Fixed division by zero bug in AmbientMeasure function which caused the return value of x and y to be -1.#IND.
+    Now following will be retunred when measuring "perfectly black screen" : Y = 0, x = y = 1/3 (chromaticity
+    coordinates for light with a flat power spectrum in terms of wavelength (equal power in every 1 nm interval)).
+   
+  -In case of a "perfect black" measurement, measure functions will also now return Y = 0, x = 1/3, y = 1/3
+    (chromaticity coordinates for light with a flat power spectrum in terms of wavelength (equal power in every
+    1 nm interval)) The reason for this change is that the SDK v1.3.7 returns Y = x = y = 0 which is not defined
+    in CIE xyY color space.
+  
+  -Mac only: Fixed SDK time out before device responded when measuring extremely dark targets. The
+    SDK would return an -523 error instead of a valid measurement.
+  
+Other changes
+  -Added example of how to obtain firmware version to i1Display3CmdDemo
+  -Added AIO mode examples to i1Display3CmdDemo and i1Display3MfcDemo
+  -Added new error codes which may be returned by firmware >= 2.05 / i1D3DC devices to i1d3Status_t enumeration.
+  -Streamlined Linux SDK with OSX and Windows SDKs
+  -Dropped support for OS X 10.5.x
+  
+Known bugs
+  -None
+
+1.3.7  (2013-02-01)
+-----------------
+New features
+  -Support for i1Display3 DirectConnect devices (i1D3DC)
+  
+Bug fixes
+  -SDK returned devices to unprivileged users. That caused the SDK to return a -523 error
+      when trying to open them.
+  -Measure function returned -1.#IND for x and y values when measuring extremely dark targets.
+
+Other changes
+  -Mac only: Bundle identifier in Info.plist has changed from 'com.GretagMacbeth.i1d3SDK' to 
+       'com.xrite.i1d3SDK'. If i1d3SDK bundle resources have been accessed programmaticaly by
+       your application a rebuild might be necessary.
+  
+Known bugs
+-None
+
+1.2 (2012-10-26)
+-----------------
+New features
+  -A new measurement mode: i1d3MeasModeBurst has been provided. This mode provides better
+      accuracy on devices that have pulsing characteristics. In particular, plasma displays
+      will be measured better with this mode.
+  -Addition of the RG-Phosphor, Plasma and OLED support files.
+
+Bug fixes
+  -In the previous version of the SDK, setting calibration to something other than generic CMF and
+      then back to Generic CMF and then querying current calibration does not accurately report
+      "Generic CMF" although that calibration was correctly in effect. Now, the results of
+      "GetCurrentCalibration()" are always correct.
+
+Known bugs
+  -Linux only: To build i1Display3CmdDemo with automake 1.14.* and above remove "-Werror" flag from AM_INIT_AUTOMAKE
+      in configure.ac
+
+
+
+For older versions, see old Release Notes in 1.1.1.1 package

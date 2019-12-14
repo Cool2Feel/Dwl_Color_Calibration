@@ -1,0 +1,17 @@
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe.config
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.pdb
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.dll
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.pdb
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.ColorForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.IDSetForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.MainForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Properties.Resources.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnAdjustForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnColorForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnMainLogo.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnSetForm.resources
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.GenerateResource.Cache
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.exe
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.pdb
+F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csprojResolveAssemblyReference.cache

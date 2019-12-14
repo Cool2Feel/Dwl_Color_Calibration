@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Color_Calibration.ComLib
 {
-    class ColorGaridModel
+    [Serializable]
+    public class ColorGaridModel
     {
         public string ID { get; set; }
         public string Backlight { get; set; }

@@ -154,7 +154,6 @@
             this.label6.Size = new System.Drawing.Size(137, 19);
             this.label6.TabIndex = 22;
             this.label6.Text = "Custom Target xy:";
-            this.label6.Visible = false;
             // 
             // ucComTL
             // 
@@ -289,10 +288,10 @@
             // 
             this.Uncom_model.BackColor = System.Drawing.Color.Transparent;
             this.Uncom_model.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.Uncom_model.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.Uncom_model.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Uncom_model.ConerRadius = 5;
             this.Uncom_model.DropPanelHeight = -1;
-            this.Uncom_model.FillColor = System.Drawing.Color.White;
+            this.Uncom_model.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.Uncom_model.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.Uncom_model.IsRadius = true;
             this.Uncom_model.IsShowRect = true;
@@ -300,7 +299,7 @@
             this.Uncom_model.Location = new System.Drawing.Point(36, 306);
             this.Uncom_model.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Uncom_model.Name = "Uncom_model";
-            this.Uncom_model.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.Uncom_model.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.Uncom_model.RectWidth = 1;
             this.Uncom_model.SelectedIndex = -1;
             this.Uncom_model.SelectedValue = "";
@@ -309,6 +308,7 @@
             this.Uncom_model.TabIndex = 26;
             this.Uncom_model.TextValue = null;
             this.Uncom_model.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.Uncom_model.SelectedChangedEvent += new System.EventHandler(this.Uncom_model_SelectedChangedEvent);
             // 
             // Uncom_meter
             // 
@@ -384,7 +384,6 @@
             this.ucBtn_set.TabStop = false;
             this.ucBtn_set.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtn_set.TipsText = "";
-            this.ucBtn_set.Visible = false;
             this.ucBtn_set.BtnClick += new System.EventHandler(this.ucBtn_set_BtnClick);
             // 
             // ucSplitLine_H3
@@ -512,7 +511,6 @@
             this.Controls.Add(this.ucSplitLine_H1);
             this.Name = "UnSetForm";
             this.Size = new System.Drawing.Size(915, 374);
-            this.Load += new System.EventHandler(this.UnSetForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

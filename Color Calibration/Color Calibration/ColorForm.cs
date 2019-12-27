@@ -1,4 +1,5 @@
-﻿using HZH_Controls.Forms;
+﻿using Color_Calibration.ComLib;
+using HZH_Controls.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,24 @@ namespace Color_Calibration
 {
     public partial class ColorForm : Form
     {
-        public ColorForm()
+        private int Index;
+        public ColorForm(int index)
         {
+            Index = index;
             InitializeComponent();
+            string ss = "当前的色温模式：";
+            if(index == 0)
+                label_mode.Text = ss + "Cool ";
+            else if(index == 1)
+                label_mode.Text = ss + "NORMAL";
+            else if (index == 2)
+                label_mode.Text = ss + "WARM ";
+            else if (index == 3)
+                label_mode.Text = ss + "CUSTOM";
+            //Console.WriteLine("22222");
         }
 
+        #region Get xy function
         private int Get_x(float x_v)
         {
             double len;
@@ -48,10 +62,11 @@ namespace Color_Calibration
             }
             return (int)len;
         }
-
+        #endregion
+        #region Track Changed
         private void ucTrack_x_ValueChanged(object sender, EventArgs e)
         {
-            label_x.Text = ucTrack_x.Value.ToString();
+            label_x.Text = string.Format("{0:N3}", ucTrack_x.Value);
             //float x_v = ucTrack_x.Value;
             int x = Get_x(ucTrack_x.Value);
             int y = Get_y(ucTrack_y.Value);
@@ -62,7 +77,7 @@ namespace Color_Calibration
 
         private void ucTrack_y_ValueChanged(object sender, EventArgs e)
         {
-            label_y.Text = ucTrack_y.Value.ToString();
+            label_y.Text = string.Format("{0:N3}", ucTrack_y.Value);
             //float y_v = ucTrack_y.Value;
             int x = Get_x(ucTrack_x.Value);
             int y = Get_y(ucTrack_y.Value);
@@ -70,7 +85,11 @@ namespace Color_Calibration
             Draw_ColorPoint(x, y);
 
         }
-        
+        private void ucTrack_lv_ValueChanged(object sender, EventArgs e)
+        {
+            label_lv.Text =ucTrack_lv.Value.ToString();
+        }
+        #endregion
         private void Draw_ColorPoint(int x,int y)
         {
             pictureBox1.Image = global::Color_Calibration.Properties.Resources.color_cie;
@@ -115,6 +134,16 @@ namespace Color_Calibration
         #endregion
         private void ucBtn_set_BtnClick(object sender, EventArgs e)
         {
+            GlobalClass._t_ColorTempStd[Index, 0] = (int)(ucTrack_x.Value * 10000);
+            GlobalClass._t_ColorTempStd[Index, 1] = (int)(ucTrack_y.Value * 10000);
+            GlobalClass._t_ColorTempStd[Index, 2] = (int)(ucTrack_lv.Value);
+            //GlobalClass._t_ColorTempStd[Index, 2] = (int)(ucTrack_lv.Value * 10000);
+            GlobalClass._t_ColorEerorxy[Index] = (int)(float.Parse(ucTextBox_xy.InputText) * 10000);
+            GlobalClass._t_ColorEerorlv[Index] = int.Parse(ucTextBox_lv.InputText);
+            if (ucSwitch1.Checked)
+                GlobalClass._t_ColorEeror[Index] = true;
+            else
+                GlobalClass._t_ColorEeror[Index] = false;
             this.Close();
         }
 
@@ -138,7 +167,19 @@ namespace Color_Calibration
 
         private void ColorForm_Load(object sender, EventArgs e)
         {
+            //Console.WriteLine("11111");
             Draw_Pic();
+            ucTrack_x.Value = (float)GlobalClass._t_ColorTempStd[Index, 0] / 10000;
+            ucTrack_y.Value = (float)GlobalClass._t_ColorTempStd[Index, 1] / 10000;
+            ucTrack_lv.Value = GlobalClass._t_ColorTempStd[Index, 2];
+
+            string xy = string.Format("{0:N3}", (float)GlobalClass._t_ColorEerorxy[Index] / 10000);
+            ucTextBox_xy.InputText = xy;
+            ucTextBox_lv.InputText = GlobalClass._t_ColorEerorlv[Index].ToString();
+            if (GlobalClass._t_ColorEeror[Index])
+                ucSwitch1.Checked = true;
+            //string lv = string.Format("{0:N3}", GlobalClass._t_ColorEerorlv[Index]);
+            //Console.WriteLine("11111" + GlobalClass._t_ColorTempStd[Index, 0] + "," + GlobalClass._t_ColorTempStd[Index, 1]);
         }
 
         #region  Lable_Mouse function
@@ -186,6 +227,11 @@ namespace Color_Calibration
         {
             lbl_MouseUp(sender);
         }
+        private void label_lv_add_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_lv.Value = Math.Min((int)(ucTrack_lv.Value + 1), 1000);
+        }
 
         private void lbl_y_add_MouseDown(object sender, MouseEventArgs e)
         {
@@ -204,6 +250,30 @@ namespace Color_Calibration
             lbl_MouseDown(sender);
             ucTrack_y.Value = Math.Max((float)(ucTrack_y.Value - 0.001), 0);
         }
+        private void label_lv_down_MouseDown(object sender, MouseEventArgs e)
+        {
+            lbl_MouseDown(sender);
+            ucTrack_lv.Value = Math.Max((int)(ucTrack_lv.Value - 1), 100);
+        }
         #endregion
+
+        private void ucSwitch1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ucSwitch1.Checked == true)
+            {
+                label_eerxy.Visible = true;
+                label_errlv.Visible = true;
+                ucTextBox_xy.Visible = true;
+                ucTextBox_lv.Visible = true;
+            }
+            else
+            {
+                label_eerxy.Visible = false;
+                label_errlv.Visible = false;
+                ucTextBox_xy.Visible = false;
+                ucTextBox_lv.Visible = false;
+            }
+        }
+
     }
 }

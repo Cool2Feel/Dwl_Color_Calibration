@@ -2,8 +2,8 @@
 <MainSetModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <H_Row>1</H_Row>
   <V_Colu>1</V_Colu>
-  <M_ComIndex>0</M_ComIndex>
-  <M_PageIndex>1</M_PageIndex>
+  <M_ComIndex>1</M_ComIndex>
+  <M_PageIndex>3</M_PageIndex>
   <M_MeterType>0</M_MeterType>
   <M_ModelType>0</M_ModelType>
   <T_Gamma>0</T_Gamma>

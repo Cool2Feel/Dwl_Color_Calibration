@@ -105,10 +105,10 @@ namespace Color_Calibration.CalibrationSDK
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public struct i1d3Yxy_t
         {
-            double Y;       /**< Y luminance data in Cd/m2, or Lux */
-            double x;       /**< x chrominance data */
-            double y;       /**< y chrominance data */
-            double z;		/**< z (internal use for computation purposes - Applications should not rely on this element to always be valid) */
+            public double Y;       /**< Y luminance data in Cd/m2, or Lux */
+            public double x;       /**< x chrominance data */
+            public double y;       /**< y chrominance data */
+            public double z;		/**< z (internal use for computation purposes - Applications should not rely on this element to always be valid) */
         }
         /// <summary>
         ///	A structure to encapsulate raw, unscaled RGB data from the device.<BR>
@@ -149,6 +149,7 @@ namespace Color_Calibration.CalibrationSDK
 
         //public IntPtr i1d3Handle;
 
+        #region Init and Set SDK
         /// <summary>
         /// This function initializes the SDK. This call must be called before any 
         /// other i1d3 SDK calls.It must be paired with a call to i1d3Destroy.
@@ -168,8 +169,15 @@ namespace Color_Calibration.CalibrationSDK
         //, CallingConvention = CallingConvention.Cdecl  , CallingConvention = CallingConvention.StdCall
         public static extern i1d3Status_t i1d3Destroy();
 
+        /// <summary>
+        /// Overrides the SDK defaults when opening a device.
+        /// </summary>
+        /// <param name="vid"></param>
+        /// <param name="pid"></param>
+        /// <param name="productkey"></param>
+        /// <returns></returns>
         [DllImport("i1d3SDK.dll", EntryPoint = "i1d3OverrideDeviceDefaults", CallingConvention = CallingConvention.Cdecl)]
-        public static extern i1d3Status_t i1d3OverrideDeviceDefaults(uint vid, uint pid, ref byte[] productkey);
+        public static extern i1d3Status_t i1d3OverrideDeviceDefaults(uint vid, uint pid, byte[] productkey);
 
         /// <summary>
         /// Returns the number of devices attached and enumerated on USB
@@ -182,12 +190,12 @@ namespace Color_Calibration.CalibrationSDK
 
         /// <summary>
         /// Returns the device handle.
-        /// 返回USB上已连接并枚举的设备数
+        /// 返回设备句柄。
         /// </summary>
         /// <returns></returns>
         [DllImport("i1d3SDK.dll", EntryPoint = "i1d3GetDeviceHandle",CallingConvention = CallingConvention.Cdecl)]
         //, CallingConvention = CallingConvention.Cdecl  , CallingConvention = CallingConvention.StdCall
-        public static extern i1d3Status_t i1d3GetDeviceHandle(uint whichDevice, ref IntPtr i1d3Handle);
+        public static extern i1d3Status_t i1d3GetDeviceHandle(uint whichDevice,out IntPtr i1d3Handle);
 
         /// <summary>
         /// This function opens a device via a handle received from i1d3GetDeviceHandle()
@@ -214,9 +222,22 @@ namespace Color_Calibration.CalibrationSDK
         /// <param name="sn"></param>
         /// <returns></returns>
         [DllImport("i1d3SDK.dll", EntryPoint = "i1d3GetSerialNumber", CallingConvention = CallingConvention.Cdecl)]
-        public static extern i1d3Status_t i1d3GetSerialNumber(IntPtr devHndl, ref string sn);
+        public static extern i1d3Status_t i1d3GetSerialNumber(IntPtr devHndl, IntPtr sn);
 
+        /// <summary>
+        /// Returns the version string of the i1d3 toolkit
+        /// </summary>
+        /// <param name="ver"></param>
+        /// <returns></returns>
+        [DllImport("i1d3SDK.dll", EntryPoint = "i1d3GetToolkitVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr i1d3GetToolkitVersion(IntPtr ver);
 
+        /// <summary>
+        /// Returns the a structure with information about the device
+        /// </summary>
+        /// <param name="devHndl"></param>
+        /// <param name="infostruct"></param>
+        /// <returns></returns>
         [DllImport("i1d3SDK.dll", EntryPoint = "i1d3GetDeviceInfo", CallingConvention = CallingConvention.Cdecl)]
         public static extern i1d3Status_t i1d3GetDeviceInfo(IntPtr devHndl, ref i1d3DEVICE_INFO infostruct);
 
@@ -229,7 +250,7 @@ namespace Color_Calibration.CalibrationSDK
         [DllImport("i1d3SDK.dll", EntryPoint = "i1d3SetSupportFilePath", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public static extern i1d3Status_t i1d3SetSupportFilePath(IntPtr devHndl, string path);
 
-        
+        #endregion
 
         #region  Measurement Setup functions
         /// <summary>

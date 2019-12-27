@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Color_Calibration.ComLib;
 using System.Threading;
 using HZH_Controls.Forms;
+using HZH_Controls.Controls;
 
 namespace Color_Calibration.UnPages
 {
@@ -104,7 +105,8 @@ namespace Color_Calibration.UnPages
         #endregion
         private void Uncom_id_SelectedChangedEvent(object sender, EventArgs e)
         {
-            Index = byte.Parse(Uncom_id.SelectedText);
+            //if (Uncom_id.SelectedText != null)
+                //Index = byte.Parse(Uncom_id.SelectedText);
         }
 
 
@@ -243,11 +245,19 @@ namespace Color_Calibration.UnPages
         /// <param name="e"></param>
         private void ucBtn_get_Click(object sender, EventArgs e)
         {
-            myThread = new Thread(new ThreadStart(delegate ()
+            if (GlobalClass.c_bIsOpen)
             {
-                Init_Thread();
-            })); //开线程         
-            myThread.Start(); //启动线程 
+                Index = byte.Parse(Uncom_id.SelectedValue);
+                myThread = new Thread(new ThreadStart(delegate ()
+                {
+                    Init_Thread();
+                })); //开线程         
+                myThread.Start(); //启动线程 
+            }
+            else
+            {
+                FrmDialog.ShowDialog(this, "Serial port is not opened！", "提示", false);
+            }
         }
         
         private void Init_Thread()
@@ -452,29 +462,30 @@ namespace Color_Calibration.UnPages
         {
             if (GlobalClass.m_bIsOpen == false)
             {
-                FrmDialog.ShowDialog(this, "   No device open ! ", "提示", false);
+                FrmDialog.ShowDialog(this, "   No i1D3 device open ! ", "提示", false);
                 return;
             }
             try
             {
                 IntPtr m_hi1d3 = GlobalClass.i1d3Handle;
 
-                Console.WriteLine("i1d3Handle: " + m_hi1d3);
-                CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3SetIntegrationTime(m_hi1d3, 1.000);
-                CalibrationSDK.i1dColorSDK.i1d3SetTargetLCDTime(m_hi1d3, 1.000);
-                
-                m_err = CalibrationSDK.i1dColorSDK.i1d3SetMeasurementMode(m_hi1d3, CalibrationSDK.i1dColorSDK.i1d3MeasMode_t.i1d3MeasModeLCD);
-                Console.WriteLine("SetModel" + m_err.ToString());
+                //Console.WriteLine("i1d3Handle: " + m_hi1d3);
 
                 CalibrationSDK.i1dColorSDK.i1d3Yxy_t m_dYxyMeas = new CalibrationSDK.i1dColorSDK.i1d3Yxy_t();
 
-                m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(m_hi1d3, ref m_dYxyMeas);
+                CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(m_hi1d3, ref m_dYxyMeas);
                 if (m_err != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                 {
                     FrmDialog.ShowDialog(this, "   Error for " + m_err.ToString(), "提示", false);
                     return;
                 }
-                Console.WriteLine("OK =" + m_dYxyMeas);
+                //Console.WriteLine("OK =" + m_dYxyMeas.Y + " - " + m_dYxyMeas.x + " - " + m_dYxyMeas.y + " - " + m_dYxyMeas.z);
+                string lv = string.Format("{0:N3}", m_dYxyMeas.Y);
+                string x = string.Format("{0:N3}", m_dYxyMeas.x);
+                string y = string.Format("{0:N3}", m_dYxyMeas.y);
+                ucTextBox_lv.InputText = lv;
+                ucTextBox_x.InputText = x;
+                ucTextBox_y.InputText = y;
             }
             catch
             {

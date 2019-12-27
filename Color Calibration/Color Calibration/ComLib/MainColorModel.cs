@@ -10,7 +10,7 @@ namespace Color_Calibration.ComLib
     {
         private static int _h_Row = 1;
         private static int _v_Colu = 1;
-        private static int _m_PageIndex = 1;
+        private static int _m_PageIndex = 0;
         private static int _m_ComIndex = 0;
         private static int _m_MeterType = 0;
         private static int _m_ModelType = 0;
@@ -19,9 +19,9 @@ namespace Color_Calibration.ComLib
         private static int _t_Lum;
         private static int _t_Custom;
         private static int _t_ID = 0;
-
         private static List<KeyValuePair<string, string>> _id_List;
         
+
         public static int H_Row
         {
             get { return _h_Row; }
@@ -110,7 +110,6 @@ namespace Color_Calibration.ComLib
                 _t_ID = value;
             }
         }
-
         public static List<KeyValuePair<string, string>> Id_List
         {
             get { return _id_List; }

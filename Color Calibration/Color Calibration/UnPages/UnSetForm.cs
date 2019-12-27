@@ -10,6 +10,8 @@ using System.IO.Ports;
 using Color_Calibration.ComLib;
 using HZH_Controls.Forms;
 using System.Threading;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Color_Calibration.UnPages
 {
@@ -17,9 +19,11 @@ namespace Color_Calibration.UnPages
     {
         private SerialPort ComDevice = new SerialPort();
         List<KeyValuePair<string, string>> dit = new List<KeyValuePair<string, string>>();
+        private MainForm _mainForm;
         public UnSetForm()
         {
             InitializeComponent();
+            ReadObject();
             #region 界面初始化
             dit.Clear();
             int[] num = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12, 13, 14 ,15 };
@@ -34,7 +38,7 @@ namespace Color_Calibration.UnPages
 
             List<KeyValuePair<string, string>> dit_gamma = new List<KeyValuePair<string, string>>();
             dit_gamma.Add(new KeyValuePair<string, string>("1", "GAMMA 2.2"));
-            dit_gamma.Add(new KeyValuePair<string, string>("2", "GAMMA 1.0"));
+            dit_gamma.Add(new KeyValuePair<string, string>("2", "GAMMA 2.4"));
             ucComTG.Source = dit_gamma;
             ucComTG.SelectedIndex = MainColorModel.T_Gamma;
 
@@ -52,8 +56,14 @@ namespace Color_Calibration.UnPages
             ucComTL.Source = dit_lum;
             ucComTL.SelectedIndex = MainColorModel.T_Lum;
             #endregion
+            InitialTempData();
+            InitComPort();
+            //Console.WriteLine("2222");
         }
-
+        public void InitUmainForm(MainForm f)
+        {
+            _mainForm = f;
+        }
         private void InitComPort()
         {
             string[] drpComList = SerialPort.GetPortNames().Distinct().ToArray();
@@ -62,7 +72,7 @@ namespace Color_Calibration.UnPages
             {
                 for (int i = 1; i <= drpComList.Length; i++)
                 {
-                    dit_port.Add(new KeyValuePair<string, string>(i.ToString(), drpComList[i-1]));
+                    dit_port.Add(new KeyValuePair<string, string>(i.ToString(), drpComList[i - 1]));
                 }
                 Uncom_port.Source = dit_port;
                 Uncom_port.SelectedIndex = MainColorModel.M_ComIndex;
@@ -70,7 +80,7 @@ namespace Color_Calibration.UnPages
             ComDevice.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
 
             List<KeyValuePair<string, string>> dit_meter = new List<KeyValuePair<string, string>>();
-            dit_meter.Add(new KeyValuePair<string, string>("1", "CA310"));
+            //dit_meter.Add(new KeyValuePair<string, string>("1", "CA310"));
             dit_meter.Add(new KeyValuePair<string, string>("2", "X-rite i1D3"));
             Uncom_meter.Source = dit_meter;
             Uncom_meter.SelectedIndex = MainColorModel.M_MeterType;
@@ -80,6 +90,10 @@ namespace Color_Calibration.UnPages
             dit_model.Add(new KeyValuePair<string, string>("2", "拼接屏"));
             Uncom_model.Source = dit_model;
             Uncom_model.SelectedIndex = MainColorModel.M_ModelType;
+
+            ucComHM.SelectedIndex = MainColorModel.H_Row - 1;
+            ucComVM.SelectedIndex = MainColorModel.V_Colu - 1;
+            //_mainForm.UpdateUIStatus();
         }
         /// <summary>
         /// 色温用户自定义模式选中
@@ -95,17 +109,26 @@ namespace Color_Calibration.UnPages
             }
             else
             {
-                label6.Visible = false;
-                ucBtn_set.Visible = false;
+                //label6.Visible = false;
+                //ucBtn_set.Visible = false;
             }
             MainColorModel.T_Temp = ucComTC.SelectedIndex;
+            //if (MainColorModel.M_PageIndex > 0)
+            //    _mainForm.UpdateUIStatus();
+        }
+        private void Uncom_model_SelectedChangedEvent(object sender, EventArgs e)
+        {
+            MainColorModel.M_ModelType = Uncom_model.SelectedIndex;
         }
 
         private void ucBtn_set_BtnClick(object sender, EventArgs e)
         {
-            new ColorForm().ShowDialog();
+            int index = ucComTC.SelectedIndex;
+            new ColorForm(index).ShowDialog();
+            _mainForm.UpdateUIStatus();
         }
 
+        #region 数据传输
         public event ComEvent.DataReceivedHandler DataReceived;
         /// <summary>
         /// 输出数据
@@ -114,13 +137,14 @@ namespace Color_Calibration.UnPages
         /// <param name="e"></param>
         private void Com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(300);
+            Thread.Sleep(200);
             byte[] ReDatas = new byte[ComDevice.BytesToRead];
-            string str;
             if (MainColorModel.M_PageIndex == 2)
                 ComDevice.Read(ReDatas, 0, ReDatas.Length);//读取数据
             else if (MainColorModel.M_PageIndex == 3)
             {
+                Thread.Sleep(200);
+                string str;
                 str = ComDevice.ReadExisting();
                 ReDatas = Encoding.Default.GetBytes(str);
             }
@@ -131,7 +155,7 @@ namespace Color_Calibration.UnPages
 
             //ExceptionLog.getLog().WriteLogFile(ReDatas, DateTime.Now.ToString("yyyyMMdd") + "log.txt");
         }
-
+        
         /// <summary>
         /// 发送数据
         /// </summary>
@@ -161,7 +185,8 @@ namespace Color_Calibration.UnPages
             }
             return false;
         }
-
+        #endregion
+        #region 设备连接操作
         /// <summary>
         /// 关闭串口
         /// </summary>
@@ -173,6 +198,26 @@ namespace Color_Calibration.UnPages
             }
         }
 
+        public void SavePage()
+        {
+            MainColorModel.M_ComIndex = Uncom_port.SelectedIndex;
+            MainColorModel.M_MeterType = Uncom_meter.SelectedIndex;
+            MainColorModel.M_ModelType = Uncom_model.SelectedIndex;
+            MainColorModel.T_Lum = ucComTL.SelectedIndex;
+        }
+
+        public void Colsei1D()
+        {
+            if (m_bIsOpen)
+            {
+                CalibrationSDK.i1dColorSDK.i1d3DeviceClose(i1d3Handle);
+            }
+        }
+        /// <summary>
+        /// 串口连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_connect_BtnClick(object sender, EventArgs e)
         {
             if (ComDevice.IsOpen == false)
@@ -208,7 +253,10 @@ namespace Color_Calibration.UnPages
                 }
                 LogHelper.WriteLog(Btn_connect.Text);
                 Btn_connect.Text = "Close";
-                Btn_connect.ForeColor = Color.Gray;
+                _mainForm.com_status.Text = "SerialPort : " + Uncom_port.SelectedText + " is Connected";
+                //FrmTips.ShowTipsInfo(_mainForm, "SerialPort : " + Uncom_port.SelectedText + " is Connect");
+                FrmTips.ShowTips(_mainForm, "SerialPort: " + Uncom_port.SelectedText + " is Connected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
+                Btn_connect.ForeColor = Color.Red;
             }
             else
             {
@@ -223,9 +271,13 @@ namespace Color_Calibration.UnPages
                 }
                 LogHelper.WriteLog(Btn_connect.Text);
                 Btn_connect.Text = "Connect";
+                _mainForm.com_status.Text = "SerialPort: " + Uncom_port.SelectedText + " is Disconnected";
+                //FrmTips.ShowTipsInfo(_mainForm, "SerialPort : " + Uncom_port.SelectedText + " is Close");
+                FrmTips.ShowTips(_mainForm, "SerialPort: " + Uncom_port.SelectedText + " is Disconnected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
                 Btn_connect.ForeColor = Color.Purple;
             }
             MainColorModel.M_ComIndex = Uncom_port.SelectedIndex;
+            GlobalClass.c_bIsOpen = ComDevice.IsOpen;
             Uncom_port.Enabled = !ComDevice.IsOpen;
         }
 
@@ -237,11 +289,17 @@ namespace Color_Calibration.UnPages
         }
         private bool m_bIsOpen = false;
         private IntPtr i1d3Handle;
+        /// <summary>
+        /// i1D3 连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Unbt_meter_BtnClick(object sender, EventArgs e)
         {
             //FrmDialog.ShowDialog(this, "Open connect the i1D.", "提示", false);
             if (m_bIsOpen == false)
             {
+                //string retlust;
                 try
                 {
                     CalibrationSDK.i1dColorSDK.i1d3Destroy();
@@ -254,7 +312,8 @@ namespace Color_Calibration.UnPages
                         return;
                     }
                     //Console.WriteLine("count: " + ii);
-                    tt = CalibrationSDK.i1dColorSDK.i1d3GetDeviceHandle(0, ref i1d3Handle);
+                    //i1d3Handle = new IntPtr();
+                    tt = CalibrationSDK.i1dColorSDK.i1d3GetDeviceHandle(0,out i1d3Handle);
                     if (tt != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                     {
                         FrmDialog.ShowDialog(this, "   Error getting handle!" + tt.ToString(), "提示", false);
@@ -262,39 +321,55 @@ namespace Color_Calibration.UnPages
                     }
                     GlobalClass.i1d3Handle = i1d3Handle;
                     //Console.WriteLine("i1d3Handle: " + i1d3Handle);
-                    string path = Application.StartupPath + "\\i1d3 Support Files";
-                    CalibrationSDK.i1dColorSDK.i1d3SetSupportFilePath(i1d3Handle, path);
+                    //string path = Application.StartupPath + "\\i1d3 Support Files\\";
+                    //CalibrationSDK.i1dColorSDK.i1d3SetSupportFilePath(i1d3Handle, path);
 
                     tt = CalibrationSDK.i1dColorSDK.i1d3DeviceOpen(i1d3Handle);
                     if (tt != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                     {
                         byte[] key = { 0xD4, 0x9F, 0xD4, 0xA4, 0x59, 0x7E, 0x35, 0xCF };
-                        //tt = CalibrationSDK.i1dColorSDK.i1d3OverrideDeviceDefaults(0, 0, ref key);
+                        CalibrationSDK.i1dColorSDK.i1d3OverrideDeviceDefaults(0, 0, key);
+                        //Console.WriteLine("i1d3Key: " + tt.ToString());
                         tt = CalibrationSDK.i1dColorSDK.i1d3DeviceOpen(i1d3Handle);
+
+                        //Console.WriteLine("i1d3open: "+ tt.ToString());
                     }
                     if (tt != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                     {
                         FrmDialog.ShowDialog(this, "   Error opening i1d3 !   \r   " + tt.ToString(), "提示", false);
                         return;
                     }
-                    CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO info = new CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO();
-                    tt = CalibrationSDK.i1dColorSDK.i1d3GetDeviceInfo(i1d3Handle, ref info);
+                    //CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO info = new CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO();
+                    //tt = CalibrationSDK.i1dColorSDK.i1d3GetDeviceInfo(i1d3Handle, ref info);
 
                     // Display the serial number.
                     //string sn = null;
-                    Console.WriteLine("getinfo=" + tt.ToString());
-                    //tt = CalibrationSDK.i1dColorSDK.i1d3GetSerialNumber(i1d3Handle, ref sn);
-                    //Console.WriteLine("getsn===" + tt.ToString());
-                    Console.WriteLine("Info== " + info.strFirmwareVersion +"="+ info.strProductName +"="+ info.ucIsLocked);
-                    m_bIsOpen = true;
-                    GlobalClass.m_bIsOpen = m_bIsOpen;
-                    Unbt_meter.Text = "Close";
+                    //Console.WriteLine("getinfo=" + tt.ToString());
+                    //IntPtr ptrIn = Marshal.StringToHGlobalAnsi("text");
+                    //tt = CalibrationSDK.i1dColorSDK.i1d3GetSerialNumber(i1d3Handle, ptrIn);
+                    //retlust = Marshal.PtrToStringAnsi(ptrIn);
+                    //Console.WriteLine("getsn===" + tt.ToString() + "=== " + retlust);
 
+                    tt = CalibrationSDK.i1dColorSDK.i1d3SetIntegrationTime(i1d3Handle, 1.000);
+                    CalibrationSDK.i1dColorSDK.i1d3SetTargetLCDTime(i1d3Handle, 0.080);
+
+                    tt = CalibrationSDK.i1dColorSDK.i1d3SetMeasurementMode(i1d3Handle, CalibrationSDK.i1dColorSDK.i1d3MeasMode_t.i1d3MeasModeLCD);
+                    //Console.WriteLine("SetModel" + tt.ToString());
+                    //Console.WriteLine("Info== " + info.strFirmwareVersion +"="+ info.strProductName +"="+ info.ucIsLocked);
                 }
                 catch
                 {
-                    Console.WriteLine("i1d3 connect err.");
+                    FrmDialog.ShowDialog(this, "   Error connect i1d3 ! ", "提示", false);
+                    return;
+                    //Console.WriteLine("i1d3 connect err.");
                 }
+                m_bIsOpen = true;
+                GlobalClass.m_bIsOpen = m_bIsOpen;
+                Unbt_meter.Text = "Close";
+                _mainForm.meter_status.Text = "Calibration : i1D3 is Connected ";
+                FrmTips.ShowTipsInfo(_mainForm, "Calibration : i1D3 is Connected");
+                //FrmTips.ShowTips(_mainForm, "Calibration : i1D3 is Connected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 70), TipsState.Info);
+                Unbt_meter.ForeColor = Color.Red;
             }
             else
             {
@@ -302,9 +377,14 @@ namespace Color_Calibration.UnPages
                 m_bIsOpen = false;
                 GlobalClass.m_bIsOpen = m_bIsOpen;
                 Unbt_meter.Text = "Connect";
+                _mainForm.meter_status.Text = "Calibration : i1D3 is Disconnected";
+                FrmTips.ShowTipsInfo(_mainForm, "Calibration : i1D3 is Disconnected");
+                //FrmTips.ShowTips(_mainForm, "Calibration : i1D3 is Disconnected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 70), TipsState.Info);
+                Unbt_meter.ForeColor = Color.Purple;
             }
         }
-
+        #endregion
+        #region 行列更新
         private void HV_Reflash()
         {
             List<KeyValuePair<string, string>> id_source = new List<KeyValuePair<string, string>>();
@@ -331,12 +411,13 @@ namespace Color_Calibration.UnPages
             MainColorModel.V_Colu = v_col;
             HV_Reflash();
         }
-        
+        #endregion
+        #region 初始化数据
         private void ReadObject()
         {
             try
             {
-                SerializeModel.PathFile = Application.StartupPath + "\\Model\\main_set.xml";
+                SerializeModel.PathFile = Application.StartupPath + "\\ColorData\\main_set.xml";
                 MainSetModel setModel = new MainSetModel();
                 setModel = SerializeModel.DeXMLSerialize<MainSetModel>();
 
@@ -351,6 +432,7 @@ namespace Color_Calibration.UnPages
                 MainColorModel.T_Temp = setModel.T_Temp;
                 MainColorModel.T_Lum = setModel.T_Lum;
                 MainColorModel.T_ID = setModel.T_ID;
+                //MainColorModel.T_ColorTemp = setModel.T_ColorTempStd;
                 //Console.WriteLine(MainColorModel.H_Row + ":" + MainColorModel.V_Colu);
             }
             catch
@@ -358,16 +440,38 @@ namespace Color_Calibration.UnPages
                 Console.WriteLine("[" + "]文件读取失败...");
             }
         }
-
-        /// <summary>
-        /// 加载
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UnSetForm_Load(object sender, EventArgs e)
+        
+        private void InitialTempData()
         {
-            ReadObject();
-            InitComPort();
+            string path = Application.StartupPath + "\\ColorData\\colortemp.xml";
+            if (File.Exists(path))
+            {
+                SerializeModel.PathFile = path;
+                try
+                {
+                    List<ColorTempModel> ListData = new List<ColorTempModel>();
+                    ListData = SerializeModel.DeXMLSerialize<List<ColorTempModel>>();
+                    if (ListData != null)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            //UpdateGaridSource(ListData[i]);
+                            GlobalClass._t_ColorTempStd[i, 0] = ListData[i].C_ColorTemp_x;
+                            GlobalClass._t_ColorTempStd[i, 1] = ListData[i].C_ColorTemp_y;
+                            GlobalClass._t_ColorTempStd[i, 2] = ListData[i].C_ColorTemp_lv;
+                            GlobalClass._t_ColorEerorxy[i] = int.Parse(ListData[i].C_ColorEeror_xy);
+                            GlobalClass._t_ColorEerorlv[i] = int.Parse(ListData[i].C_ColorEeror_lv);
+                            GlobalClass._t_ColorEeror[i] = ListData[i].C_ColorEeror;
+                        }
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("[colortemp]文件读取失败...");
+                }
+            }
         }
+        #endregion
+
     }
 }

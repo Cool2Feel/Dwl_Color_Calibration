@@ -168,7 +168,7 @@
             // ucComHM
             // 
             this.ucComHM.BackColor = System.Drawing.Color.Transparent;
-            this.ucComHM.BackColorExt = System.Drawing.Color.Silver;
+            this.ucComHM.BackColorExt = System.Drawing.Color.White;
             this.ucComHM.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ucComHM.ConerRadius = 5;
             this.ucComHM.DropPanelHeight = -1;
@@ -180,7 +180,7 @@
             this.ucComHM.Location = new System.Drawing.Point(299, 306);
             this.ucComHM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComHM.Name = "ucComHM";
-            this.ucComHM.RectColor = System.Drawing.Color.Silver;
+            this.ucComHM.RectColor = System.Drawing.Color.White;
             this.ucComHM.RectWidth = 1;
             this.ucComHM.SelectedIndex = -1;
             this.ucComHM.SelectedValue = "";
@@ -197,9 +197,9 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(392, 309);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 19);
+            this.label2.Size = new System.Drawing.Size(83, 19);
             this.label2.TabIndex = 30;
-            this.label2.Text = "V Moniters:";
+            this.label2.Text = "V Moniter:";
             // 
             // label1
             // 
@@ -208,9 +208,9 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(205, 309);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 19);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             this.label1.TabIndex = 29;
-            this.label1.Text = "H Moniters:";
+            this.label1.Text = "H Moniter:";
             // 
             // label3
             // 
@@ -219,9 +219,9 @@
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(236, 267);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 19);
+            this.label3.Size = new System.Drawing.Size(97, 19);
             this.label3.TabIndex = 33;
-            this.label3.Text = "SN Moniters:";
+            this.label3.Text = "Moniter SN :";
             // 
             // ucNum_SN
             // 

@@ -41,7 +41,10 @@
             this.Btn_color = new HZH_Controls.Controls.UCBtnFillet();
             this.Main_content = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.com_status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.meter_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.version = new System.Windows.Forms.ToolStripStatusLabel();
+            this.color_temp = new System.Windows.Forms.ToolStripStatusLabel();
             this.Title_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_pic)).BeginInit();
             this.panel1.SuspendLayout();
@@ -258,20 +261,50 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.com_status,
+            this.meter_status,
+            this.color_temp,
             this.version});
             this.statusStrip1.Location = new System.Drawing.Point(0, 514);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.statusStrip1.Size = new System.Drawing.Size(917, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // com_status
+            // 
+            this.com_status.AutoSize = false;
+            this.com_status.BackColor = System.Drawing.Color.Transparent;
+            this.com_status.Margin = new System.Windows.Forms.Padding(30, 3, 0, 2);
+            this.com_status.Name = "com_status";
+            this.com_status.Size = new System.Drawing.Size(200, 17);
+            this.com_status.Text = "SerialPort : COM6 is Disconnected";
+            // 
+            // meter_status
+            // 
+            this.meter_status.AutoSize = false;
+            this.meter_status.BackColor = System.Drawing.Color.Transparent;
+            this.meter_status.Margin = new System.Windows.Forms.Padding(30, 3, 0, 2);
+            this.meter_status.Name = "meter_status";
+            this.meter_status.Size = new System.Drawing.Size(300, 17);
+            this.meter_status.Text = "Calibration : i1D3 is Disconnected";
+            // 
             // version
             // 
+            this.version.Margin = new System.Windows.Forms.Padding(52, 3, 0, 2);
             this.version.Name = "version";
             this.version.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.version.Size = new System.Drawing.Size(42, 17);
             this.version.Text = "V 0.1";
+            // 
+            // color_temp
+            // 
+            this.color_temp.AutoSize = false;
+            this.color_temp.BackColor = System.Drawing.Color.Transparent;
+            this.color_temp.Name = "color_temp";
+            this.color_temp.Size = new System.Drawing.Size(260, 17);
+            this.color_temp.Text = "Target -> Lv : 250  x ： 0.283  y : 0.294";
             // 
             // MainForm
             // 
@@ -313,6 +346,9 @@
         private HZH_Controls.Controls.UCBtnFillet Btn_color;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripStatusLabel version;
+        public System.Windows.Forms.ToolStripStatusLabel meter_status;
+        public System.Windows.Forms.ToolStripStatusLabel com_status;
+        private System.Windows.Forms.ToolStripStatusLabel color_temp;
     }
 }
 

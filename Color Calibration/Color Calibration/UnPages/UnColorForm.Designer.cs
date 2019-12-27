@@ -32,10 +32,11 @@
             this.ucCheckBox_out = new HZH_Controls.Controls.UCCheckBox();
             this.ucDataGridView_result = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1_tips = new System.Windows.Forms.Label();
             this.ucBtn_save = new EASkins.Ami_Button_1();
             this.ucBtn_clear = new EASkins.Ami_Button_1();
             this.ucBtn_Execute = new EASkins.Ami_Button_1();
+            this.ucledNums1 = new HZH_Controls.Controls.UCLEDNums();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,22 +91,22 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label1_tips);
             this.panel1.Location = new System.Drawing.Point(62, 14);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(810, 44);
             this.panel1.TabIndex = 8;
             // 
-            // label1
+            // label1_tips
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(810, 44);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Put the sensor on monitor : ID 1 , and then click the Execute button.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1_tips.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1_tips.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1_tips.Location = new System.Drawing.Point(0, 0);
+            this.label1_tips.Name = "label1_tips";
+            this.label1_tips.Size = new System.Drawing.Size(810, 44);
+            this.label1_tips.TabIndex = 0;
+            this.label1_tips.Text = "Put the sensor on monitor : ID 1 , and then click the Execute button.";
+            this.label1_tips.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ucBtn_save
             // 
@@ -150,12 +151,25 @@
             this.ucBtn_Execute.TextAlignment = System.Drawing.StringAlignment.Center;
             this.ucBtn_Execute.Click += new System.EventHandler(this.ucBtn_Execute_BtnClick);
             // 
+            // ucledNums1
+            // 
+            this.ucledNums1.BackColor = System.Drawing.Color.Transparent;
+            this.ucledNums1.ForeColor = System.Drawing.Color.Purple;
+            this.ucledNums1.LineWidth = 8;
+            this.ucledNums1.Location = new System.Drawing.Point(6, 6);
+            this.ucledNums1.Name = "ucledNums1";
+            this.ucledNums1.Size = new System.Drawing.Size(113, 68);
+            this.ucledNums1.TabIndex = 69;
+            this.ucledNums1.Value = "10";
+            this.ucledNums1.Visible = false;
+            // 
             // UnColorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = global::Color_Calibration.Properties.Resources.mainLogo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.ucledNums1);
             this.Controls.Add(this.ucBtn_Execute);
             this.Controls.Add(this.ucBtn_clear);
             this.Controls.Add(this.ucBtn_save);
@@ -178,9 +192,10 @@
         private System.Windows.Forms.Label label_cm;
         private HZH_Controls.Controls.UCCheckBox ucCheckBox_out;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1_tips;
         private EASkins.Ami_Button_1 ucBtn_save;
         private EASkins.Ami_Button_1 ucBtn_clear;
         private EASkins.Ami_Button_1 ucBtn_Execute;
+        private HZH_Controls.Controls.UCLEDNums ucledNums1;
     }
 }

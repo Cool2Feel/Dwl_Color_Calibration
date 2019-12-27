@@ -25,7 +25,7 @@ namespace Color_Calibration.ComLib
 
     public class SerializeModel
     {
-        static string strFile = System.Windows.Forms.Application.StartupPath + "\\Model\\main_set.xml";     
+        static string strFile = System.Windows.Forms.Application.StartupPath + "\\ColorData\\main_set.xml";     
         public static string PathFile
         {
             get { return strFile; }
@@ -38,9 +38,13 @@ namespace Color_Calibration.ComLib
         public static string XMLSerialize<T>(T entity)
         {
             //StringBuilder buffer = new StringBuilder();
-
+            FileMode fm = FileMode.OpenOrCreate;
+            if(File.Exists(PathFile))
+            {
+                fm = FileMode.Create;
+            }
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (FileStream fs = new FileStream(strFile, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(strFile, fm))
             {
                 XmlSerializer formatter = new XmlSerializer(typeof(T));
                 formatter.Serialize(fs, entity);

@@ -155,7 +155,7 @@
             this.ucTextBox_x.InputType = HZH_Controls.TextInputType.NotControl;
             this.ucTextBox_x.IsFocusColor = true;
             this.ucTextBox_x.IsRadius = true;
-            this.ucTextBox_x.IsShowClearBtn = true;
+            this.ucTextBox_x.IsShowClearBtn = false;
             this.ucTextBox_x.IsShowKeyboard = false;
             this.ucTextBox_x.IsShowRect = true;
             this.ucTextBox_x.IsShowSearchBtn = false;
@@ -196,7 +196,7 @@
             this.ucTextBox_y.InputType = HZH_Controls.TextInputType.NotControl;
             this.ucTextBox_y.IsFocusColor = true;
             this.ucTextBox_y.IsRadius = true;
-            this.ucTextBox_y.IsShowClearBtn = true;
+            this.ucTextBox_y.IsShowClearBtn = false;
             this.ucTextBox_y.IsShowKeyboard = false;
             this.ucTextBox_y.IsShowRect = true;
             this.ucTextBox_y.IsShowSearchBtn = false;
@@ -229,7 +229,7 @@
             this.ucTextBox_lv.BackColor = System.Drawing.Color.Transparent;
             this.ucTextBox_lv.ConerRadius = 5;
             this.ucTextBox_lv.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.ucTextBox_lv.DecLength = 2;
+            this.ucTextBox_lv.DecLength = 3;
             this.ucTextBox_lv.FillColor = System.Drawing.Color.Empty;
             this.ucTextBox_lv.FocusBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
             this.ucTextBox_lv.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -237,7 +237,7 @@
             this.ucTextBox_lv.InputType = HZH_Controls.TextInputType.NotControl;
             this.ucTextBox_lv.IsFocusColor = true;
             this.ucTextBox_lv.IsRadius = true;
-            this.ucTextBox_lv.IsShowClearBtn = true;
+            this.ucTextBox_lv.IsShowClearBtn = false;
             this.ucTextBox_lv.IsShowKeyboard = false;
             this.ucTextBox_lv.IsShowRect = true;
             this.ucTextBox_lv.IsShowSearchBtn = false;
@@ -316,11 +316,11 @@
             this.label_bl.BackColor = System.Drawing.Color.Transparent;
             this.label_bl.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_bl.ForeColor = System.Drawing.Color.Purple;
-            this.label_bl.Location = new System.Drawing.Point(507, 242);
+            this.label_bl.Location = new System.Drawing.Point(502, 242);
             this.label_bl.Name = "label_bl";
-            this.label_bl.Size = new System.Drawing.Size(27, 19);
+            this.label_bl.Size = new System.Drawing.Size(36, 19);
             this.label_bl.TabIndex = 46;
-            this.label_bl.Text = "50";
+            this.label_bl.Text = "100";
             // 
             // ucTrack_r
             // 
@@ -359,7 +359,7 @@
             this.ucTrack_bl.TabIndex = 44;
             this.ucTrack_bl.Text = "ucTrack_bl";
             this.ucTrack_bl.TipsFormat = null;
-            this.ucTrack_bl.Value = 50F;
+            this.ucTrack_bl.Value = 100F;
             this.ucTrack_bl.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.ucTrack_bl.ValueChanged += new System.EventHandler(this.ucTrack_bl_ValueChanged);
             this.ucTrack_bl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ucTrack_bl_MouseUp);

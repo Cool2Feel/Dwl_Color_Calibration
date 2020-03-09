@@ -1,23 +1,20 @@
 ﻿using Color_Calibration.ComLib;
+using Color_Calibration.Control;
 using Color_Calibration.UnPages;
 using HZH_Controls.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.IO.Ports;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace Color_Calibration
 {
+    /// <summary>
+    /// Main Pages
+    /// </summary>
     public partial class MainForm : FrmBase
     {
         #region Main PageObject
@@ -25,7 +22,9 @@ namespace Color_Calibration
         private UnSetForm _setpage = new UnSetForm();
         private UnColorForm _colorpage = new UnColorForm();
         private UnAdjustForm _adjustpage = new UnAdjustForm();
+        private UnControlForm _controlpage = new UnControlForm();
         private string _path = Application.StartupPath + "\\ColorData";
+        public C_DebugPage _debug = new C_DebugPage();
         //private MainColorModel _colorModel = new MainColorModel();
         #endregion
         public MainForm()
@@ -38,7 +37,9 @@ namespace Color_Calibration
             _setpage.DataReceived += new ComEvent.DataReceivedHandler(Com_DataReceived);
             _colorpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
             _adjustpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
-
+            _controlpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
+            _debug = new C_DebugPage();
+            _debug.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
             if (!Directory.Exists(_path + "\\"))
             {
                 Directory.CreateDirectory(_path + "\\");
@@ -48,13 +49,6 @@ namespace Color_Calibration
             CalibrationSDK.i1dColorSDK.i1d3Status_t tt = CalibrationSDK.i1dColorSDK.i1d3Initialize();
             //this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             
-            /*
-            IntPtr ptrIn = Marshal.StringToHGlobalAnsi("text");
-            IntPtr ptrRet = CalibrationSDK.i1dColorSDK.i1d3GetToolkitVersion(ref ptrIn);
-            string retlust = Marshal.PtrToStringAnsi(ptrRet);
-            //CalibrationSDK.i1dColorSDK.i1d3GetToolkitVersion(ref s_ver);
-            Console.WriteLine("ver=" + retlust);
-            */
         }
 
         System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
@@ -82,20 +76,25 @@ namespace Color_Calibration
                 FrmTips.ShowTipsInfo(this, "Performing color calibration adjustment...");
                 return;
             }
-            Btn_set.BackColor = Color.Purple;
+            Btn_set.BackColor = Color.FromArgb(164,38,143);
             Btn_set.ForeColor = Color.White;
             Btn_set.BtnImage = global::Color_Calibration.Properties.Resources.set;
 
             Btn_color.BackColor = Color.White;
-            Btn_color.ForeColor = Color.Purple;
+            Btn_color.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_color.BtnImage = global::Color_Calibration.Properties.Resources.calibration;
 
             Btn_adjust.BackColor = Color.White;
-            Btn_adjust.ForeColor = Color.Purple;
+            Btn_adjust.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_adjust.BtnImage = global::Color_Calibration.Properties.Resources.adjust;
+
+            Btn_control.BackColor = Color.White;
+            Btn_control.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_control.BtnImage = global::Color_Calibration.Properties.Resources.controlList;
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_setpage);
+            //_setpage.DataReceived += new ComEvent.DataReceivedHandler(Com_DataReceived);
             MainColorModel.M_PageIndex = 1;
             _setpage.InitUmainForm(this);
             //Main_content.Dock = DockStyle.Fill;
@@ -114,16 +113,20 @@ namespace Color_Calibration
                 return;
             }
             Btn_set.BackColor = Color.White;
-            Btn_set.ForeColor = Color.Purple;
+            Btn_set.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_set.BtnImage = global::Color_Calibration.Properties.Resources.设置;
 
-            Btn_color.BackColor = Color.Purple;
+            Btn_color.BackColor = Color.FromArgb(164, 38, 143);
             Btn_color.ForeColor = Color.White;
             Btn_color.BtnImage = global::Color_Calibration.Properties.Resources.calibration_ex;
 
             Btn_adjust.BackColor = Color.White;
-            Btn_adjust.ForeColor = Color.Purple;
+            Btn_adjust.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_adjust.BtnImage = global::Color_Calibration.Properties.Resources.adjust;
+
+            Btn_control.BackColor = Color.White;
+            Btn_control.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_control.BtnImage = global::Color_Calibration.Properties.Resources.controlList;
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_colorpage);
@@ -146,16 +149,20 @@ namespace Color_Calibration
                 return;
             }
             Btn_set.BackColor = Color.White;
-            Btn_set.ForeColor = Color.Purple;
+            Btn_set.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_set.BtnImage = global::Color_Calibration.Properties.Resources.设置;
 
             Btn_color.BackColor = Color.White;
-            Btn_color.ForeColor = Color.Purple;
+            Btn_color.ForeColor = Color.FromArgb(164, 38, 143);
             Btn_color.BtnImage = global::Color_Calibration.Properties.Resources.calibration;
 
-            Btn_adjust.BackColor = Color.Purple;
+            Btn_adjust.BackColor = Color.FromArgb(164, 38, 143);
             Btn_adjust.ForeColor = Color.White;
             Btn_adjust.BtnImage = global::Color_Calibration.Properties.Resources.adjust_ex;
+
+            Btn_control.BackColor = Color.White;
+            Btn_control.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_control.BtnImage = global::Color_Calibration.Properties.Resources.controlList;
 
             Main_content.Controls.Clear();
             Main_content.Controls.Add(_adjustpage);
@@ -163,14 +170,55 @@ namespace Color_Calibration
             MainColorModel.M_PageIndex = 3;
             _adjustpage.Data_Update();
         }
+        private void Btn_control_BtnClick(object sender, EventArgs e)
+        {
+            if (MainColorModel.M_PageIndex == 4)
+                return;
+            if (GlobalClass.m_cIsRunning)
+            {
+                FrmTips.ShowTipsInfo(this, "Performing color calibration adjustment...");
+                return;
+            }
+            Btn_set.BackColor = Color.White;
+            Btn_set.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_set.BtnImage = global::Color_Calibration.Properties.Resources.设置;
+
+            Btn_color.BackColor = Color.White;
+            Btn_color.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_color.BtnImage = global::Color_Calibration.Properties.Resources.calibration;
+
+            Btn_adjust.BackColor = Color.White;
+            Btn_adjust.ForeColor = Color.FromArgb(164, 38, 143);
+            Btn_adjust.BtnImage = global::Color_Calibration.Properties.Resources.adjust;
+
+            Btn_control.BackColor = Color.FromArgb(164, 38, 143);
+            Btn_control.ForeColor = Color.White;
+            Btn_control.BtnImage = global::Color_Calibration.Properties.Resources.controlList_ex;
+
+            Main_content.Controls.Clear();
+            Main_content.Controls.Add(_controlpage);
+            //Main_content.Dock = DockStyle.Fill;
+            MainColorModel.M_PageIndex = 4;
+            _controlpage.Data_Update();
+        }
 
         public void UpdateUIStatus()
         {
-            int i = MainColorModel.T_Temp;
-            string x = string.Format("{0:N3}", (float)GlobalClass._t_ColorTempStd[i, 0] / 10000);
-            string y = string.Format("{0:N3}", (float)GlobalClass._t_ColorTempStd[i, 1] / 10000);
-            string lv = GlobalClass._t_ColorTempStd[i, 2].ToString();
-            color_temp.Text = "Target 『  Lv : " + lv + "  x ："+  x + "  y : " + y + " 』";
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                int i = MainColorModel.T_Temp;
+                string x = string.Format("{0:N3}", (float)GlobalClass._t_ColorTempStd[i, 0] / 10000);
+                string y = string.Format("{0:N3}", (float)GlobalClass._t_ColorTempStd[i, 1] / 10000);
+                string lv = GlobalClass._t_ColorTempStd[i, 2].ToString();
+                color_temp.Text = "Target 『  Lv : " + lv + "  x ：" + x + "  y : " + y + " 』";
+            }));
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(GlobalClass.m_cIsRunning == false)
+            {
+                UpdateUIStatus();
+            }
         }
         #endregion
 
@@ -356,6 +404,55 @@ namespace Color_Calibration
         }
         #endregion
         #region 串口数据 Main-API
+
+        // 系统消息常量
+        public const int WM_DEVICE_CHANGE = 0x219;             //设备改变           
+        public const int DBT_DEVICEARRIVAL = 0x8000;          //设备插入
+        public const int DBT_DEVICE_REMOVE_COMPLETE = 0x8004; //设备移除
+        /// <summary>
+        /// 串口插拔的消息处理
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_DEVICE_CHANGE)        // 捕获USB设备的拔出消息WM_DEVICECHANGE
+            {
+                switch (m.WParam.ToInt32())
+                {
+                    case DBT_DEVICE_REMOVE_COMPLETE:    // USB拔出      
+                        {
+                            if (GlobalClass.c_bIsOpen)
+                            {
+                                bool com = false;
+                                String[] serialPorts = System.IO.Ports.SerialPort.GetPortNames();
+                                for (int i = 0; i < serialPorts.Length; i++)//找出所有串口，并选择文件中的
+                                {
+                                    if (serialPorts[i].Equals(_setpage.ComDevice.PortName))
+                                        com = true;
+                                    //Console.WriteLine(serialPorts[i]);
+                                }
+                                if (!com)
+                                {
+                                    com_status.Text = "SerialPort: " + _setpage.ComDevice.PortName + " is Disconnected";
+                                    com_status.ForeColor = Color.Black;
+                                    _setpage.ClearSelf();
+                                    _colorpage.StopRuning();
+                                    FrmDialog.ShowDialog(this, "The serial port has been disconnected, please reset it to open!", "Tips", false);
+                                }
+                            }
+                            _setpage.UpdateCom();
+                        }
+                        break;
+                    case DBT_DEVICEARRIVAL:             // USB插入获取对应串口名称
+                        {
+                            _setpage.UpdateCom();
+                        }
+                        break;
+                }
+            }
+            base.WndProc(ref m);
+        }
+
         /// <summary>
         /// 串口数据返回
         /// </summary>
@@ -365,17 +462,24 @@ namespace Color_Calibration
         {
             if (data.Length > 1)
             {
-                string ss = Encoding.Default.GetString(data);
+                //string ss = Encoding.Default.GetString(data);
 
                 //Console.WriteLine(ss);
                 if (MainColorModel.M_PageIndex == 2)
                     _colorpage.DataReceived(data);
                 else if(MainColorModel.M_PageIndex == 3)
                     _adjustpage.DataReceived(data);
+                else if (MainColorModel.M_PageIndex == 4)
+                    _controlpage.DataReceived(data);
                 else
                 {
-                    Console.WriteLine("this page:" + ss);
+                    Console.WriteLine("this page:" + data.Length);
                 }
+                //_debug.ReceivePrint(data);
+                this.BeginInvoke(new MethodInvoker(delegate ()
+                {
+                     _debug.ReceivePrint(data);
+                })); 
             }
 
             //LogHelper.WriteLog("串口 DataReceived：" + Encoding.Default.GetString(ReDatas));
@@ -389,8 +493,44 @@ namespace Color_Calibration
         /// <returns></returns>
         private bool DataSender_EventDataSend(byte[] data)
         {
+            this.BeginInvoke(new MethodInvoker(delegate ()
+             {
+                 _debug.SendPrint(data);
+             }));
+            //_debug.SendPrint(data);
             return _setpage.SendData(data);
         }
         #endregion
+
+        #region Debug_Showform
+        private bool debug_show = false;
+        private void debug_lable_Click(object sender, EventArgs e)
+        {
+            _debug.Location = new Point(this.Location.X, this.Location.Y + this.Size.Height);
+            if (debug_show)
+            {
+                _debug.Hide();
+                debug_show = false;
+                debug_lable.Text = "∨";
+            }
+            else
+            {
+                _debug.Show();
+                debug_show = true;
+                debug_lable.Text = "∧";
+            }
+            //Console.WriteLine(this.Location.X + "=" + this.Location.Y + this.Size.Height);
+        }
+
+        private void MainForm_Move(object sender, EventArgs e)
+        {
+            _debug.Location = new Point(this.Location.X, this.Location.Y + this.Size.Height);
+        }
+        private void debug_lable_MouseEnter(object sender, EventArgs e)
+        {
+            this.Focus();
+        }
+        #endregion
+
     }
 }

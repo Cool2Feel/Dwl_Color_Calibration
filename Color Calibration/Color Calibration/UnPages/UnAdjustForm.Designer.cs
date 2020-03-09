@@ -62,7 +62,7 @@
             this.lblBg_down = new System.Windows.Forms.Label();
             this.Btn_measure = new EASkins.Ami_Button_1();
             this.ucBtn_get = new EASkins.Ami_Button_1();
-            this.ami_Button_12 = new EASkins.Ami_Button_1();
+            this.ami_Button_setd = new EASkins.Ami_Button_1();
             this.SuspendLayout();
             // 
             // Uncom_id
@@ -71,9 +71,9 @@
             this.Uncom_id.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.Uncom_id.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Uncom_id.ConerRadius = 5;
-            this.Uncom_id.DropPanelHeight = 300;
+            this.Uncom_id.DropPanelHeight = 500;
             this.Uncom_id.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.Uncom_id.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Uncom_id.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Uncom_id.IsRadius = true;
             this.Uncom_id.IsShowRect = true;
             this.Uncom_id.ItemWidth = 80;
@@ -88,7 +88,7 @@
             this.Uncom_id.Source = null;
             this.Uncom_id.TabIndex = 37;
             this.Uncom_id.TextValue = null;
-            this.Uncom_id.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.Uncom_id.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.Uncom_id.SelectedChangedEvent += new System.EventHandler(this.Uncom_id_SelectedChangedEvent);
             // 
             // label_mi
@@ -144,11 +144,12 @@
             // 
             // ucTextBox_x
             // 
-            this.ucTextBox_x.BackColor = System.Drawing.Color.Transparent;
+            this.ucTextBox_x.BackColor = System.Drawing.SystemColors.Control;
             this.ucTextBox_x.ConerRadius = 5;
             this.ucTextBox_x.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.ucTextBox_x.DecLength = 3;
-            this.ucTextBox_x.FillColor = System.Drawing.Color.Empty;
+            this.ucTextBox_x.Enabled = false;
+            this.ucTextBox_x.FillColor = System.Drawing.SystemColors.Control;
             this.ucTextBox_x.FocusBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
             this.ucTextBox_x.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ucTextBox_x.InputText = "";
@@ -160,7 +161,7 @@
             this.ucTextBox_x.IsShowRect = true;
             this.ucTextBox_x.IsShowSearchBtn = false;
             this.ucTextBox_x.KeyBoardType = HZH_Controls.Controls.KeyBoardType.UCKeyBorderAll_EN;
-            this.ucTextBox_x.Location = new System.Drawing.Point(93, 85);
+            this.ucTextBox_x.Location = new System.Drawing.Point(93, 86);
             this.ucTextBox_x.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucTextBox_x.MaxValue = new decimal(new int[] {
             1000000,
@@ -180,7 +181,7 @@
             this.ucTextBox_x.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.ucTextBox_x.RectWidth = 1;
             this.ucTextBox_x.RegexPattern = "";
-            this.ucTextBox_x.Size = new System.Drawing.Size(112, 34);
+            this.ucTextBox_x.Size = new System.Drawing.Size(112, 32);
             this.ucTextBox_x.TabIndex = 38;
             // 
             // ucTextBox_y
@@ -189,7 +190,8 @@
             this.ucTextBox_y.ConerRadius = 5;
             this.ucTextBox_y.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.ucTextBox_y.DecLength = 3;
-            this.ucTextBox_y.FillColor = System.Drawing.Color.Empty;
+            this.ucTextBox_y.Enabled = false;
+            this.ucTextBox_y.FillColor = System.Drawing.SystemColors.Control;
             this.ucTextBox_y.FocusBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
             this.ucTextBox_y.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ucTextBox_y.InputText = "";
@@ -201,7 +203,7 @@
             this.ucTextBox_y.IsShowRect = true;
             this.ucTextBox_y.IsShowSearchBtn = false;
             this.ucTextBox_y.KeyBoardType = HZH_Controls.Controls.KeyBoardType.UCKeyBorderAll_EN;
-            this.ucTextBox_y.Location = new System.Drawing.Point(93, 120);
+            this.ucTextBox_y.Location = new System.Drawing.Point(93, 121);
             this.ucTextBox_y.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucTextBox_y.MaxValue = new decimal(new int[] {
             1000000,
@@ -221,7 +223,7 @@
             this.ucTextBox_y.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.ucTextBox_y.RectWidth = 1;
             this.ucTextBox_y.RegexPattern = "";
-            this.ucTextBox_y.Size = new System.Drawing.Size(112, 34);
+            this.ucTextBox_y.Size = new System.Drawing.Size(112, 32);
             this.ucTextBox_y.TabIndex = 40;
             // 
             // ucTextBox_lv
@@ -230,7 +232,8 @@
             this.ucTextBox_lv.ConerRadius = 5;
             this.ucTextBox_lv.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.ucTextBox_lv.DecLength = 3;
-            this.ucTextBox_lv.FillColor = System.Drawing.Color.Empty;
+            this.ucTextBox_lv.Enabled = false;
+            this.ucTextBox_lv.FillColor = System.Drawing.SystemColors.Control;
             this.ucTextBox_lv.FocusBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
             this.ucTextBox_lv.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ucTextBox_lv.InputText = "";
@@ -242,7 +245,7 @@
             this.ucTextBox_lv.IsShowRect = true;
             this.ucTextBox_lv.IsShowSearchBtn = false;
             this.ucTextBox_lv.KeyBoardType = HZH_Controls.Controls.KeyBoardType.UCKeyBorderAll_EN;
-            this.ucTextBox_lv.Location = new System.Drawing.Point(93, 155);
+            this.ucTextBox_lv.Location = new System.Drawing.Point(93, 156);
             this.ucTextBox_lv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucTextBox_lv.MaxValue = new decimal(new int[] {
             1000000,
@@ -262,7 +265,7 @@
             this.ucTextBox_lv.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.ucTextBox_lv.RectWidth = 1;
             this.ucTextBox_lv.RegexPattern = "";
-            this.ucTextBox_lv.Size = new System.Drawing.Size(112, 34);
+            this.ucTextBox_lv.Size = new System.Drawing.Size(112, 32);
             this.ucTextBox_lv.TabIndex = 39;
             // 
             // label1
@@ -339,7 +342,7 @@
             this.ucTrack_r.Text = "ucTrack_r";
             this.ucTrack_r.TipsFormat = null;
             this.ucTrack_r.Value = 128F;
-            this.ucTrack_r.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.ucTrack_r.ValueColor = System.Drawing.Color.Purple;
             this.ucTrack_r.ValueChanged += new System.EventHandler(this.ucTrack_r_ValueChanged);
             this.ucTrack_r.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ucTrack_r_MouseUp);
             // 
@@ -360,7 +363,7 @@
             this.ucTrack_bl.Text = "ucTrack_bl";
             this.ucTrack_bl.TipsFormat = null;
             this.ucTrack_bl.Value = 100F;
-            this.ucTrack_bl.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.ucTrack_bl.ValueColor = System.Drawing.Color.Purple;
             this.ucTrack_bl.ValueChanged += new System.EventHandler(this.ucTrack_bl_ValueChanged);
             this.ucTrack_bl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ucTrack_bl_MouseUp);
             // 
@@ -405,7 +408,7 @@
             this.ucTrack_b.Text = "ucTrack_b";
             this.ucTrack_b.TipsFormat = null;
             this.ucTrack_b.Value = 128F;
-            this.ucTrack_b.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.ucTrack_b.ValueColor = System.Drawing.Color.Purple;
             this.ucTrack_b.ValueChanged += new System.EventHandler(this.ucTrack_b_ValueChanged);
             this.ucTrack_b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ucTrack_b_MouseUp);
             // 
@@ -426,7 +429,7 @@
             this.ucTrack_g.Text = "ucTrack_g";
             this.ucTrack_g.TipsFormat = null;
             this.ucTrack_g.Value = 128F;
-            this.ucTrack_g.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.ucTrack_g.ValueColor = System.Drawing.Color.Purple;
             this.ucTrack_g.ValueChanged += new System.EventHandler(this.ucTrack_g_ValueChanged);
             this.ucTrack_g.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ucTrack_g_MouseUp);
             // 
@@ -646,19 +649,20 @@
             this.ucBtn_get.TextAlignment = System.Drawing.StringAlignment.Center;
             this.ucBtn_get.Click += new System.EventHandler(this.ucBtn_get_Click);
             // 
-            // ami_Button_12
+            // ami_Button_setd
             // 
-            this.ami_Button_12.BackColor = System.Drawing.Color.Transparent;
-            this.ami_Button_12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ami_Button_12.Image = null;
-            this.ami_Button_12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ami_Button_12.Location = new System.Drawing.Point(44, 333);
-            this.ami_Button_12.Name = "ami_Button_12";
-            this.ami_Button_12.Size = new System.Drawing.Size(161, 30);
-            this.ami_Button_12.TabIndex = 66;
-            this.ami_Button_12.Text = "Set Default";
-            this.ami_Button_12.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.ami_Button_12.Click += new System.EventHandler(this.ami_Button_12_Click);
+            this.ami_Button_setd.BackColor = System.Drawing.Color.Transparent;
+            this.ami_Button_setd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ami_Button_setd.Image = null;
+            this.ami_Button_setd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ami_Button_setd.Location = new System.Drawing.Point(44, 333);
+            this.ami_Button_setd.Name = "ami_Button_setd";
+            this.ami_Button_setd.Size = new System.Drawing.Size(161, 30);
+            this.ami_Button_setd.TabIndex = 67;
+            this.ami_Button_setd.Text = "Set Default";
+            this.ami_Button_setd.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.ami_Button_setd.Visible = false;
+            this.ami_Button_setd.Click += new System.EventHandler(this.ami_Button_setd_Click);
             // 
             // UnAdjustForm
             // 
@@ -666,7 +670,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = global::Color_Calibration.Properties.Resources.mainLogo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.ami_Button_12);
+            this.Controls.Add(this.ami_Button_setd);
             this.Controls.Add(this.ucBtn_get);
             this.Controls.Add(this.Btn_measure);
             this.Controls.Add(this.lblBg_down);
@@ -745,6 +749,6 @@
         private System.Windows.Forms.Label lblBg_down;
         private EASkins.Ami_Button_1 Btn_measure;
         private EASkins.Ami_Button_1 ucBtn_get;
-        private EASkins.Ami_Button_1 ami_Button_12;
+        private EASkins.Ami_Button_1 ami_Button_setd;
     }
 }

@@ -11,6 +11,7 @@ using Color_Calibration.ComLib;
 using System.IO;
 using System.Threading;
 using HZH_Controls.Forms;
+using HZH_Controls;
 
 namespace Color_Calibration.UnPages
 {
@@ -24,6 +25,7 @@ namespace Color_Calibration.UnPages
         private IntPtr i1d3Handle;
         private byte Index = 1;
         private MainForm _mainForm;
+        private Form_Waiting _waiting = new Form_Waiting();
         #region GB
         private int uColorTempNCW = 0;                       // Cool, Normal, Warm color temp
         private int[,] uColorTempStd = new int[4, 3];        // x, y ,Lv
@@ -174,11 +176,19 @@ namespace Color_Calibration.UnPages
         public UnColorForm()
         {
             InitializeComponent();
+            Uncom_id.Source = MainColorModel.Id_List;
+            Uncom_id.SelectedIndex = 0;
+            //if (Uncom_id.Source.Count > 0)
+                //Index = 1;
             //Init_Timer();
         }
         public void InitUmainForm(MainForm f)
         {
             _mainForm = f;
+            Uncom_id.Source = MainColorModel.Id_List;
+            Uncom_id.SelectedIndex = 0;
+            if (ucCheckBox_out.Checked && Uncom_id.Source.Count > 0)
+                Index = 1;
         }
 
         private void UnColorForm_Load(object sender, EventArgs e)
@@ -193,23 +203,8 @@ namespace Color_Calibration.UnPages
             lstCulumns.Add(new DataGridViewColumnEntity() { DataField = "yValue", HeadText = " Y ", Width = 50, WidthType = SizeType.Percent });
             this.ucDataGridView_result.Columns = lstCulumns;
             this.ucDataGridView_result.IsShowCheckBox = false;
-            /*
-            for (int i = 0; i < 5; i++)
-            {
-                ColorGaridModel model = new ColorGaridModel()
-                {
-                    ID = (i + 1).ToString(),
-                    Backlight = "100",
-                    RGain = "128",
-                    GGain = "128",
-                    BGain = "128",
-                    Lum = "80",
-                    xValue = "0.285",
-                    yValue = "0.293",
-                };
-                lstSource.Add(model);
-            }
-            */
+
+            _waiting = new Form_Waiting();
             InitialGridData();
             page.Width = 34;
             page.DataSource = lstSource;
@@ -224,17 +219,20 @@ namespace Color_Calibration.UnPages
         {
             if (ucCheckBox_out.Checked)
             {
-                ucDataGridView_result.Columns[5].isVisible = false;
-                ucDataGridView_result.Columns[6].isVisible = false;
-                ucDataGridView_result.Columns[7].isVisible = false;
+                label2.Visible = true;
+                Uncom_id.Visible = true;
+                //ucTextBox_id.Visible = true;
+                //if (ucTextBox_id.InputText != "")
+                Index = byte.Parse(Uncom_id.SelectedText);
             }
             else
             {
-                ucDataGridView_result.Columns[5].isVisible = true;
-                ucDataGridView_result.Columns[6].isVisible = true;
-                ucDataGridView_result.Columns[7].isVisible = true;
+                label2.Visible = false;
+                Uncom_id.Visible = false;
+                //ucTextBox_id.Visible = false;
+                Index = 1;
             }
-            ucDataGridView_result.ReloadSource();
+            //ucDataGridView_result.ReloadSource();
         }
 
         public void DataReceived(byte[] data)
@@ -269,7 +267,8 @@ namespace Color_Calibration.UnPages
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         Adjust_State = 0;
-                        MessageBox.Show("获取屏幕默认参数失败! ");
+                        //MessageBox.Show("获取屏幕默认参数失败! ");
+                        FrmDialog.ShowDialog(this, "  Failed to get screen color temperature parameters! ", "Tips", false);
                     }));
                 }
             }
@@ -304,7 +303,8 @@ namespace Color_Calibration.UnPages
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         Adjust_State = 0;
-                        MessageBox.Show("获取屏幕色温参数失败! ");
+                        //MessageBox.Show("获取屏幕色温参数失败! ");
+                        FrmDialog.ShowDialog(this, "  Failed to get screen color temperature parameters! ", "Tips", false);
                     }));
                 }
             }
@@ -331,7 +331,7 @@ namespace Color_Calibration.UnPages
         public void Init_Timer()
         {
             timerClock.Tick += new EventHandler(this.OnTimerEvent);
-            timerClock.Interval = 80;
+            timerClock.Interval = 200;
             timerClock.Start();
         }
 
@@ -383,6 +383,10 @@ namespace Color_Calibration.UnPages
                 Temp_Tolerance = 50;
                 Brightness_Tolerance = 20;
             }
+            if (MainColorModel.T_Lum == 0)
+                UseMaxPanelLv75Percent = true;
+            else
+                UseMaxPanelLv75Percent = false;
             //Console.WriteLine(Temp_Tolerance);
         }
         #endregion
@@ -539,7 +543,7 @@ namespace Color_Calibration.UnPages
             CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(i1d3Handle, ref m_dYxyMeas);
             if (m_err != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
             {
-                FrmDialog.ShowDialog(this, "   Error for " + m_err.ToString(), "提示", false);
+                FrmDialog.ShowDialog(this, "   Error for " + m_err.ToString(), "Tips", false);
                 return;
             }
             string lv = string.Format("{0:N3}", m_dYxyMeas.Y);
@@ -594,22 +598,36 @@ namespace Color_Calibration.UnPages
             return uColorTempNCW;
         }
         #endregion
-        private int key = 30;
+        private bool do_next = false;
+        private int preRunKey = 10;
+        private int Adjust_count = 0;
         #region  OnTimer 调整过程
         public void OnTimerEvent(Object myObject, EventArgs myEventArgs)
         {
-            //Console.WriteLine("Adjust_State:" + Adjust_State + "=" + Adjust_Repeat);
+            //Console.WriteLine("Adjust_State:" + Adjust_State);
             //ucledNums1.Value = Adjust_State.ToString();
             switch (Adjust_State)
             {
                 #region initial
                 case 0:     // waiting
-                    // do nothing
+                    if(Index == 1 && GlobalClass.c_IsAutoLv == false)
                     {
+                        //Console.WriteLine("test22");
                         {
                             Adjust_Repeat = 0;
                             Adjust_State = 0;
-                            Application.DoEvents();
+                            if (MainColorModel.M_ModelType == 1 && MainColorModel.T_Lum == 0 && Index == 1 && GlobalClass.c_IsAutoLv == false)
+                            {
+                                timerClock.Stop();
+                                if (Measure_AllLum())
+                                {
+                                    Adjust_State = 1;
+                                }
+                                timerClock.Start();
+                                Application.DoEvents();
+                            }
+                            else
+                                Adjust_State = 1;
                         }
                     }
                     break;
@@ -619,14 +637,15 @@ namespace Color_Calibration.UnPages
                         startTime = DateTime.Now;
                         ucledNums1.Visible = false;
                         //richTextBox3.Text = "调整时间: ";
-                        timerClock.Interval = 150;
-                        timerClock.Start();
+                        timerClock.Interval = 200;
+                        //timerClock.Start();
                         TVReturnStatus = 1;
                         if (send_normal_com((byte)RS232_CMD.AUTO_ADJUST_MODE_com, 1, 0, 0))
                         {
                             break;
                         }
                         Adjust_State = 2;
+                        Adjust_count = 0;
                     }
                     break;
 
@@ -646,23 +665,29 @@ namespace Color_Calibration.UnPages
                                     }
                                 }
                             }
+                            //count = 0;
+                            Adjust_count = 0;
                             Adjust_State = 3;
                         }
                         else
                         {
                             Adjust_Repeat++;
-                            if (Adjust_Repeat < 10)
+                            if (Adjust_Repeat > 10 && Adjust_count <= 4)
                             {
+                                Adjust_Repeat = 0;
+                                Adjust_count++;
                                 if (send_normal_com((byte)RS232_CMD.AUTO_ADJUST_MODE_com, 1, 0, 0))
                                 {
                                     break;
                                 }
                             }
-                            else
+                            if(Adjust_count > 4)
                             {
-                                Adjust_Repeat = 0;
                                 timerClock.Stop();
-                                FrmDialog.ShowDialog(this, "   无法正常接收设备的调试反馈信息，请停止校准调试，     检查设备的连线和设备的开启情况 ! ", "提示", false);
+                                Adjust_Repeat = 0;
+                                Adjust_count = 0;
+                                FrmDialog.ShowDialog(this, "   The debugging feedback of the device cannot be received normally, please stop calibration and debugging, check the connection of the device and the opening of the device ! ", "Tips", false);
+                                Adjust_State = 1;
                                 break;
                             }
                         }
@@ -698,33 +723,45 @@ namespace Color_Calibration.UnPages
                             {
                                 if (InitValueType == InitValue.DefaultValue)
                                 {
-                                    timerClock.Interval = 80;
+                                    timerClock.Interval = 200;
                                     Adjust_State = 10;
                                 }
                                 else
                                 {
                                     Adjust_MaxValue = Adjust_MaxValue_Backup;
-                                    timerClock.Interval = 75;
+                                    timerClock.Interval = 200;
                                     Adjust_State = 14;
                                 }
                             }
                             else
                             {
                                 Adjust_MaxValue = 128;
-                                timerClock.Interval = 75;
+                                timerClock.Interval = 200;
                                 Adjust_State = 14;
                             }
+                            Adjust_count = 0;
                         }
                         else
                         {
                             Adjust_Repeat++;
-                            if (Adjust_Repeat > 15)
+                            if (Adjust_Repeat > 10 && Adjust_count <= 4)
                             {
                                 Adjust_Repeat = 0;
+                                Adjust_count++;
+                                //Adjust_Repeat = 0;
                                 if (send_normal_com((byte)RS232_CMD.GET_RGB_GAIN_DATA_com, 0, 0, 0))
                                 {
                                     break;
                                 }
+                            }
+                            if(Adjust_count > 4)
+                            {
+                                timerClock.Stop();
+                                Adjust_Repeat = 0;
+                                Adjust_count = 0;
+                                FrmDialog.ShowDialog(this, "   The debugging feedback of the device cannot be received normally, please stop calibration and debugging, check the connection of the device and the opening of the device ! ", "Tips", false);
+                                Adjust_State = 1;
+                                break;
                             }
                         }
                     }
@@ -783,7 +820,7 @@ namespace Color_Calibration.UnPages
                             {
                                 Adjust_State = 99;     // finish auto adjust
                                 //MessageBox.Show("请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！");
-                                FrmDialog.ShowDialog(this, "请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！", "提示", false);
+                                FrmDialog.ShowDialog(this, "Please confirm that the color analyzer is normally tested, and the HDMI output of the signal generator is normal.！", "Tips", false);
                                 break;
                             }
 
@@ -824,7 +861,7 @@ namespace Color_Calibration.UnPages
                             {
                                 Adjust_State = 99;     // finish auto adjust
                                 //MessageBox.Show("请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！");
-                                FrmDialog.ShowDialog(this, "请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！", "提示", false);
+                                FrmDialog.ShowDialog(this, "Please confirm that the color analyzer is normally tested, and the HDMI output of the signal generator is normal.！", "Tips", false);
                                 break;
                             }
 
@@ -849,7 +886,7 @@ namespace Color_Calibration.UnPages
                                         }
                                     }
 
-                                    timerClock.Interval = 75;
+                                    timerClock.Interval = 200;
                                     Adjust_State = 14;
                                     break;
                                 }
@@ -899,19 +936,31 @@ namespace Color_Calibration.UnPages
                         {
                             Adjust_Repeat = 0;
                             timerClock.Stop();
-                            Thread.Sleep(300);
+                            Thread.Sleep(500);
                             Measure_i1d3();
                             Thread.Sleep(200);
-                            timerClock.Interval = 100;
-                            timerClock.Start();
+                            timerClock.Interval = 150;
                             Panel_Lv_max = ucMeasure_Lv;
                             //richTextBox11.Text = Panel_Lv_max.ToString().Substring(0, 5);
-                            Console.WriteLine(ucMeasure_Lv + "=" + Adjust_MaxValue);
+                            //Console.WriteLine(ucMeasure_Lv + "=" + Adjust_MaxValue);
+                            if(UseMaxPanelLv75Percent)
+                            {
+                                if (MainColorModel.T_Lum == 0 && GlobalClass.c_IsAutoLv == false)
+                                {
+                                    GlobalClass.m_uCompare_lv = Panel_Lv_max;
+                                }
+                                GlobalClass._t_ColorTempStd[MainColorModel.T_Temp, 2] = (int)(ucMeasure_Lv * 0.75);
+                                if(MainColorModel.T_Lum == 0 && GlobalClass.c_IsAutoLv == true)
+                                    GlobalClass._t_ColorTempStd[MainColorModel.T_Temp, 2] = (int)(GlobalClass.m_uCompare_lv * 0.75);
+                            }
+                            //Console.WriteLine(GlobalClass.m_uCompare_lv + ";" + GlobalClass.c_IsAutoLv);
+                            //_mainForm.UpdateUIStatus();
+                            timerClock.Start();
                             if (Panel_Lv_max < 100)
                             {
                                 Adjust_State = 99;     // finish auto adjust
                                 //MessageBox.Show("请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！");
-                                FrmDialog.ShowDialog(this, "请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！", "提示", false);
+                                FrmDialog.ShowDialog(this, "Please confirm that the color analyzer is normally tested, and the HDMI output of the signal generator is normal.！", "Tips", false);
                             }
                             else
                             {
@@ -945,7 +994,7 @@ namespace Color_Calibration.UnPages
                         {
                             Adjust_Repeat = 0;
                             SetColorTempNCW(starColor);
-                            timerClock.Interval = 100;
+                            timerClock.Interval = 200;
                             Adjust_State = 26;
                         }
                         else
@@ -967,6 +1016,7 @@ namespace Color_Calibration.UnPages
                     {
                         Adjust_Repeat = 0;
                         beginningTime = DateTime.Now;
+                        Init_Var();
                         timerClock.Start();
                         ColorTempAdjStepUpdate(GetColorTempNCW());
                         if (uColorTemp_Table[GetColorTempNCW(), (int)ColorTempGain.Red] > Adjust_MaxValue)
@@ -1015,26 +1065,10 @@ namespace Color_Calibration.UnPages
                             {
                                 if ((uColorTempMode == 15))
                                 {
-                                    if (GetColorTempNCW() == (int)ColorTempNCW.Cool)
-                                    {
-                                        uCompare_Lv = (float)(float.Parse("75") / 100 - 0.05 * (LvMinus_Count - 5)) * Panel_Lv_max;
-                                    }
-                                    else if (GetColorTempNCW() == (int)ColorTempNCW.Normal)
-                                    {
-                                        uCompare_Lv = (float)(float.Parse("75") / 100 - 0.05 * (LvMinus_Count - 5)) * Panel_Lv_max;
-                                    }
-                                    else if (GetColorTempNCW() == (int)ColorTempNCW.Warm)
-                                    {
-                                        uCompare_Lv = (float)(float.Parse("75") / 100 - 0.05 * (LvMinus_Count - 5)) * Panel_Lv_max;
-                                    }
-                                    else if (GetColorTempNCW() == (int)ColorTempNCW.User)
-                                    {
-                                        uCompare_Lv = (float)(float.Parse("75") / 100 - 0.05 * (LvMinus_Count - 5)) * Panel_Lv_max;
-                                    }
                                 }
                                 else
                                 {
-                                    uCompare_Lv = (float)(Panel_Lv_max * (1 - 0.05 * LvMinus_Count));
+                                    uCompare_Lv = (float)(GlobalClass.m_uCompare_lv * (1 - 0.05 * LvMinus_Count));
                                 }
                             }
                             else
@@ -1058,6 +1092,7 @@ namespace Color_Calibration.UnPages
                             }
                             //Brightness_Tolerance = float.Parse(richTextBox33.Text) * Panel_Lv_max / 100;
                             //Brightness_Tolerance = float.Parse(richTextBox33.Text) * uCompare_Lv / 100;//目标亮度误差计算
+                            //Console.WriteLine(uCompare_Lv);
                             Adjust_StepLength = 2;
                             Adjust_State = 30;
                         }
@@ -1086,7 +1121,7 @@ namespace Color_Calibration.UnPages
                             {
                                 Adjust_State = 99;     // finish auto adjust
                                 //MessageBox.Show("请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！");
-                                FrmDialog.ShowDialog(this, "请确认色彩分析仪正常测试，信号发生器HDMI输出白场正常！", "提示", false);
+                                FrmDialog.ShowDialog(this, "Please confirm that the color analyzer is normally tested, and the HDMI output of the signal generator is normal.！", "Tips", false);
                                 break;
                             }
 
@@ -1175,11 +1210,11 @@ namespace Color_Calibration.UnPages
                                     else
                                         Adjust_StepLength = 1;
 
-                                    if (ucMeasure_Lv > uCompare_Lv + Brightness_Tolerance)
+                                    if (ucMeasure_Lv >= uCompare_Lv + Brightness_Tolerance / 2)
                                     {
                                         uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Green] -= Adjust_StepLength;
                                     }
-                                    else if (ucMeasure_Lv < uCompare_Lv - Brightness_Tolerance)
+                                    else if (ucMeasure_Lv < uCompare_Lv - Brightness_Tolerance / 2)
                                     {
                                         if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Green] < (Adjust_MaxValue - Adjust_StepLength))
                                         {
@@ -1189,6 +1224,7 @@ namespace Color_Calibration.UnPages
                                         {
                                             if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Green] >= Adjust_MaxValue)
                                             {
+                                                uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Green] = 128;
                                                 Adjust_State = 34;
                                                 break;
                                             }
@@ -1198,7 +1234,7 @@ namespace Color_Calibration.UnPages
                                             }
                                         }
                                     }
-
+                                    //Console.WriteLine("31 = ucMeasure_Lv :" + ucMeasure_Lv);
                                     Adjust_State = 31;
                                 }
                                 else
@@ -1256,8 +1292,7 @@ namespace Color_Calibration.UnPages
                                 }
                                 else
                                     Adjust_StepLength = 1;
-                                
-                                if (ucMeasure_Sy > uCompare_Sy + Temp_Tolerance)
+                                if (ucMeasure_Sy >= uCompare_Sy - Temp_Tolerance / 2)
                                 {
                                     if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Blue] <= (Adjust_MaxValue - Adjust_StepLength))
                                     {
@@ -1267,6 +1302,7 @@ namespace Color_Calibration.UnPages
                                     {
                                         if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Blue] >= Adjust_MaxValue)
                                         {
+                                            uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Blue] = 128;
                                             Adjust_State = 34;
                                             break;
                                         }
@@ -1276,7 +1312,7 @@ namespace Color_Calibration.UnPages
                                         }
                                     }
                                 }
-                                else if (ucMeasure_Sy < uCompare_Sy - Temp_Tolerance)
+                                else if (ucMeasure_Sy < uCompare_Sy + Temp_Tolerance / 2)
                                 {
                                     uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Blue] -= Adjust_StepLength;
                                 }
@@ -1296,7 +1332,7 @@ namespace Color_Calibration.UnPages
                         else
                         {
                             Adjust_Repeat++;
-                            if (Adjust_Repeat > 20)
+                            if (Adjust_Repeat > 10)
                             {
                                 Adjust_Repeat = 0;
                                 if (send_normal_com((byte)RS232_CMD.RGB_GAIN_VALUE_com, uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Red], uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Green], uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Blue]))
@@ -1340,11 +1376,11 @@ namespace Color_Calibration.UnPages
                                 else
                                     Adjust_StepLength = 1;
 
-                                if (ucMeasure_Sx > uCompare_Sx + Temp_Tolerance)
+                                if (ucMeasure_Sx >= uCompare_Sx + Temp_Tolerance / 2)
                                 {
                                     uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Red] -= Adjust_StepLength;
                                 }
-                                else if (ucMeasure_Sx < uCompare_Sx - Temp_Tolerance)
+                                else if (ucMeasure_Sx < uCompare_Sx - Temp_Tolerance / 2)
                                 {
                                     if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Red] <= (Adjust_MaxValue - Adjust_StepLength))
                                     {
@@ -1354,6 +1390,7 @@ namespace Color_Calibration.UnPages
                                     {
                                         if (uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Red] >= Adjust_MaxValue)
                                         {
+                                            uColorTempAdj_Data[GetColorTempNCW(), (int)ColorTempGain.Red] = 128;
                                             Adjust_State = 34;
                                             break;
                                         }
@@ -1408,7 +1445,7 @@ namespace Color_Calibration.UnPages
                             {
                                 if (GetColorTempNCW() == (int)ColorTempNCW.Cool)
                                 {
-                                    if (LvMinus_Count > 10)
+                                    if (LvMinus_Count > 8)
                                     {
                                         LvMinus_Count = 5;
                                         uColorTempNCW_OK[GetColorTempNCW()] = 1;
@@ -1426,7 +1463,7 @@ namespace Color_Calibration.UnPages
                                 }
                                 else if (GetColorTempNCW() == (int)ColorTempNCW.Warm)
                                 {
-                                    if (LvMinus_Count > 10)
+                                    if (LvMinus_Count > 8)
                                     {
                                         LvMinus_Count = 5;
                                         uColorTempNCW_OK[GetColorTempNCW()] = 1;
@@ -1435,7 +1472,7 @@ namespace Color_Calibration.UnPages
                                 }
                                 else if (GetColorTempNCW() == (int)ColorTempNCW.User)
                                 {
-                                    if (LvMinus_Count > 10)
+                                    if (LvMinus_Count > 8)
                                     {
                                         LvMinus_Count = 5;
                                         uColorTempNCW_OK[GetColorTempNCW()] = 1;
@@ -1732,7 +1769,7 @@ namespace Color_Calibration.UnPages
                                 break;
                             }
 
-                            timerClock.Interval = 100;
+                            timerClock.Interval = 150;
                             Adjust_State = 100;    // pass
                         }
                         else
@@ -1780,7 +1817,7 @@ namespace Color_Calibration.UnPages
                 case 111:
                     {
                         Adjust_Repeat = 0;
-                        timerClock.Interval = 100;
+                        timerClock.Interval = 150;
                         Adjust_Result = 3;    // pass
                         Adjust_State = 118;
                     }
@@ -1834,23 +1871,28 @@ namespace Color_Calibration.UnPages
                 #endregion
                 case 121:
                     {
+                        //Console.WriteLine(Adjust_State);
+                        Adjust_Repeat = 0;
                         if (check_cmd_return())
                         {
                             if (Adjust_Result == 3)
                             {
-                                //richTextBox21.ForeColor = Color.Green;
-                                //richTextBox21.Text = "成功";
-                                //timerClock.Stop();
-                                //Console.WriteLine("ID = "+ Index + " 的屏幕色温校准完成！");
-                                //Thread.Sleep(2000);
-                                if (Index <= MainColorModel.H_Row * MainColorModel.V_Colu && MainColorModel.M_ModelType == 1)
+                                timerClock.Interval = 2000;
+                                if (ucCheckBox_out.Checked || MainColorModel.M_ModelType == 0)
                                 {
-                                    timerClock.Interval = 2000;
-                                    FrmTips.ShowTipsInfo(_mainForm, " ID = " + Index + " 的屏幕色温校准完成！");
-                                    Index++;
+                                    timerClock.Stop();
+                                    //Console.WriteLine("stop 121");
+                                    goto ok;
+                                }
+                                if ((Index <= (MainColorModel.H_Row * MainColorModel.V_Colu)) && (MainColorModel.M_ModelType == 1))
+                                {
+                                    FrmTips.ShowTipsInfo(_mainForm, " ID = " + Index + " screen color temperature calibration completed！");
+                                    Index = (byte)(Index + 1);
                                     label1_tips.Text = "Put the sensor on monitor : ID = " + Index + ", Wait for adjustments to occur automatically.";
-                                    label1_tips.ForeColor = Color.Purple;
-                                    ucledNums1.Visible = true;
+                                    label1_tips.ForeColor = Color.FromArgb(164, 38, 143);
+                                    //ucledNums1.Visible = true;
+                                    do_next = true;
+                                    //Console.WriteLine("id111111= " + Index);
                                     break;
                                 }
                             }
@@ -1858,71 +1900,186 @@ namespace Color_Calibration.UnPages
                             {
                                 //richTextBox21.ForeColor = Color.Yellow;
                                 //richTextBox21.Text = "失败";
-                                Console.WriteLine("失败");
+                                //Console.WriteLine("失败");
                             }
                             else
                             {
-                                Adjust_State = 0;
                                 timerClock.Stop();
-                                FrmTips.ShowTips(_mainForm, "ID = < " + Index + " > 的屏幕色温校准失败！", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
-                                Console.WriteLine("失败");
+                                timerClock.Enabled = false;
+                                GlobalClass.m_cIsRunning = false;
+                                FrmDialog.ShowDialog(_mainForm, "ID = < " + Index + " > screen color temperature calibration failed！","Tips",false);
+                                //Console.WriteLine("失败");
+                                if (ucCheckBox_out.Checked)
+                                {
+                                    Uncom_id.Enabled = true;
+                                }
+                                //Adjust_State = 0;
+                                ucBtn_Execute.Text = "Execute";
+                                ucBtn_Execute.ForeColor = Color.FromArgb(164, 38, 143);
                                 break;
                             }
-
+                            ok:
+                            timerClock.Stop();
+                            timerClock.Enabled = false;
                             Adjust_Repeat = 0;
                             Adjust_Result = 0;
-                            stopTime = DateTime.Now;
-                            ts_total = stopTime - startTime;
-                            timerClock.Interval = 2000;
-                            //button2.Text = "开始";
-                            //richTextBox3.Text = "调整时间: " + ((int)ts_total.TotalSeconds).ToString() + "秒";
-                            //uColorTempControlEnable(true);
-                            //if (!Adjust_DateOk)
-                            //MessageBox.Show("调整后的数据对比有误，请重新进行调整！","提示");
-                            FrmTips.ShowTips(_mainForm, "当前设备的屏幕色温校准完成！", 2000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
+                            GlobalClass.m_cIsRunning = false;
+                            FrmTips.ShowTips(_mainForm, "Screen color temperature calibration for the current device is complete！", 2000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
+                            if (ucCheckBox_out.Checked)
+                            {
+                                Uncom_id.Enabled = true;
+                            }
+                            ucBtn_Execute.Text = "Execute";
+                            ucBtn_Execute.ForeColor = Color.FromArgb(164, 38, 143);
+                            break;
                         }
                         else
                         {
-                            if (Adjust_Result == 3)
+                            //Console.WriteLine("121212121test1");
+                            if(!do_next)
                             {
-                                timerClock.Interval = 1200;
-                                ucledNums1.Value = key.ToString();
-                                //Application.DoEvents();
-                                FrmTips.ShowTipsInfo(_mainForm, "请在" + key + "S 内完成校色设备的调整！");
-                                key--;
-                                if (key < 1)
+                                timerClock.Interval = 200;
+                                Adjust_Repeat++;
+                                if (Adjust_Repeat > 10 && Adjust_count <= 3)
                                 {
-                                    timerClock.Stop();
-                                    key = 30;
-                                    ucledNums1.Visible = false;
-                                    Adjust_State = 1;
-                                    timerClock.Interval = 200;
-                                    timerClock.Start();
+                                    Adjust_Repeat = 0;
+                                    Adjust_count++;
+                                    if (send_normal_com((byte)RS232_CMD.AUTO_ADJUST_MODE_com, 0, 0, 0))
+                                    {
+                                        break;
+                                    }
                                 }
                                 break;
                             }
-                            Adjust_Repeat++;
-                            if (Adjust_Repeat > 15)
+                            timerClock.Interval = 2000;
+                            timerClock.Stop();
+                            timerClock.Enabled = false;
+                            if ((Index > (MainColorModel.H_Row * MainColorModel.V_Colu)) && (MainColorModel.M_ModelType == 1))
                             {
+                                //Console.WriteLine("id2222= " + Index + "all= " + (MainColorModel.H_Row * MainColorModel.V_Colu));
                                 Adjust_Repeat = 0;
-                                if (send_normal_com((byte)RS232_CMD.AUTO_ADJUST_MODE_com, 0, 0, 0))
+                                Adjust_Result = 0;
+                                Adjust_State = 0;
+                                ucledNums1.Visible = false;
+                                label1_tips.Text = "The color temperature automatic calibration adjustment is completed.";
+                                Index = 1;
+                                GlobalClass.c_IsAutoLv = false;
+                                GlobalClass.m_cIsRunning = false;
+                                if (ucCheckBox_out.Checked)
                                 {
-                                    break;
+                                    Uncom_id.Enabled = true;
                                 }
+                                ucBtn_Execute.Text = "Execute";
+                                ucBtn_Execute.ForeColor = Color.FromArgb(164, 38, 143);
+                                break;
+                            }
+                            else if (Adjust_Result == 3 && do_next && GlobalClass.m_cIsRunning)
+                            {
+                                //Console.WriteLine("121212121test3");
+                                _waiting.SetTime = preRunKey + 10;
+                                _waiting.Msg2 = "Tips :" + "Please complete the adjustment of the color calibration equipment within " + _waiting.SetTime + " seconds.";
+                                _waiting.Msg = "Please follow the prompts...";
+                                _waiting.ShowForm();
+                                //bool go = false;
+                                while (_waiting.SetTime > 0)
+                                {
+                                    Thread.Sleep(200);
+                                    Application.DoEvents();
+                                }
+                                _waiting.Stop();
+                                do_next = false;
+                                Adjust_State = 1;
+                                if (GlobalClass.m_cIsRunning)
+                                {
+                                    timerClock.Interval = 200;
+                                    timerClock.Start();
+                                    timerClock.Enabled = true;
+                                    //Console.WriteLine("debug 11111...");
+                                }
+                                break;
                             }
                         }
                     }
                     break;
                 #endregion
                 default:
-                    Adjust_State = 0;
+                    //Adjust_State = 0;
                     Adjust_Repeat = 0;
                     Adjust_Result = 0;
                     break;
             }
         }
         #endregion
-        
+
+        #region 测试对比所以屏亮度
+
+        private bool Measure_AllLum()
+        {
+            timerClock.Stop();
+            i1d3Handle = GlobalClass.i1d3Handle;
+            int index = 1;
+            GlobalClass.c_IsAutoLv = false;
+            Index = 0xFD;
+            if (send_normal_com((byte)RS232_CMD.WHITE_PATTERN_com, 1, 0, 0))
+            {
+                Console.WriteLine("open ===");
+                return false;
+            }
+            GlobalClass.m_uCompare_lv = 250;
+            string id_Text = " Detect the maximum brightness of each ID device： \n";
+            while (index <= MainColorModel.H_Row * MainColorModel.V_Colu)
+            {
+                label1_tips.Text = "Put the sensor on monitor : ID = " + index + ", Wait for the maximum brightness measurement to complete.";
+                label1_tips.ForeColor = Color.FromArgb(164, 38, 143);
+                Thread.Sleep(1000);
+                Measure_i1d3();
+                Thread.Sleep(200);
+                float lv = ucMeasure_Lv;
+                //Console.WriteLine("Lv ===" + lv);
+                if (GlobalClass.m_uCompare_lv > lv || index == 1)
+                    GlobalClass.m_uCompare_lv = lv;
+                id_Text += "  > ID = " + index + "maximum brightness :" + lv.ToString() + "\n";
+                //FrmDialog.ShowDialog(_mainForm, id_Text + "Please move the color calibration device to the next ID device within 10 seconds.", "Tips: Screen brightness", false);
+                //FrmTips.ShowTipsInfo(_mainForm, "ID = <" + index + "> Screen brightness measurement OK！\n Please move the color calibration device to the next ID device within 10 seconds.");
+                if (index > (MainColorModel.H_Row * MainColorModel.V_Colu))
+                {
+                    _waiting.Stop();
+                    Index = 0x1;
+                    return true;
+                }
+                else
+                {
+                    _waiting = new Form_Waiting();
+                    _waiting.SetTime = 10;
+                    _waiting.Msg2 = "Tips" + id_Text + "Please move the color calibration device to the next ID device within " + _waiting.SetTime + " seconds.";
+                    _waiting.Msg = "Please follow the prompts...";
+                    _waiting.ShowForm();
+                    while (_waiting.SetTime > 0)
+                    {
+                        Thread.Sleep(100);
+                        Application.DoEvents();
+                    }
+                    _waiting.Stop();
+                    index += 1;
+                }
+            }
+
+            if (send_normal_com((byte)RS232_CMD.WHITE_PATTERN_com, 0, 0, 0))
+            {
+                Console.WriteLine("close ===");
+                return false;
+            }
+            Index = 0x1;
+            label1_tips.Text = "Put the sensor on monitor : ID = " + Index + ", Wait for adjustments to occur automatically.";
+            GlobalClass._t_ColorTempStd[MainColorModel.T_Temp, 2] = (int)(GlobalClass.m_uCompare_lv * 0.75);
+            GlobalClass.m_BackLv = (int)(GlobalClass.m_uCompare_lv * 0.75);
+            GlobalClass.c_IsAutoLv = true;
+            FrmTips.ShowTipsInfo(_mainForm, "The screen maximum brightness measurement is completed, and enter the automatic calibration adjustment!");
+            return true;
+        }
+
+        #endregion
+
         #region DataSend & GridUI
         /// <summary>
         /// 调整数据发送接口
@@ -1938,10 +2095,7 @@ namespace Color_Calibration.UnPages
             byte[] P = new byte[8];
             P[0] = 0xAB;
             P[1] = 0x8;
-            if(MainColorModel.M_ModelType == 1)
-                P[2] = Index;
-            else
-                P[2] = 0xFD;
+            P[2] = Index;
             P[3] = com;
             P[4] = value1;
             P[5] = value2;
@@ -1957,7 +2111,7 @@ namespace Color_Calibration.UnPages
             {
                 //serialPort1.Close();
                 Adjust_State = 0;
-                FrmDialog.ShowDialog(this, " 串口连接中断,请检查USB连线！\n并且，请关闭本软件，重新打开！", "提示", false);
+                FrmDialog.ShowDialog(this, " The serial port connection is interrupted, please check the USB connection! \n So, please close this software and reopen it！", "Tips", false);
                 //MessageBox.Show("");
                 return true;
             }
@@ -1965,6 +2119,13 @@ namespace Color_Calibration.UnPages
             return false;
         }
 
+        public void StopRuning()
+        {
+            timerClock.Stop();
+            GlobalClass.m_cIsRunning = false;
+            ucBtn_Execute.Text = "Execute";
+            ucBtn_Execute.ForeColor = Color.FromArgb(74, 22, 124);
+        }
         /// <summary>
         /// 结果列表更新
         /// </summary>
@@ -2004,54 +2165,98 @@ namespace Color_Calibration.UnPages
         {
             i1d3Handle = GlobalClass.i1d3Handle;
             //_mainForm.UpdateUIStatus();
+            GlobalClass.c_IsAutoLv = false;
             if (GlobalClass.m_cIsRunning == false)
             {
                 if (GlobalClass.m_bIsOpen && GlobalClass.c_bIsOpen)
                 {
+                    Init_Var();
+                    timerClock.Enabled = true;
                     starColor = MainColorModel.T_Temp;
-                    if (Adjust_State == 0)
+                    if (Adjust_State <= 1 && Index < 2)
                     {
-                        Index = 1;
-                        Adjust_State = 1;
+                        if (ucCheckBox_out.Checked)
+                        {
+                            Uncom_id.Enabled = false;
+                            Index = byte.Parse(Uncom_id.SelectedText);
+                            Adjust_State = 1;
+                        }
+                        else
+                        {
+                            Index = 1;
+                            if (MainColorModel.T_Lum == 0 && MainColorModel.M_ModelType == 1)
+                            {
+                                Adjust_State = 0;
+                            }
+                            else
+                                Adjust_State = 1;
+                        }
+
                         flag = starColor;
-                        Init_Var();
                         timerClock.Enabled = true;
+                        label1_tips.Text = "Put the sensor on monitor : ID = " + Index + ", Wait for adjustments to occur automatically.";
+                        label1_tips.ForeColor = Color.FromArgb(164, 38, 143);
                         Init_Timer();
                     }
-                    else if (Adjust_State == 121)
+                    else if (Adjust_State >= 98 && Adjust_State <= 121)
                     {
+                        preRunKey = _waiting.SetTime;
                         timerClock.Start();
-                        //Console.WriteLine("countinue 121 =" + Index);
+                        Adjust_State = 1;
+                        //Console.WriteLine("countinue 121 =" + Index +"==" + GlobalClass.m_cIsRunning);
 
                     }
                     else
                     {
                         //Console.WriteLine("stop = " + Index);
                         Adjust_Result = 0;    // fail
+                        //Adjust_State = 0;
+                        if (ucCheckBox_out.Checked)
+                        {
+                            Uncom_id.Enabled = false;
+                            Index = byte.Parse(Uncom_id.SelectedText);
+                            Adjust_State = 1;
+                        }
+                        label1_tips.Text = "Put the sensor on monitor : ID = " + Index + ", Wait for adjustments to occur automatically.";
+                        label1_tips.ForeColor = Color.FromArgb(164, 38, 143);
+                        //if (MainColorModel.M_ModelType == 1)
                         Init_Timer();
                     }
+                    //Console.WriteLine("Adjust_State = " + Adjust_State + " ++ " + Index);
                     GlobalClass.m_cIsRunning = true;
                     ucBtn_Execute.Text = "Stop...";
                     ucBtn_Execute.ForeColor = Color.Red;
                 }
                 else
                 {
-                    FrmDialog.ShowDialog(this, "  校色设备或者串口通讯没有正常连接 ! ", "连接提示", false);
+                    FrmDialog.ShowDialog(this, "  The color calibration equipment or serial communication is not connected properly ! ", "Connection prompt", false);
                     return;
                 }
             }
             else
             {
+                if (Adjust_State > 15 && Adjust_State < 121)
+                    return;
                 timerClock.Stop();
-                if (Adjust_Result != 3)
+                timerClock.Enabled = false;
+                do_next = false;
+                _waiting.Stop();
+                //if (Adjust_Result != 3)
+                //{
+                //    if(MainColorModel.M_ModelType == 1)
+                //        Adjust_State = 0;
+                //    timerClock.Stop();
+                //}
+                if (ucCheckBox_out.Checked)
                 {
-                    Index = 1;
-                    Adjust_State = 0;
-                    timerClock.Enabled = false;
+                    Uncom_id.Enabled = true;
                 }
+                Adjust_Result = 0;
+                //Console.WriteLine("Adjust_State = " + Adjust_State);
+                //Adjust_State = 0;
                 GlobalClass.m_cIsRunning = false;
                 ucBtn_Execute.Text = "Execute";
-                ucBtn_Execute.ForeColor = Color.Purple;
+                ucBtn_Execute.ForeColor = Color.FromArgb(164, 38, 143);
             }
         }
         #endregion
@@ -2085,14 +2290,14 @@ namespace Color_Calibration.UnPages
                 }
                 string Ok = "";
                 if (ListData != null)
-                    Ok = "(成功) " + SerializeModel.XMLSerialize<List<ColorGaridModel>>(ListData);
+                    Ok = "(success) " + SerializeModel.XMLSerialize<List<ColorGaridModel>>(ListData);
                 else
-                    Ok = "(失败) failed";
-                FrmDialog.ShowDialog(this, " 保存调整的色温数据 " + Ok +"!", "提示", false);
+                    Ok = "failed";
+                FrmDialog.ShowDialog(this, " Save the adjusted color temperature data " + Ok +"!", "Tips", false);
             }
             catch (Exception e)
             {
-                FrmDialog.ShowDialog(this, " 保存调整的色温数据出错！" + e, "提示", false);
+                FrmDialog.ShowDialog(this, " Error saving adjusted color temperature data！" + e, "Tips", false);
                 return;
             }
         }
@@ -2122,6 +2327,8 @@ namespace Color_Calibration.UnPages
             {
                 File.Delete(path);
             }
+            if(MainColorModel.M_ModelType == 1)
+                Index = 1;
             lstSource.Clear();
             page.DataSource = lstSource;
             this.ucDataGridView_result.Page = page;
@@ -2133,5 +2340,49 @@ namespace Color_Calibration.UnPages
             SaveGridData();
         }
         #endregion
+        
+        private void ucTextBox_id_MouseLeave(object sender, EventArgs e)
+        {
+            if (ucTextBox_id.InputText != "")
+            {
+                Index = byte.Parse(ucTextBox_id.InputText);
+                //Console.WriteLine(Index);
+                ucBtn_Execute.Focus();
+            }
+        }
+
+        private void ucTextBox_id_MouseEnter(object sender, EventArgs e)
+        {
+            if(GlobalClass.m_cIsRunning)
+            {
+                ucTextBox_id.Enabled = false;
+            }
+            else
+                ucTextBox_id.Enabled = true;
+
+        }
+
+        private void ami_Button_11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void ami_Button_13_Click(object sender, EventArgs e)
+        {
+            Index = 1;
+            if (send_normal_com((byte)RS232_CMD.WHITE_PATTERN_com, 0, 0, 0))
+            {
+                Console.WriteLine("close ===");
+            }
+            Console.WriteLine("close === ok");
+        }
+
+        private void Uncom_id_SelectedChangedEvent(object sender, EventArgs e)
+        {
+            if(ucCheckBox_out.Checked)
+            {
+                Index = byte.Parse(Uncom_id.SelectedText);
+                //Console.WriteLine(Index);
+            }
+        }
     }
 }

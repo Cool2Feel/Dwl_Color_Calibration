@@ -17,7 +17,8 @@ namespace Color_Calibration.UnPages
 {
     public partial class UnSetForm : UserControl
     {
-        private SerialPort ComDevice = new SerialPort();
+        public SerialPort ComDevice = new SerialPort();
+        public event ComEvent.DataReceivedHandler DataReceived;
         List<KeyValuePair<string, string>> dit = new List<KeyValuePair<string, string>>();
         private MainForm _mainForm;
         public UnSetForm()
@@ -26,7 +27,7 @@ namespace Color_Calibration.UnPages
             ReadObject();
             #region 界面初始化
             dit.Clear();
-            int[] num = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12, 13, 14 ,15 };
+            int[] num = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 ,9 };
             foreach (int element in num)
             {
                 dit.Add(new KeyValuePair<string, string>(element.ToString(), element.ToString()));
@@ -52,12 +53,14 @@ namespace Color_Calibration.UnPages
 
             List<KeyValuePair<string, string>> dit_lum = new List<KeyValuePair<string, string>>();
             dit_lum.Add(new KeyValuePair<string, string>("1", "AUTOMTIC"));
-            dit_lum.Add(new KeyValuePair<string, string>("2", "OTHER"));
+            dit_lum.Add(new KeyValuePair<string, string>("2", "CUSTOM"));
             ucComTL.Source = dit_lum;
             ucComTL.SelectedIndex = MainColorModel.T_Lum;
             #endregion
             InitialTempData();
             InitComPort();
+            ComDevice.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
+
             //Console.WriteLine("2222");
         }
         public void InitUmainForm(MainForm f)
@@ -75,9 +78,9 @@ namespace Color_Calibration.UnPages
                     dit_port.Add(new KeyValuePair<string, string>(i.ToString(), drpComList[i - 1]));
                 }
                 Uncom_port.Source = dit_port;
-                Uncom_port.SelectedIndex = MainColorModel.M_ComIndex;
+                if (dit_port.Count > MainColorModel.M_ComIndex)
+                    Uncom_port.SelectedIndex = MainColorModel.M_ComIndex;
             }
-            ComDevice.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
 
             List<KeyValuePair<string, string>> dit_meter = new List<KeyValuePair<string, string>>();
             //dit_meter.Add(new KeyValuePair<string, string>("1", "CA310"));
@@ -86,8 +89,8 @@ namespace Color_Calibration.UnPages
             Uncom_meter.SelectedIndex = MainColorModel.M_MeterType;
 
             List<KeyValuePair<string, string>> dit_model = new List<KeyValuePair<string, string>>();
-            dit_model.Add(new KeyValuePair<string, string>("1", "监视器"));
-            dit_model.Add(new KeyValuePair<string, string>("2", "拼接屏"));
+            dit_model.Add(new KeyValuePair<string, string>("1", "Monitor"));
+            dit_model.Add(new KeyValuePair<string, string>("2", "Multi-screen"));
             Uncom_model.Source = dit_model;
             Uncom_model.SelectedIndex = MainColorModel.M_ModelType;
 
@@ -95,6 +98,7 @@ namespace Color_Calibration.UnPages
             ucComVM.SelectedIndex = MainColorModel.V_Colu - 1;
             //_mainForm.UpdateUIStatus();
         }
+        #region Main UI change
         /// <summary>
         /// 色温用户自定义模式选中
         /// </summary>
@@ -102,19 +106,15 @@ namespace Color_Calibration.UnPages
         /// <param name="e"></param>
         private void ucComTC_SelectedChangedEvent(object sender, EventArgs e)
         {
-            if(ucComTC.SelectedIndex == 3)
-            {
-                label6.Visible = true;
-                ucBtn_set.Visible = true;
-            }
-            else
-            {
-                //label6.Visible = false;
-                //ucBtn_set.Visible = false;
-            }
             MainColorModel.T_Temp = ucComTC.SelectedIndex;
             //if (MainColorModel.M_PageIndex > 0)
             //    _mainForm.UpdateUIStatus();
+            if(MainColorModel.M_PageIndex == 1)
+                _mainForm.UpdateUIStatus();
+        }
+        private void ucComTL_SelectedChangedEvent(object sender, EventArgs e)
+        {
+            MainColorModel.T_Lum = ucComTL.SelectedIndex;
         }
         private void Uncom_model_SelectedChangedEvent(object sender, EventArgs e)
         {
@@ -127,9 +127,8 @@ namespace Color_Calibration.UnPages
             new ColorForm(index).ShowDialog();
             _mainForm.UpdateUIStatus();
         }
-
+        #endregion
         #region 数据传输
-        public event ComEvent.DataReceivedHandler DataReceived;
         /// <summary>
         /// 输出数据
         /// </summary>
@@ -139,20 +138,25 @@ namespace Color_Calibration.UnPages
         {
             Thread.Sleep(200);
             byte[] ReDatas = new byte[ComDevice.BytesToRead];
-            if (MainColorModel.M_PageIndex == 2)
-                ComDevice.Read(ReDatas, 0, ReDatas.Length);//读取数据
-            else if (MainColorModel.M_PageIndex == 3)
+            if (MainColorModel.M_PageIndex == 3)
             {
                 Thread.Sleep(200);
                 string str;
                 str = ComDevice.ReadExisting();
                 ReDatas = Encoding.Default.GetBytes(str);
+                DataReceived(this, ReDatas);//输出数据
+
+                Console.WriteLine(str);
             }
-
-            DataReceived(this, ReDatas);//输出数据
-
+            else
+            {
+                //Console.WriteLine("++++");
+                ComDevice.Read(ReDatas, 0, ReDatas.Length);//读取数据
+                DataReceived(this, ReDatas);//输出数据
+            }
+            
             LogHelper.WriteLog("串口 DataReceived：" + Encoding.Default.GetString(ReDatas));
-
+            //Console.WriteLine("串口 DataReceived：" + ReDatas.Length);
             //ExceptionLog.getLog().WriteLogFile(ReDatas, DateTime.Now.ToString("yyyyMMdd") + "log.txt");
         }
         
@@ -169,24 +173,39 @@ namespace Color_Calibration.UnPages
                 {
                     ComDevice.Write(data, 0, data.Length);//发送数据
 
-                    LogHelper.WriteLog("串口 Send Data:" + data);
+                    //LogHelper.WriteLog("串口 Send Data:" + data);
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    FrmDialog.ShowDialog(this, ex.Message, "提示", true);
+                    FrmDialog.ShowDialog(this, ex.Message, "Tips", true);
                     //MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                FrmDialog.ShowDialog(this, "Serial port is not open ！", "提示",true);
+                FrmDialog.ShowDialog(this, "Serial port is not open ！", "Tips", true);
                 //MessageBox.Show("Serial port is not open", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;
         }
         #endregion
         #region 设备连接操作
+        public void UpdateCom()
+        {
+            string[] drpComList = SerialPort.GetPortNames().Distinct().ToArray();
+            List<KeyValuePair<string, string>> dit_port = new List<KeyValuePair<string, string>>();
+            if (drpComList.Length > 0)
+            {
+                for (int i = 1; i <= drpComList.Length; i++)
+                {
+                    dit_port.Add(new KeyValuePair<string, string>(i.ToString(), drpComList[i - 1]));
+                }
+                Uncom_port.Source = dit_port;
+                Uncom_port.SelectedIndex = 0;
+            }
+        }
+
         /// <summary>
         /// 关闭串口
         /// </summary>
@@ -196,6 +215,11 @@ namespace Color_Calibration.UnPages
             {
                 ComDevice.Close();
             }
+            GlobalClass.c_bIsOpen = false;
+            Btn_connect.Text = "Connect";
+            Btn_connect.ForeColor = Color.FromArgb(74, 22, 124);
+            Uncom_port.Enabled = true;
+            UpdateCom();
         }
 
         public void SavePage()
@@ -247,13 +271,14 @@ namespace Color_Calibration.UnPages
                 }
                 catch (Exception ex)
                 {
-                    FrmDialog.ShowDialog(this, ex.Message, "提示", false);
+                    FrmDialog.ShowDialog(this, ex.Message, "Tips", false);
                     //MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 LogHelper.WriteLog(Btn_connect.Text);
                 Btn_connect.Text = "Close";
                 _mainForm.com_status.Text = "SerialPort : " + Uncom_port.SelectedText + " is Connected";
+                _mainForm.com_status.ForeColor = Color.FromArgb(74, 22, 124);
                 //FrmTips.ShowTipsInfo(_mainForm, "SerialPort : " + Uncom_port.SelectedText + " is Connect");
                 FrmTips.ShowTips(_mainForm, "SerialPort: " + Uncom_port.SelectedText + " is Connected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
                 Btn_connect.ForeColor = Color.Red;
@@ -266,15 +291,16 @@ namespace Color_Calibration.UnPages
                 }
                 catch (Exception ex)
                 {
-                    FrmDialog.ShowDialog(this, ex.Message, "提示", false);
+                    FrmDialog.ShowDialog(this, ex.Message, "Tips", false);
                     //MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 LogHelper.WriteLog(Btn_connect.Text);
                 Btn_connect.Text = "Connect";
                 _mainForm.com_status.Text = "SerialPort: " + Uncom_port.SelectedText + " is Disconnected";
+                _mainForm.com_status.ForeColor = Color.Black;
                 //FrmTips.ShowTipsInfo(_mainForm, "SerialPort : " + Uncom_port.SelectedText + " is Close");
                 FrmTips.ShowTips(_mainForm, "SerialPort: " + Uncom_port.SelectedText + " is Disconnected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
-                Btn_connect.ForeColor = Color.Purple;
+                Btn_connect.ForeColor = Color.FromArgb(74, 22, 124);
             }
             MainColorModel.M_ComIndex = Uncom_port.SelectedIndex;
             GlobalClass.c_bIsOpen = ComDevice.IsOpen;
@@ -308,7 +334,7 @@ namespace Color_Calibration.UnPages
                     uint ii = CalibrationSDK.i1dColorSDK.i1d3GetNumberOfDevices();
                     if (ii == 0)
                     {
-                        FrmDialog.ShowDialog(this, "   No i1d3 devices found!", "提示", false);
+                        FrmDialog.ShowDialog(this, "   No i1d3 devices found!", "Tips", false);
                         return;
                     }
                     //Console.WriteLine("count: " + ii);
@@ -316,7 +342,7 @@ namespace Color_Calibration.UnPages
                     tt = CalibrationSDK.i1dColorSDK.i1d3GetDeviceHandle(0,out i1d3Handle);
                     if (tt != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                     {
-                        FrmDialog.ShowDialog(this, "   Error getting handle!" + tt.ToString(), "提示", false);
+                        FrmDialog.ShowDialog(this, "   Error getting handle!" + tt.ToString(), "Tips", false);
                         return;
                     }
                     GlobalClass.i1d3Handle = i1d3Handle;
@@ -336,7 +362,7 @@ namespace Color_Calibration.UnPages
                     }
                     if (tt != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                     {
-                        FrmDialog.ShowDialog(this, "   Error opening i1d3 !   \r   " + tt.ToString(), "提示", false);
+                        FrmDialog.ShowDialog(this, "   Error opening i1d3 !   \r   " + tt.ToString(), "Tips", false);
                         return;
                     }
                     //CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO info = new CalibrationSDK.i1dColorSDK.i1d3DEVICE_INFO();
@@ -359,7 +385,7 @@ namespace Color_Calibration.UnPages
                 }
                 catch
                 {
-                    FrmDialog.ShowDialog(this, "   Error connect i1d3 ! ", "提示", false);
+                    FrmDialog.ShowDialog(this, "   Error connect i1d3 ! ", "Tips", false);
                     return;
                     //Console.WriteLine("i1d3 connect err.");
                 }
@@ -367,6 +393,7 @@ namespace Color_Calibration.UnPages
                 GlobalClass.m_bIsOpen = m_bIsOpen;
                 Unbt_meter.Text = "Close";
                 _mainForm.meter_status.Text = "Calibration : i1D3 is Connected ";
+                _mainForm.meter_status.ForeColor = Color.FromArgb(74, 22, 124);
                 FrmTips.ShowTipsInfo(_mainForm, "Calibration : i1D3 is Connected");
                 //FrmTips.ShowTips(_mainForm, "Calibration : i1D3 is Connected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 70), TipsState.Info);
                 Unbt_meter.ForeColor = Color.Red;
@@ -378,9 +405,10 @@ namespace Color_Calibration.UnPages
                 GlobalClass.m_bIsOpen = m_bIsOpen;
                 Unbt_meter.Text = "Connect";
                 _mainForm.meter_status.Text = "Calibration : i1D3 is Disconnected";
+                _mainForm.meter_status.ForeColor = Color.Black;
                 FrmTips.ShowTipsInfo(_mainForm, "Calibration : i1D3 is Disconnected");
                 //FrmTips.ShowTips(_mainForm, "Calibration : i1D3 is Disconnected", 1500, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 70), TipsState.Info);
-                Unbt_meter.ForeColor = Color.Purple;
+                Unbt_meter.ForeColor = Color.FromArgb(74, 22, 124);
             }
         }
         #endregion

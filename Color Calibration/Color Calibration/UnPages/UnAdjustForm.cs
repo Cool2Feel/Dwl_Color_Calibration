@@ -36,6 +36,11 @@ namespace Color_Calibration.UnPages
             Uncom_id.SelectedIndex = 0;
             if(Uncom_id.Source.Count > 0)
                 Index = 1;
+
+            if (MainColorModel.M_ModelType == 1)
+                Index = byte.Parse(Uncom_id.SelectedValue);
+            else
+                Index = 0xFD;
         }
 
         public void Data_Update()
@@ -44,6 +49,10 @@ namespace Color_Calibration.UnPages
             Uncom_id.SelectedIndex = 0;
             if (Uncom_id.Source.Count > 0)
                 Index = 1;
+            if (MainColorModel.H_Row > 8 && MainColorModel.V_Colu > 8)
+                Uncom_id.DropPanelHeight = 550;
+            else
+                Uncom_id.DropPanelHeight = (MainColorModel.H_Row + MainColorModel.V_Colu) * 10;
         }
         public void DataReceived(byte[] data)
         {
@@ -62,7 +71,7 @@ namespace Color_Calibration.UnPages
                     {
                         Init_Data2(str);
                     }
-                    //Console.Write("adjustpage:" + str);
+                    Console.Write("adjustpage:" + str);
                 }
                 //Console.Write(str);
             }
@@ -113,6 +122,7 @@ namespace Color_Calibration.UnPages
         #region  Lable_Mouse function
         private void lbl_MouseDown(object sender)
         {
+            do_run = true;
             Label LB = sender as Label;
             LB.Image = Color_Calibration.Properties.Resources.btn2_Dwn;
             LB.Location = new Point(LB.Location.X + 1, LB.Location.Y + 1);
@@ -158,7 +168,7 @@ namespace Color_Calibration.UnPages
         private void lblBl_add_MouseUp(object sender, MouseEventArgs e)
         {
             lbl_MouseUp(sender);
-            do_run = true;
+            do_run = false;
             //lblBl_add.Location = new Point(lblBl_add.Location.X - 1, lblBl_add.Location.Y - 1);
         }
 
@@ -228,11 +238,10 @@ namespace Color_Calibration.UnPages
                 //serialPort1.Write(array, 0, 6);
                 DataSend(array);
                 do_run = false;
-
             }
             catch
             {
-                FrmDialog.ShowDialog(this, "     串口发送数据出错！", "提示", false);
+                FrmDialog.ShowDialog(this, "     Error sending data from serial port！", "Tips", false);
                 return;
             }
 
@@ -256,7 +265,7 @@ namespace Color_Calibration.UnPages
             }
             else
             {
-                FrmDialog.ShowDialog(this, "Serial port is not opened！", "提示", false);
+                FrmDialog.ShowDialog(this, "Serial port is not opened！", "Tips", false);
             }
         }
         
@@ -419,15 +428,21 @@ namespace Color_Calibration.UnPages
         /// <param name="e"></param>
         private void ami_Button_12_Click(object sender, EventArgs e)
         {
-            if (FrmDialog.ShowDialog(this, "   对当前ID的屏幕色温数据默认初始化！", "提示", true) == DialogResult.OK)
+            if (FrmDialog.ShowDialog(this, "   Initialize the screen color temperature data of the current ID by default！", "Tips", true) == DialogResult.OK)
             {
                 byte[] array = new byte[5];
                 array[0] = 0xE5;
-                array[1] = 0xFD;
+                array[1] = Index;
                 array[2] = 0x20;
                 array[3] = 0x81;
                 array[4] = (byte)(0xFF - (0xFF & array[0] + array[1] + array[2] + array[3]));
                 DataSend(array);
+                Thread.Sleep(200);
+                myThread = new Thread(new ThreadStart(delegate ()
+                {
+                    Init_Thread();
+                })); //开线程         
+                myThread.Start(); //启动线程 
             }
         }
 
@@ -462,7 +477,7 @@ namespace Color_Calibration.UnPages
         {
             if (GlobalClass.m_bIsOpen == false)
             {
-                FrmDialog.ShowDialog(this, "   No i1D3 device open ! ", "提示", false);
+                FrmDialog.ShowDialog(this, "   No i1D3 device open ! ", "Tips", false);
                 return;
             }
             try
@@ -476,7 +491,10 @@ namespace Color_Calibration.UnPages
                 CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(m_hi1d3, ref m_dYxyMeas);
                 if (m_err != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
                 {
-                    FrmDialog.ShowDialog(this, "   Error for " + m_err.ToString(), "提示", false);
+                    if(m_err == CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3ErrHW_PeriodeTimeOut)
+                        FrmDialog.ShowDialog(this, "   The device measurement timed out and cannot detect the current display data (the display brightness is blank or the device lens is not punched)", "Tips", false);
+                    else
+                        FrmDialog.ShowDialog(this, "   Error for :" + m_err.ToString(), "Tips", false);
                     return;
                 }
                 //Console.WriteLine("OK =" + m_dYxyMeas.Y + " - " + m_dYxyMeas.x + " - " + m_dYxyMeas.y + " - " + m_dYxyMeas.z);
@@ -489,8 +507,28 @@ namespace Color_Calibration.UnPages
             }
             catch
             {
-                FrmDialog.ShowDialog(this, "   Measure Lcd Error ! ", "提示", false);
+                FrmDialog.ShowDialog(this, "   Measure Lcd Error ! ", "Tips", false);
                 return;
+            }
+        }
+
+        private void ami_Button_setd_Click(object sender, EventArgs e)
+        {
+            if (FrmDialog.ShowDialog(this, "   Initialize the screen color temperature data of the current ID by default！", "Tips", true) == DialogResult.OK)
+            {
+                byte[] array = new byte[5];
+                array[0] = 0xE5;
+                array[1] = Index;
+                array[2] = 0x20;
+                array[3] = 0x81;
+                array[4] = (byte)(0xFF - (0xFF & array[0] + array[1] + array[2] + array[3]));
+                DataSend(array);
+                Thread.Sleep(200);
+                myThread = new Thread(new ThreadStart(delegate ()
+                {
+                    Init_Thread();
+                })); //开线程         
+                myThread.Start(); //启动线程 
             }
         }
     }

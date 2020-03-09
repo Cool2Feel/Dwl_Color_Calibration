@@ -116,29 +116,30 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(662, 100);
+            this.label3.Location = new System.Drawing.Point(662, 299);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 19);
             this.label3.TabIndex = 16;
             this.label3.Text = "Target Gamma:";
+            this.label3.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(628, 136);
+            this.label4.Location = new System.Drawing.Point(632, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 19);
+            this.label4.Size = new System.Drawing.Size(148, 19);
             this.label4.TabIndex = 18;
-            this.label4.Text = "Target Clolor Temp.:";
+            this.label4.Text = "Target Color Temp.:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(641, 172);
+            this.label5.Location = new System.Drawing.Point(641, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 19);
             this.label5.TabIndex = 20;
@@ -149,7 +150,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(643, 208);
+            this.label6.Location = new System.Drawing.Point(643, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(137, 19);
             this.label6.TabIndex = 22;
@@ -167,7 +168,7 @@
             this.ucComTL.IsRadius = true;
             this.ucComTL.IsShowRect = false;
             this.ucComTL.ItemWidth = 114;
-            this.ucComTL.Location = new System.Drawing.Point(790, 169);
+            this.ucComTL.Location = new System.Drawing.Point(790, 132);
             this.ucComTL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTL.Name = "ucComTL";
             this.ucComTL.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -178,7 +179,8 @@
             this.ucComTL.Source = null;
             this.ucComTL.TabIndex = 31;
             this.ucComTL.TextValue = null;
-            this.ucComTL.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComTL.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.ucComTL.SelectedChangedEvent += new System.EventHandler(this.ucComTL_SelectedChangedEvent);
             // 
             // ucComTC
             // 
@@ -192,7 +194,7 @@
             this.ucComTC.IsRadius = true;
             this.ucComTC.IsShowRect = false;
             this.ucComTC.ItemWidth = 114;
-            this.ucComTC.Location = new System.Drawing.Point(790, 133);
+            this.ucComTC.Location = new System.Drawing.Point(790, 96);
             this.ucComTC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTC.Name = "ucComTC";
             this.ucComTC.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -203,7 +205,7 @@
             this.ucComTC.Source = null;
             this.ucComTC.TabIndex = 30;
             this.ucComTC.TextValue = null;
-            this.ucComTC.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComTC.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.ucComTC.SelectedChangedEvent += new System.EventHandler(this.ucComTC_SelectedChangedEvent);
             // 
             // ucComTG
@@ -219,7 +221,7 @@
             this.ucComTG.IsRadius = true;
             this.ucComTG.IsShowRect = false;
             this.ucComTG.ItemWidth = 114;
-            this.ucComTG.Location = new System.Drawing.Point(790, 97);
+            this.ucComTG.Location = new System.Drawing.Point(790, 296);
             this.ucComTG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComTG.Name = "ucComTG";
             this.ucComTG.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -230,7 +232,8 @@
             this.ucComTG.Source = null;
             this.ucComTG.TabIndex = 29;
             this.ucComTG.TextValue = null;
-            this.ucComTG.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComTG.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.ucComTG.Visible = false;
             // 
             // ucComVM
             // 
@@ -244,7 +247,7 @@
             this.ucComVM.IsRadius = true;
             this.ucComVM.IsShowRect = false;
             this.ucComVM.ItemWidth = 38;
-            this.ucComVM.Location = new System.Drawing.Point(790, 61);
+            this.ucComVM.Location = new System.Drawing.Point(790, 59);
             this.ucComVM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ucComVM.Name = "ucComVM";
             this.ucComVM.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -255,7 +258,7 @@
             this.ucComVM.Source = null;
             this.ucComVM.TabIndex = 28;
             this.ucComVM.TextValue = null;
-            this.ucComVM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComVM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.ucComVM.SelectedChangedEvent += new System.EventHandler(this.ucComVM_SelectedChangedEvent);
             // 
             // ucComHM
@@ -281,7 +284,7 @@
             this.ucComHM.Source = null;
             this.ucComHM.TabIndex = 27;
             this.ucComHM.TextValue = null;
-            this.ucComHM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucComHM.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.ucComHM.SelectedChangedEvent += new System.EventHandler(this.ucComHM_SelectedChangedEvent);
             // 
             // Uncom_model
@@ -307,7 +310,7 @@
             this.Uncom_model.Source = null;
             this.Uncom_model.TabIndex = 26;
             this.Uncom_model.TextValue = null;
-            this.Uncom_model.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.Uncom_model.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.Uncom_model.SelectedChangedEvent += new System.EventHandler(this.Uncom_model_SelectedChangedEvent);
             // 
             // Uncom_meter
@@ -333,7 +336,7 @@
             this.Uncom_meter.Source = null;
             this.Uncom_meter.TabIndex = 25;
             this.Uncom_meter.TextValue = null;
-            this.Uncom_meter.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.Uncom_meter.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             // 
             // Uncom_port
             // 
@@ -358,14 +361,14 @@
             this.Uncom_port.Source = null;
             this.Uncom_port.TabIndex = 24;
             this.Uncom_port.TextValue = null;
-            this.Uncom_port.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.Uncom_port.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             // 
             // ucBtn_set
             // 
             this.ucBtn_set.BackColor = System.Drawing.Color.White;
             this.ucBtn_set.BtnBackColor = System.Drawing.Color.White;
             this.ucBtn_set.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_set.BtnForeColor = System.Drawing.Color.Purple;
+            this.ucBtn_set.BtnForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.ucBtn_set.BtnText = "Set";
             this.ucBtn_set.ConerRadius = 10;
             this.ucBtn_set.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -374,7 +377,7 @@
             this.ucBtn_set.IsRadius = true;
             this.ucBtn_set.IsShowRect = false;
             this.ucBtn_set.IsShowTips = false;
-            this.ucBtn_set.Location = new System.Drawing.Point(790, 205);
+            this.ucBtn_set.Location = new System.Drawing.Point(790, 168);
             this.ucBtn_set.Margin = new System.Windows.Forms.Padding(0);
             this.ucBtn_set.Name = "ucBtn_set";
             this.ucBtn_set.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
@@ -418,7 +421,7 @@
             this.ucBtn_id.BackColor = System.Drawing.Color.White;
             this.ucBtn_id.BtnBackColor = System.Drawing.Color.White;
             this.ucBtn_id.BtnFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ucBtn_id.BtnForeColor = System.Drawing.Color.Purple;
+            this.ucBtn_id.BtnForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
             this.ucBtn_id.BtnText = "Set";
             this.ucBtn_id.ConerRadius = 10;
             this.ucBtn_id.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -427,7 +430,7 @@
             this.ucBtn_id.IsRadius = true;
             this.ucBtn_id.IsShowRect = false;
             this.ucBtn_id.IsShowTips = false;
-            this.ucBtn_id.Location = new System.Drawing.Point(790, 245);
+            this.ucBtn_id.Location = new System.Drawing.Point(790, 208);
             this.ucBtn_id.Margin = new System.Windows.Forms.Padding(0);
             this.ucBtn_id.Name = "ucBtn_id";
             this.ucBtn_id.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
@@ -444,11 +447,11 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(608, 248);
+            this.label7.Location = new System.Drawing.Point(637, 211);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(172, 19);
+            this.label7.Size = new System.Drawing.Size(143, 19);
             this.label7.TabIndex = 32;
-            this.label7.Text = "Splicing wall ID setting:";
+            this.label7.Text = "Monitor ID setting:";
             // 
             // Btn_connect
             // 

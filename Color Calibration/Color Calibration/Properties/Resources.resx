@@ -121,8 +121,8 @@
   <data name="adjust" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\adjust.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="calibration_ex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\calibration_ex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="controlList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\controlList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mainview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,20 +139,29 @@
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="remote_controller" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\remote_controller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="calibration" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calibration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btn2_Ent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn2_Ent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="color_cie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\color_cie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="calibration_ex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calibration_ex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="set" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\set.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="color_cie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\color_cie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="controlList_ex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\controlList_ex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="设置" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\设置.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mainLogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,13 +169,19 @@
   <data name="log4net" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Lib\log4net.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="btn2_Dwn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn2_Dwn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DWL_Controls" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Lib\DWL_Controls.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="设置" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\设置.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hdmi_outlined" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hdmi_outlined.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btn2_Dwn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn2_Dwn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btn2_Ent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn2_Ent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="系统管理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\系统管理.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

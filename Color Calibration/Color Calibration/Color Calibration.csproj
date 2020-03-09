@@ -83,9 +83,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\EASkins.dll</HintPath>
     </Reference>
+    <Reference Include="Guifreaks.Common">
+      <HintPath>Lib\Guifreaks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Guifreaks.NavigationBar">
+      <HintPath>Lib\Guifreaks.NavigationBar.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>Lib\log4net.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="PopupTool">
+      <HintPath>Lib\PopupTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -97,6 +106,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>Lib\unvell.ReoGrid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalibrationSDK\i1dColorSDK.cs" />
@@ -106,13 +118,47 @@
     <Compile Include="ColorForm.Designer.cs">
       <DependentUpon>ColorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComLib\BytesBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComLib\BytesBox.Designer.cs">
+      <DependentUpon>BytesBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComLib\ColorGaridModel.cs" />
     <Compile Include="ComLib\ComEvent.cs" />
+    <Compile Include="ComLib\ExceptionLog.cs" />
+    <Compile Include="ComLib\FormMove.cs" />
     <Compile Include="ComLib\GlobalClass.cs" />
     <Compile Include="ComLib\LogHelper.cs" />
     <Compile Include="ComLib\MainColorModel.cs" />
     <Compile Include="ComLib\MainSetModel.cs" />
+    <Compile Include="ComLib\Model.cs" />
+    <Compile Include="ComLib\Screen.cs" />
     <Compile Include="ComLib\XMLHelper.cs" />
+    <Compile Include="Controler\AdjustColorPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controler\AdjustColorPage.designer.cs">
+      <DependentUpon>AdjustColorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controler\C_DebugPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controler\C_DebugPage.designer.cs">
+      <DependentUpon>C_DebugPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controler\Form_UartIrCmd_3458.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controler\Form_UartIrCmd_3458.designer.cs">
+      <DependentUpon>Form_UartIrCmd_3458.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Waiting.designer.cs">
+      <DependentUpon>Form_Waiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="IDSetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +190,12 @@
     <Compile Include="UnPages\UnColorForm.Designer.cs">
       <DependentUpon>UnColorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnPages\UnControlForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UnPages\UnControlForm.designer.cs">
+      <DependentUpon>UnControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnPages\UnMainLogo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,6 +210,18 @@
     </Compile>
     <EmbeddedResource Include="ColorForm.resx">
       <DependentUpon>ColorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controler\AdjustColorPage.resx">
+      <DependentUpon>AdjustColorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controler\C_DebugPage.resx">
+      <DependentUpon>C_DebugPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controler\Form_UartIrCmd_3458.resx">
+      <DependentUpon>Form_UartIrCmd_3458.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Waiting.resx">
+      <DependentUpon>Form_Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IDSetForm.resx">
       <DependentUpon>IDSetForm.cs</DependentUpon>
@@ -175,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UnPages\UnColorForm.resx">
       <DependentUpon>UnColorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnPages\UnControlForm.resx">
+      <DependentUpon>UnControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnPages\UnMainLogo.resx">
       <DependentUpon>UnMainLogo.cs</DependentUpon>
@@ -195,6 +262,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\系统管理.png" />
+    <None Include="Resources\remote_controller.png" />
     <None Include="Resources\color_cie.jpg" />
     <None Include="Resources\calibration_ex.png" />
     <None Include="Resources\adjust_ex.png" />
@@ -214,8 +283,12 @@
     <Content Include="ColorSync.ico" />
     <None Include="Resources\btn2_Ent.png" />
     <None Include="Resources\btn2_Dwn.png" />
+    <None Include="Resources\controlList.png" />
+    <None Include="Resources\controlList_ex.png" />
+    <None Include="Resources\hdmi_outlined.png" />
     <Content Include="Resources\Picture\logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

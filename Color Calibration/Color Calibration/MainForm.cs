@@ -1,5 +1,6 @@
 ﻿using Color_Calibration.ComLib;
 using Color_Calibration.Control;
+using Color_Calibration.NetCommand.IOCPClinet;
 using Color_Calibration.UnPages;
 using HZH_Controls.Forms;
 using System;
@@ -45,7 +46,7 @@ namespace Color_Calibration
                 Directory.CreateDirectory(_path + "\\");
                 Console.WriteLine("create");
             }
-            GlobalClass.m_cIsRunning = false;
+            //GlobalClass.m_cIsRunning = false;
             CalibrationSDK.i1dColorSDK.i1d3Status_t tt = CalibrationSDK.i1dColorSDK.i1d3Initialize();
             //this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             
@@ -215,10 +216,8 @@ namespace Color_Calibration
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(GlobalClass.m_cIsRunning == false)
-            {
-                UpdateUIStatus();
-            }
+            timer1.Interval = 2000;
+            UpdateUIStatus();
         }
         #endregion
 
@@ -240,11 +239,13 @@ namespace Color_Calibration
                 setModel.M_ModelType = MainColorModel.M_ModelType;
                 setModel.M_PageIndex = MainColorModel.M_PageIndex;
                 setModel.M_ComIndex = MainColorModel.M_ComIndex;
+                setModel.M_LanIndex = MainColorModel.M_LanIndex;
                 setModel.T_Gamma = MainColorModel.T_Gamma;
                 setModel.T_Temp = MainColorModel.T_Temp;
                 setModel.T_Lum = MainColorModel.T_Lum;
                 setModel.T_Custom = MainColorModel.T_Custom;
                 setModel.T_ID = MainColorModel.T_ID;
+                setModel.T_ComLan = MainColorModel.T_ComLan;
                 //setModel.T_ColorTempStd = MainColorModel.T_ColorTemp;
 
                 string ok = SerializeModel.XMLSerialize<MainSetModel>(setModel);
@@ -331,6 +332,7 @@ namespace Color_Calibration
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
+            GlobalClass.m_cIsRunning = false;
             UpdateUIStatus();
             ThreadPool.QueueUserWorkItem(new WaitCallback(ShowMain), null);
             //Console.WriteLine("1111");
@@ -359,7 +361,7 @@ namespace Color_Calibration
                 if (GlobalClass.c_bIsOpen)
                     _setpage.ClearSelf();
                 if (GlobalClass.m_bIsOpen)
-                    _setpage.Colsei1D();
+                    _setpage.ColseMeter();
                 CalibrationSDK.i1dColorSDK.i1d3Status_t tt = CalibrationSDK.i1dColorSDK.i1d3Destroy(); ;
                 //Console.WriteLine("i1d3Destroy OK =  " + tt.ToString());
             }
@@ -502,6 +504,55 @@ namespace Color_Calibration
         }
         #endregion
 
+        #region LAN 口数据 API
+        /// <summary>
+        /// 接收信息的处理更新
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="length"></param>
+        /// <param name="Remoteip"></param>
+        public void Receive_data(byte[] data, int length, string Remoteip)
+        {
+            //Console.WriteLine(Remoteip);
+            if (length > 0)
+            {
+                if (MainColorModel.M_PageIndex == 2)
+                    _colorpage.DataReceived(data);
+                else if (MainColorModel.M_PageIndex == 3)
+                    _adjustpage.DataReceived(data);
+                else if (MainColorModel.M_PageIndex == 4)
+                    _controlpage.DataReceived(data);
+                else
+                {
+                    Console.WriteLine("this page:" + data.Length);
+                }
+                //_debug.ReceivePrint(data);
+                this.BeginInvoke(new MethodInvoker(delegate ()
+                {
+                    _debug.ReceivePrint(data);
+                }));
+            }
+        }
+        public void Reflash_Connect(string client)
+        {
+            //Console.WriteLine("[" + DateTime.Now.ToString() + "] / 完成对: " + client + "请求连接！ \r");
+            int count = _setpage.GetConnectCount();
+            tcp_count.Text = "Count : " + count;
+            tcp_count.ForeColor = Color.FromArgb(74, 22, 124);
+            if (count == MainColorModel.H_Row * MainColorModel.V_Colu)
+                FrmTips.ShowTips(this, "All devices have completed a TCP connection : " + count, 2000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
+        }
+        public void Re_Connect(IOCPClient client)
+        {
+            if (!_setpage.SetReConnect(client))
+            {
+                int count = _setpage.GetConnectCount();
+                tcp_count.Text = "Count : " + count;
+            }
+        }
+
+        #endregion
+
         #region Debug_Showform
         private bool debug_show = false;
         private void debug_lable_Click(object sender, EventArgs e)
@@ -532,5 +583,16 @@ namespace Color_Calibration
         }
         #endregion
 
+        #region 连接数显示
+        private void tcp_count_MouseEnter(object sender, EventArgs e)
+        {
+            this.tcp_count.BackColor = Color.FromArgb(247, 247, 247);
+            this.tcp_count.ToolTipText = _setpage.show_connectDevice();
+        }
+        private void tcp_count_MouseLeave(object sender, EventArgs e)
+        {
+            this.tcp_count.BackColor = Color.Transparent;
+        }
+        #endregion
     }
 }

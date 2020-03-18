@@ -43,4 +43,26 @@ namespace Color_Calibration.ComLib
             }
         }
     }
+
+
+    public class MeasureData
+    {
+        public double Lv { get; set; }
+        public double sx { get; set; }
+        public double sy { get; set; }
+    }
+
+    /// <summary>
+    /// 连接设备对象
+    /// </summary>
+    [Serializable]
+    public class DeviceMonitor
+    {
+        public string name { get; set; }
+        public string ip { get; set; }
+        public bool status { get; set; }
+        public string mac { get; set; }
+
+        public int port { get; set; }
+    }
 }

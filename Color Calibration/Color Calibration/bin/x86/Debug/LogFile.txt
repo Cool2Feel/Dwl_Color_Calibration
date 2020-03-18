@@ -1,0 +1,246 @@
+Log Entry : 
+Date：09:55:23 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:55:37 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:55:50 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:57:24 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor() 位置 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\UnPages\UnSetForm.cs:行号 43
+   在 Color_Calibration.MainForm..ctor() 位置 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\MainForm.cs:行号 23
+   在 Color_Calibration.Program.Main() 位置 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\Program.cs:行号 24
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:58:49 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:59:37 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：09:59:44 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net, Version=1.0.7332.25089, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：10:09:50 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net.dll”或它的某一个依赖项。找不到指定的模块。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.Color_Analyzer.CA_410.Meter_CA410..ctor()
+   在 Color_Calibration.UnPages.UnSetForm..ctor()
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void .ctor()
+------------------------------------
+
+Log Entry : 
+Date：10:11:09 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.set_m_cIsRunning(Boolean value)
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void set_m_cIsRunning(Boolean)
+------------------------------------
+
+Log Entry : 
+Date：10:11:30 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.set_m_cIsRunning(Boolean value)
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void set_m_cIsRunning(Boolean)
+------------------------------------
+
+Log Entry : 
+Date：10:19:01 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.set_m_cIsRunning(Boolean value)
+   在 Color_Calibration.MainForm..ctor()
+   在 Color_Calibration.Program.Main()
+Trigger method：Void set_m_cIsRunning(Boolean)
+------------------------------------
+
+Log Entry : 
+Date：10:21:36 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.get_m_cIsRunning()
+   在 Color_Calibration.MainForm.timer1_Tick(Object sender, EventArgs e)
+   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 Color_Calibration.Program.Main()
+Trigger method：Boolean get_m_cIsRunning()
+------------------------------------
+
+Log Entry : 
+Date：10:23:01 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.get_m_cIsRunning()
+   在 Color_Calibration.MainForm.timer1_Tick(Object sender, EventArgs e)
+   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 Color_Calibration.Program.Main()
+Trigger method：Boolean get_m_cIsRunning()
+------------------------------------
+
+Log Entry : 
+Date：10:25:25 2020年3月18日 
+
+Exception information：“Color_Calibration.ComLib.GlobalClass”的类型初始值设定项引发异常。
+Exception object：Color Calibration
+Call stack：
+在 Color_Calibration.ComLib.GlobalClass.get_m_cIsRunning()
+   在 Color_Calibration.MainForm.timer1_Tick(Object sender, EventArgs e)
+   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 Color_Calibration.Program.Main()
+Trigger method：Boolean get_m_cIsRunning()
+------------------------------------
+
+Log Entry : 
+Date：10:27:17 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net.dll”或它的某一个依赖项。找不到指定的模块。
+Exception object：System.Windows.Forms
+Call stack：
+在 System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   在 System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   在 System.Windows.Forms.Control.Invoke(Delegate method)
+   在 Color_Calibration.MainForm.UpdateUIStatus()
+   在 Color_Calibration.MainForm.timer1_Tick(Object sender, EventArgs e)
+   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 Color_Calibration.Program.Main()
+Trigger method：System.Object MarshaledInvoke(System.Windows.Forms.Control, System.Delegate, System.Object[], Boolean)
+------------------------------------
+
+Log Entry : 
+Date：10:30:03 2020年3月18日 
+
+Exception information：未能加载文件或程序集“CASDK2Net.dll”或它的某一个依赖项。找不到指定的模块。
+Exception object：System.Windows.Forms
+Call stack：
+在 System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   在 System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   在 System.Windows.Forms.Control.Invoke(Delegate method)
+   在 Color_Calibration.MainForm.UpdateUIStatus()
+   在 Color_Calibration.MainForm.timer1_Tick(Object sender, EventArgs e)
+   在 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   在 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 Color_Calibration.Program.Main()
+Trigger method：System.Object MarshaledInvoke(System.Windows.Forms.Control, System.Delegate, System.Object[], Boolean)
+------------------------------------
+

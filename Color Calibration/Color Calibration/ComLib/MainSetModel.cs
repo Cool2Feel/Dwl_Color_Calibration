@@ -14,6 +14,7 @@ namespace Color_Calibration.ComLib
         public int V_Colu { set; get; }
         public int M_ComIndex { set; get; }
         public int M_PageIndex { set; get; }
+        public int M_LanIndex { set; get; }
         public int M_MeterType { set; get; }
         public int M_ModelType { set; get; }
         public int T_Gamma { set; get; }
@@ -21,6 +22,7 @@ namespace Color_Calibration.ComLib
         public int T_Lum { set; get; }
         public int T_Custom { set; get; }
         public int T_ID { set; get; }
+        public bool T_ComLan { set; get; }
     }
 
     public class SerializeModel

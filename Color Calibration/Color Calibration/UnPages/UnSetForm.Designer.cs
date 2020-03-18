@@ -54,6 +54,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.Btn_connect = new EASkins.Ami_Button_1();
             this.Unbt_meter = new EASkins.Ami_Button_1();
+            this.lblBl_add = new System.Windows.Forms.Label();
+            this.ucSwitch_com = new HZH_Controls.Controls.UCSwitch();
+            this.Btn_connectLan = new EASkins.Ami_Button_1();
+            this.Uncom_lan = new HZH_Controls.Controls.UCCombox();
             this.SuspendLayout();
             // 
             // label_cp
@@ -63,9 +67,9 @@
             this.label_cp.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_cp.Location = new System.Drawing.Point(23, 19);
             this.label_cp.Name = "label_cp";
-            this.label_cp.Size = new System.Drawing.Size(154, 19);
+            this.label_cp.Size = new System.Drawing.Size(158, 19);
             this.label_cp.TabIndex = 2;
-            this.label_cp.Text = "Communication Port";
+            this.label_cp.Text = "Communication Type";
             // 
             // label_cm
             // 
@@ -481,12 +485,95 @@
             this.Unbt_meter.TextAlignment = System.Drawing.StringAlignment.Center;
             this.Unbt_meter.Click += new System.EventHandler(this.Unbt_meter_BtnClick);
             // 
+            // lblBl_add
+            // 
+            this.lblBl_add.BackColor = System.Drawing.Color.Transparent;
+            this.lblBl_add.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblBl_add.ForeColor = System.Drawing.Color.White;
+            this.lblBl_add.Location = new System.Drawing.Point(198, 65);
+            this.lblBl_add.Name = "lblBl_add";
+            this.lblBl_add.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
+            this.lblBl_add.Size = new System.Drawing.Size(50, 20);
+            this.lblBl_add.TabIndex = 59;
+            this.lblBl_add.Tag = "";
+            this.lblBl_add.Text = ">> set";
+            this.lblBl_add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblBl_add.Visible = false;
+            this.lblBl_add.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblBl_add_MouseDown);
+            this.lblBl_add.MouseEnter += new System.EventHandler(this.lblBl_add_MouseEnter);
+            this.lblBl_add.MouseLeave += new System.EventHandler(this.lblBl_add_MouseLeave);
+            this.lblBl_add.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblBl_add_MouseUp);
+            // 
+            // ucSwitch_com
+            // 
+            this.ucSwitch_com.BackColor = System.Drawing.Color.Transparent;
+            this.ucSwitch_com.Checked = false;
+            this.ucSwitch_com.FalseColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
+            this.ucSwitch_com.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ucSwitch_com.Location = new System.Drawing.Point(215, 32);
+            this.ucSwitch_com.Name = "ucSwitch_com";
+            this.ucSwitch_com.Size = new System.Drawing.Size(83, 31);
+            this.ucSwitch_com.SwitchType = HZH_Controls.Controls.SwitchType.Ellipse;
+            this.ucSwitch_com.TabIndex = 58;
+            this.ucSwitch_com.Texts = new string[] {
+        "COM",
+        "LAN"};
+            this.ucSwitch_com.TrueColor = System.Drawing.Color.Purple;
+            this.ucSwitch_com.CheckedChanged += new System.EventHandler(this.ucSwitch_com_CheckedChanged);
+            // 
+            // Btn_connectLan
+            // 
+            this.Btn_connectLan.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_connectLan.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_connectLan.Image = null;
+            this.Btn_connectLan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_connectLan.Location = new System.Drawing.Point(37, 95);
+            this.Btn_connectLan.Name = "Btn_connectLan";
+            this.Btn_connectLan.Size = new System.Drawing.Size(161, 30);
+            this.Btn_connectLan.TabIndex = 61;
+            this.Btn_connectLan.Text = "Connect";
+            this.Btn_connectLan.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.Btn_connectLan.Visible = false;
+            this.Btn_connectLan.Click += new System.EventHandler(this.Btn_connectLan_Click);
+            // 
+            // Uncom_lan
+            // 
+            this.Uncom_lan.BackColor = System.Drawing.Color.Transparent;
+            this.Uncom_lan.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.Uncom_lan.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Uncom_lan.ConerRadius = 5;
+            this.Uncom_lan.DropPanelHeight = -1;
+            this.Uncom_lan.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.Uncom_lan.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.Uncom_lan.IsRadius = true;
+            this.Uncom_lan.IsShowRect = false;
+            this.Uncom_lan.ItemWidth = 160;
+            this.Uncom_lan.Location = new System.Drawing.Point(37, 63);
+            this.Uncom_lan.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Uncom_lan.Name = "Uncom_lan";
+            this.Uncom_lan.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.Uncom_lan.RectWidth = 1;
+            this.Uncom_lan.SelectedIndex = -1;
+            this.Uncom_lan.SelectedValue = "";
+            this.Uncom_lan.Size = new System.Drawing.Size(161, 24);
+            this.Uncom_lan.Source = null;
+            this.Uncom_lan.TabIndex = 60;
+            this.Uncom_lan.TabStop = false;
+            this.Uncom_lan.TextValue = null;
+            this.Uncom_lan.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.Uncom_lan.Visible = false;
+            this.Uncom_lan.SelectedChangedEvent += new System.EventHandler(this.Uncom_lan_SelectedChangedEvent);
+            // 
             // UnSetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.Btn_connectLan);
+            this.Controls.Add(this.Uncom_lan);
+            this.Controls.Add(this.lblBl_add);
+            this.Controls.Add(this.ucSwitch_com);
             this.Controls.Add(this.Unbt_meter);
             this.Controls.Add(this.Btn_connect);
             this.Controls.Add(this.ucBtn_id);
@@ -545,5 +632,9 @@
         private System.Windows.Forms.Label label7;
         private EASkins.Ami_Button_1 Btn_connect;
         private EASkins.Ami_Button_1 Unbt_meter;
+        private System.Windows.Forms.Label lblBl_add;
+        private HZH_Controls.Controls.UCSwitch ucSwitch_com;
+        private EASkins.Ami_Button_1 Btn_connectLan;
+        private HZH_Controls.Controls.UCCombox Uncom_lan;
     }
 }

@@ -43,6 +43,7 @@
             this.color_temp = new System.Windows.Forms.ToolStripStatusLabel();
             this.version = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tcp_count = new System.Windows.Forms.ToolStripStatusLabel();
             this.Btn_control = new HZH_Controls.Controls.UCBtnFillet();
             this.Btn_adjust = new HZH_Controls.Controls.UCBtnFillet();
             this.Btn_set = new HZH_Controls.Controls.UCBtnFillet();
@@ -75,7 +76,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.Purple;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.label2.Location = new System.Drawing.Point(141, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 28);
@@ -86,7 +87,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Purple;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.label1.Location = new System.Drawing.Point(139, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 28);
@@ -140,6 +141,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.debug_lable,
             this.com_status,
+            this.tcp_count,
             this.meter_status,
             this.color_temp,
             this.version});
@@ -168,18 +170,18 @@
             // 
             this.com_status.AutoSize = false;
             this.com_status.BackColor = System.Drawing.Color.Transparent;
-            this.com_status.Margin = new System.Windows.Forms.Padding(10, 3, 0, 2);
+            this.com_status.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.com_status.Name = "com_status";
-            this.com_status.Size = new System.Drawing.Size(200, 17);
+            this.com_status.Size = new System.Drawing.Size(260, 17);
             this.com_status.Text = "SerialPort : COM6 is Disconnected";
             // 
             // meter_status
             // 
             this.meter_status.AutoSize = false;
             this.meter_status.BackColor = System.Drawing.Color.Transparent;
-            this.meter_status.Margin = new System.Windows.Forms.Padding(20, 3, 0, 2);
+            this.meter_status.Margin = new System.Windows.Forms.Padding(10, 3, 0, 2);
             this.meter_status.Name = "meter_status";
-            this.meter_status.Size = new System.Drawing.Size(300, 17);
+            this.meter_status.Size = new System.Drawing.Size(250, 17);
             this.meter_status.Text = "Calibration : i1D3 is Disconnected";
             // 
             // color_temp
@@ -192,7 +194,7 @@
             // 
             // version
             // 
-            this.version.Margin = new System.Windows.Forms.Padding(52, 3, 0, 2);
+            this.version.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.version.Name = "version";
             this.version.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.version.Size = new System.Drawing.Size(42, 17);
@@ -204,6 +206,12 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // tcp_count
+            // 
+            this.tcp_count.Name = "tcp_count";
+            this.tcp_count.Size = new System.Drawing.Size(60, 17);
+            this.tcp_count.Text = "Count : 0";
+            // 
             // Btn_control
             // 
             this.Btn_control.BackColor = System.Drawing.Color.Transparent;
@@ -212,7 +220,7 @@
             this.Btn_control.ConerRadius = 5;
             this.Btn_control.FillColor = System.Drawing.Color.White;
             this.Btn_control.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Btn_control.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.Btn_control.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.Btn_control.IsRadius = false;
             this.Btn_control.IsShowRect = false;
             this.Btn_control.Location = new System.Drawing.Point(688, 0);
@@ -234,7 +242,7 @@
             this.Btn_adjust.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_adjust.FillColor = System.Drawing.Color.White;
             this.Btn_adjust.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Btn_adjust.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.Btn_adjust.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.Btn_adjust.IsRadius = false;
             this.Btn_adjust.IsShowRect = false;
             this.Btn_adjust.Location = new System.Drawing.Point(459, 0);
@@ -256,7 +264,7 @@
             this.Btn_set.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_set.FillColor = System.Drawing.Color.White;
             this.Btn_set.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Btn_set.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.Btn_set.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.Btn_set.IsRadius = false;
             this.Btn_set.IsShowRect = false;
             this.Btn_set.Location = new System.Drawing.Point(1, 0);
@@ -278,7 +286,7 @@
             this.Btn_color.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_color.FillColor = System.Drawing.Color.White;
             this.Btn_color.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Btn_color.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(22)))), ((int)(((byte)(124)))));
+            this.Btn_color.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(143)))));
             this.Btn_color.IsRadius = false;
             this.Btn_color.IsShowRect = false;
             this.Btn_color.Location = new System.Drawing.Point(230, 0);
@@ -360,9 +368,10 @@
             this.Main_pic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.Main_pic.BackgroundImage = global::Color_Calibration.Properties.Resources.logo;
-            this.Main_pic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Main_pic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Main_pic.Location = new System.Drawing.Point(0, 0);
             this.Main_pic.Name = "Main_pic";
+            this.Main_pic.Padding = new System.Windows.Forms.Padding(3);
             this.Main_pic.Size = new System.Drawing.Size(136, 67);
             this.Main_pic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.Main_pic.TabIndex = 0;
@@ -416,6 +425,7 @@
         private System.Windows.Forms.Timer timer1;
         private HZH_Controls.Controls.UCBtnFillet Btn_control;
         private System.Windows.Forms.ToolStripStatusLabel debug_lable;
+        public System.Windows.Forms.ToolStripStatusLabel tcp_count;
     }
 }
 

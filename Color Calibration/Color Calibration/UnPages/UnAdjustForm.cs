@@ -473,34 +473,62 @@ namespace Color_Calibration.UnPages
         }
         #endregion
 
+        /// <summary>
+        /// Measure Data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_measure_Click(object sender, EventArgs e)
         {
             if (GlobalClass.m_bIsOpen == false)
             {
-                FrmDialog.ShowDialog(this, "   No i1D3 device open ! ", "Tips", false);
+                FrmDialog.ShowDialog(this, "   Color calibration equipment is not connected ! ", "Tips", false);
                 return;
             }
             try
             {
-                IntPtr m_hi1d3 = GlobalClass.i1d3Handle;
-
-                //Console.WriteLine("i1d3Handle: " + m_hi1d3);
-
-                CalibrationSDK.i1dColorSDK.i1d3Yxy_t m_dYxyMeas = new CalibrationSDK.i1dColorSDK.i1d3Yxy_t();
-
-                CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(m_hi1d3, ref m_dYxyMeas);
-                if (m_err != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
+                string lv = "" ;string x = "" ;string y = "" ;
+                if (MainColorModel.M_MeterType == 0)
                 {
-                    if(m_err == CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3ErrHW_PeriodeTimeOut)
-                        FrmDialog.ShowDialog(this, "   The device measurement timed out and cannot detect the current display data (the display brightness is blank or the device lens is not punched)", "Tips", false);
+                    #region i1d3 Measure
+                    IntPtr m_hi1d3 = GlobalClass.i1d3Handle;
+
+                    //Console.WriteLine("i1d3Handle: " + m_hi1d3);
+
+                    CalibrationSDK.i1dColorSDK.i1d3Yxy_t m_dYxyMeas = new CalibrationSDK.i1dColorSDK.i1d3Yxy_t();
+
+                    CalibrationSDK.i1dColorSDK.i1d3Status_t m_err = CalibrationSDK.i1dColorSDK.i1d3MeasureYxy(m_hi1d3, ref m_dYxyMeas);
+                    if (m_err != CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3Success)
+                    {
+                        if (m_err == CalibrationSDK.i1dColorSDK.i1d3Status_t.i1d3ErrHW_PeriodeTimeOut)
+                            FrmDialog.ShowDialog(this, "   The device measurement timed out and cannot detect the current display data (the display brightness is blank or the device lens is not punched)", "Tips", false);
+                        else
+                            FrmDialog.ShowDialog(this, "   Error for :" + m_err.ToString(), "Tips", false);
+                        return;
+                    }
+                    lv = string.Format("{0:N3}", m_dYxyMeas.Y);
+                    x = string.Format("{0:N3}", m_dYxyMeas.x);
+                    y = string.Format("{0:N3}", m_dYxyMeas.y);
+                    #endregion
+                }
+                else
+                {
+                    #region CA310/CA410
+                    MeasureData _measureData = new MeasureData();
+                    if (MainColorModel.M_MeterType == 1)
+                        _measureData = GlobalClass._meter_CA310.GetCA310Measure_Data();
                     else
-                        FrmDialog.ShowDialog(this, "   Error for :" + m_err.ToString(), "Tips", false);
-                    return;
+                        _measureData = GlobalClass._meter_CA410.GetCA410Measure_Data();
+                    if (_measureData != null)
+                    {
+                        lv = string.Format("{0:N3}", _measureData.Lv);
+                        x = string.Format("{0:N3}", _measureData.sx);
+                        y = string.Format("{0:N3}", _measureData.sy);
+                    }
+                    #endregion
                 }
                 //Console.WriteLine("OK =" + m_dYxyMeas.Y + " - " + m_dYxyMeas.x + " - " + m_dYxyMeas.y + " - " + m_dYxyMeas.z);
-                string lv = string.Format("{0:N3}", m_dYxyMeas.Y);
-                string x = string.Format("{0:N3}", m_dYxyMeas.x);
-                string y = string.Format("{0:N3}", m_dYxyMeas.y);
+
                 ucTextBox_lv.InputText = lv;
                 ucTextBox_x.InputText = x;
                 ucTextBox_y.InputText = y;

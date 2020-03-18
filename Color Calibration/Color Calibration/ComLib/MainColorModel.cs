@@ -8,10 +8,12 @@ namespace Color_Calibration.ComLib
 {
     public class MainColorModel
     {
+        #region Attributes
         private static int _h_Row = 1;
         private static int _v_Colu = 1;
         private static int _m_PageIndex = 0;
         private static int _m_ComIndex = 0;
+        private static int _m_LanIndex = 0;
         private static int _m_MeterType = 0;
         private static int _m_ModelType = 0;
         private static int _t_Gamma = 0;
@@ -19,9 +21,11 @@ namespace Color_Calibration.ComLib
         private static int _t_Lum;
         private static int _t_Custom;
         private static int _t_ID = 0;
+        private static bool _t_ComLan = false;
         private static List<KeyValuePair<string, string>> _id_List;
-        
+        #endregion
 
+        #region  Method
         public static int H_Row
         {
             get { return _h_Row; }
@@ -52,6 +56,15 @@ namespace Color_Calibration.ComLib
             set
             {
                 _m_ComIndex = value;
+            }
+        }
+
+        public static int M_LanIndex
+        {
+            get { return _m_LanIndex; }
+            set
+            {
+                _m_LanIndex = value;
             }
         }
         public static int M_MeterType
@@ -110,6 +123,14 @@ namespace Color_Calibration.ComLib
                 _t_ID = value;
             }
         }
+        public static bool T_ComLan
+        {
+            get { return _t_ComLan; }
+            set
+            {
+                _t_ComLan = value;
+            }
+        }
         public static List<KeyValuePair<string, string>> Id_List
         {
             get { return _id_List; }
@@ -118,6 +139,7 @@ namespace Color_Calibration.ComLib
                 _id_List = value;
             }
         }
-        
+
+        #endregion
     }
 }

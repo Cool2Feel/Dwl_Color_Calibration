@@ -15,3 +15,34 @@ F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibr
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csprojResolveAssemblyReference.cache
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.dll
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.exe.config
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Interop.CA200SRVRLib.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csproj.ResolveComReference.cache
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.exe
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.exe
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Color Calibration.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\CASDK2Net.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Guifreaks.Common.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Guifreaks.NavigationBar.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\PopupTool.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\unvell.ReoGrid.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\EASkins.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\Debug\Interop.CA200SRVRLib.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csprojResolveAssemblyReference.cache
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.ColorForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Control.AdjustColorPage.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Control.C_DebugPage.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Control.Form_Net.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\WallControl.Form_UartIrCmd_3458.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Form_Waiting.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.IDSetForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.MainForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.Properties.Resources.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnAdjustForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnColorForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnControlForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnMainLogo.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color_Calibration.UnPages.UnSetForm.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\Debug\Color Calibration.csproj.GenerateResource.Cache

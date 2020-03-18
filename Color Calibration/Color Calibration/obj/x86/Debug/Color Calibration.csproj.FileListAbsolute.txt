@@ -15,9 +15,23 @@ F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibr
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.exe
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.pdb
 F:\Code\KTC_Git_Code_Source\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csprojResolveAssemblyReference.cache
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe.config
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Interop.CA200SRVRLib.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.ResolveComReference.cache
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\CASDK2Net.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.Common.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.NavigationBar.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\PopupTool.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\unvell.ReoGrid.dll
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Interop.CA200SRVRLib.dll
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.ColorForm.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.AdjustColorPage.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.C_DebugPage.resources
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.Form_Net.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\WallControl.Form_UartIrCmd_3458.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Form_Waiting.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.IDSetForm.resources
@@ -29,14 +43,37 @@ F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\C
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnMainLogo.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnSetForm.resources
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.GenerateResource.Cache
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe.config
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.pdb
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.dll
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.Common.dll
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.NavigationBar.dll
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\PopupTool.dll
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\unvell.ReoGrid.dll
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.pdb
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.exe
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.pdb
+F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csprojResolveAssemblyReference.cache
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe.config
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Interop.CA200SRVRLib.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.ResolveComReference.cache
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.exe
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.pdb
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.pdb
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\CASDK2Net.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.Common.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Guifreaks.NavigationBar.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\PopupTool.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\unvell.ReoGrid.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\EASkins.pdb
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Interop.CA200SRVRLib.dll
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csprojResolveAssemblyReference.cache
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.ColorForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.AdjustColorPage.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.C_DebugPage.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Control.Form_Net.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\WallControl.Form_UartIrCmd_3458.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Form_Waiting.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.IDSetForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.MainForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.Properties.Resources.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnAdjustForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnColorForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnControlForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnMainLogo.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color_Calibration.UnPages.UnSetForm.resources
+F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.GenerateResource.Cache

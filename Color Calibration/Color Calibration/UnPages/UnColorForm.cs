@@ -12,6 +12,7 @@ using System.IO;
 using System.Threading;
 using HZH_Controls.Forms;
 using HZH_Controls;
+using CA200SRVRLib;
 
 namespace Color_Calibration.UnPages
 {
@@ -189,6 +190,16 @@ namespace Color_Calibration.UnPages
             Uncom_id.SelectedIndex = 0;
             if (ucCheckBox_out.Checked && Uncom_id.Source.Count > 0)
                 Index = 1;
+            if (GlobalClass.c_bIsOpen)
+            {
+                if (MainColorModel.M_MeterType == 0)
+                {
+                    i1d3Handle = GlobalClass.i1d3Handle;
+                }
+                else
+                {
+                }
+            }
         }
 
         private void UnColorForm_Load(object sender, EventArgs e)
@@ -523,18 +534,33 @@ namespace Color_Calibration.UnPages
         }
         #endregion
         #region Measure & ColorTemp
+        
         // measure color temp
-        private void Measure_CA210()
+        private void Measure_ColorxyLv0()
         {
-            //m_ICa.Measure(1);
+            if (MainColorModel.M_MeterType == 0)
+            {
+                Measure_i1d3();
+            }
+            else 
+            {
+                MeasureData _measureData = new MeasureData();
+                if (MainColorModel.M_MeterType == 1)
+                {
+                    _measureData = GlobalClass._meter_CA310.GetCA310Measure_Data();
+                }
+                else
+                {
+                    _measureData = GlobalClass._meter_CA410.GetCA410Measure_Data();
+                }
+                ucPrevMeasure_Sx = ucMeasure_Sx;
+                ucPrevMeasure_Sy = ucMeasure_Sy;
+                ucPrevMeasure_Lv = ucMeasure_Lv;
 
-            ucPrevMeasure_Sx = ucMeasure_Sx;
-            ucPrevMeasure_Sy = ucMeasure_Sy;
-            ucPrevMeasure_Lv = ucMeasure_Lv;
-
-            //ucMeasure_Sx = m_IProbe.sx * 10000;
-            //ucMeasure_Sy = m_IProbe.sy * 10000;
-            //ucMeasure_Lv = m_IProbe.Lv;
+                ucMeasure_Sx = (float)_measureData.sx * 10000;
+                ucMeasure_Sy = (float)_measureData.sy * 10000;
+                ucMeasure_Lv = (float)_measureData.Lv;
+            }
         }
         private void Measure_i1d3()
         {
@@ -2156,6 +2182,24 @@ namespace Color_Calibration.UnPages
         }
         #endregion
         #region RunButton
+
+        private bool Check_Meter()
+        {
+            if (GlobalClass.c_bIsOpen)
+            {
+                if (MainColorModel.M_MeterType == 0)
+                {
+                    i1d3Handle = GlobalClass.i1d3Handle;
+                }
+                else
+                {
+                    //m_ICa = GlobalClass.m_ICa;
+                    //m_IProbe = GlobalClass.m_IProbe;
+                }
+                return true;
+            }
+            return false;
+        }
         /// <summary>
         /// 执行控制按键
         /// </summary>
@@ -2163,8 +2207,10 @@ namespace Color_Calibration.UnPages
         /// <param name="e"></param>
         private void ucBtn_Execute_BtnClick(object sender, EventArgs e)
         {
-            i1d3Handle = GlobalClass.i1d3Handle;
+            //i1d3Handle = GlobalClass.i1d3Handle;
             //_mainForm.UpdateUIStatus();
+            if (!Check_Meter())
+                return;
             GlobalClass.c_IsAutoLv = false;
             if (GlobalClass.m_cIsRunning == false)
             {

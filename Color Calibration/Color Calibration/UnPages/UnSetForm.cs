@@ -27,6 +27,7 @@ namespace Color_Calibration.UnPages
     {
         public SerialPort ComDevice = new SerialPort();
         public event ComEvent.DataReceivedHandler DataReceived;
+        public event LANNetEvent.TCPConnectdHandler LanConnectReceived;
         List<KeyValuePair<string, string>> dit = new List<KeyValuePair<string, string>>();
         private MainForm _mainForm;
         #region Meter
@@ -88,6 +89,8 @@ namespace Color_Calibration.UnPages
             {
                 m_localEP = Com_Class.GetLocalIP()[0];
                 _Tcp_Server = new IOCPServer(IPAddress.Parse(m_localEP), 8234, 81);
+                _Tcp_Server.DataReceived += new LANNetEvent.TCPDataReceivedHandler(Lan_DataReceived);
+                _Tcp_Server.ConnectReceived += new LANNetEvent.TCPConnectdHandler(Lan_ConnectReceived);
             }
             //Console.WriteLine("2222");
         }
@@ -202,7 +205,31 @@ namespace Color_Calibration.UnPages
             //Console.WriteLine("串口 DataReceived：" + ReDatas.Length);
             //ExceptionLog.getLog().WriteLogFile(ReDatas, DateTime.Now.ToString("yyyyMMdd") + "log.txt");
         }
-        
+
+        private void Lan_DataReceived(object sender, byte[] data)
+        {
+            if (data.Length > 0)
+            {
+                DataReceived(this, data);//输出数据
+                //Console.WriteLine("LAN DataReceived：" + data.Length);
+                //LogHelper.WriteLog("LAN DataReceived：" + Encoding.Default.GetString(data));
+            }
+        }
+
+        private void Lan_ConnectReceived(object sender, bool ok)
+        {
+            if (ok == false)
+            {
+                if (MainColorModel.M_LanIndex == 1)
+                    SetReConnect(sender as IOCPClient);
+                //Console.WriteLine("LAN DisConnect：" + client);
+            }
+            LanConnectReceived(sender, ok);
+            //Console.WriteLine("LAN ConnectReceived：" + client);
+            //LogHelper.WriteLog("LAN ConnectReceived：" + client);
+            //Console.WriteLine("串口 DataReceived：" + ReDatas.Length);
+            //ExceptionLog.getLog().WriteLogFile(ReDatas, DateTime.Now.ToString("yyyyMMdd") + "log.txt");
+        }
         /// <summary>
         /// 发送数据
         /// </summary>
@@ -777,7 +804,7 @@ namespace Color_Calibration.UnPages
                 #region TCP Server Connect
                 if (!_Tcp_Server.IsRunning)
                 {
-                    if (_Tcp_Server.Start(_mainForm))
+                    if (_Tcp_Server.Start())
                     {
                         ucSwitch_com.Enabled = false;
                         ucSwitch_com.Visible = false;
@@ -890,8 +917,12 @@ namespace Color_Calibration.UnPages
                 foreach (DeviceMonitor monitor in _deivceMonitor)
                 {
                     IOCPClient _m_client = new IOCPClient(monitor.ip, monitor.port);
-                    if (_m_client.Start(_mainForm))
+                    if (_m_client.Start())
+                    {
+                        _m_client.DataReceived += new LANNetEvent.TCPDataReceivedHandler(Lan_DataReceived);
+                        _m_client.ConnectReceived += new LANNetEvent.TCPConnectdHandler(Lan_ConnectReceived);
                         _tcp_clients.Add(_m_client);
+                    }
                 }
                 return true;
             }
@@ -1012,6 +1043,8 @@ namespace Color_Calibration.UnPages
             {
                 if (_m_client.Equals(_client))
                 {
+                    _m_client.DataReceived -= new LANNetEvent.TCPDataReceivedHandler(Lan_DataReceived);
+                    _m_client.ConnectReceived -= new LANNetEvent.TCPConnectdHandler(Lan_ConnectReceived);
                     _tcp_clients.Remove(_m_client);
                     break;
                 }
@@ -1032,10 +1065,12 @@ namespace Color_Calibration.UnPages
                 try
                 {
                     IOCPClient _m_client = new IOCPClient(_monitor.ip, _monitor.port);
-                    if (_m_client.Start(_mainForm))
+                    if (_m_client.Start())
                     {
+                        _m_client.DataReceived += new LANNetEvent.TCPDataReceivedHandler(Lan_DataReceived);
+                        _m_client.ConnectReceived += new LANNetEvent.TCPConnectdHandler(Lan_ConnectReceived);
                         _tcp_clients.Add(_m_client);
-                        Console.WriteLine("重新连接OK。");
+                        //Console.WriteLine("重新连接OK。");
                         return true;
                     }
                     Thread.Sleep(1000);

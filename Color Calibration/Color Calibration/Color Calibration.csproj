@@ -143,6 +143,7 @@
     <Compile Include="ComLib\ExceptionLog.cs" />
     <Compile Include="ComLib\FormMove.cs" />
     <Compile Include="ComLib\GlobalClass.cs" />
+    <Compile Include="ComLib\LANNetEvent.cs" />
     <Compile Include="ComLib\LogHelper.cs" />
     <Compile Include="ComLib\MainColorModel.cs" />
     <Compile Include="ComLib\MainSetModel.cs" />

@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
+using static Color_Calibration.ComLib.LANNetEvent;
 
 namespace Color_Calibration.NetCommand.IOCPClinet
 {
@@ -16,7 +17,9 @@ namespace Color_Calibration.NetCommand.IOCPClinet
         IPEndPoint m_endPoint;
         private SocketAsyncEventArgs m_connectSAEA;
         private SocketAsyncEventArgs m_sendSAEA;
-        private MainForm lm;
+        //private MainForm lm;
+        public TCPDataReceivedHandler DataReceived;
+        public TCPConnectdHandler ConnectReceived;
         public bool Connected { get; set; }
         //public List<Socket> m_clients; //客户端列表
         #endregion
@@ -32,9 +35,8 @@ namespace Color_Calibration.NetCommand.IOCPClinet
             //Console.WriteLine(m_socket.RemoteEndPoint);
         }
 
-        public bool Start(MainForm lm)
+        public bool Start()
         {
-            this.lm = lm;
             m_connectSAEA.Completed += OnConnectedCompleted;
             bool con = m_socket.ConnectAsync(m_connectSAEA);
             //Console.WriteLine(con);
@@ -57,10 +59,7 @@ namespace Color_Calibration.NetCommand.IOCPClinet
             //m_clients.Add(socket);
             //_clientCount++;
             Connected = true;
-            lm.Invoke(new MethodInvoker(delegate ()
-            {
-               lm.Reflash_Connect(iPRemote);
-            }));
+            ConnectReceived(this,true);
             SocketAsyncEventArgs receiveSAEA = new SocketAsyncEventArgs();
             byte[] receiveBuffer = new byte[1024 * 4];
             receiveSAEA.SetBuffer(receiveBuffer, 0, receiveBuffer.Length);
@@ -87,23 +86,20 @@ namespace Color_Calibration.NetCommand.IOCPClinet
                 //Console.WriteLine("Client : receive message[ {0} ],from Server[ {1} ]", msg, ipAdress);
                 //char[] c = "end".ToCharArray();
                 //lm.newReceiveData(msg);
+                /*
                 lm.Invoke(new MethodInvoker(delegate ()
                 {
                     lm.Receive_data(buffer, buffer.Length, ipAdress);
                 }));
+                */
+                DataReceived(this, buffer);
                 socket.ReceiveAsync(e);
             }
             else if (e.SocketError == SocketError.ConnectionReset || e.BytesTransferred == 0)
             {
-                Console.WriteLine("Client: 服务器断开连接 ");
+                //Console.WriteLine("Client: 服务器断开连接 ");
                 Connected = false;
-                lm.Invoke(new MethodInvoker(delegate ()
-                {
-                    lm.Re_Connect(this);
-                }));
-                //m_clients.Remove(socket);
-                //lm.Disconnect();
-                //DisConnect();
+                ConnectReceived(this,false);
             }
             else
             {
@@ -172,7 +168,6 @@ namespace Color_Calibration.NetCommand.IOCPClinet
                 }
             }
         }
-
-
+        
     }
 }

@@ -36,6 +36,7 @@ namespace Color_Calibration
             Main_content.Controls.Add(_logopage);
             //Main_content.Dock = DockStyle.Fill;
             _setpage.DataReceived += new ComEvent.DataReceivedHandler(Com_DataReceived);
+            _setpage.LanConnectReceived += new LANNetEvent.TCPConnectdHandler(LAN_ConnectReceived);
             _colorpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
             _adjustpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
             _controlpage.DataSend += new ComEvent.DataSendHandler(DataSender_EventDataSend);
@@ -511,27 +512,12 @@ namespace Color_Calibration
         /// <param name="data"></param>
         /// <param name="length"></param>
         /// <param name="Remoteip"></param>
-        public void Receive_data(byte[] data, int length, string Remoteip)
+        private void LAN_ConnectReceived(object sender, bool ok)
         {
-            //Console.WriteLine(Remoteip);
-            if (length > 0)
+            this.Invoke(new MethodInvoker(delegate ()
             {
-                if (MainColorModel.M_PageIndex == 2)
-                    _colorpage.DataReceived(data);
-                else if (MainColorModel.M_PageIndex == 3)
-                    _adjustpage.DataReceived(data);
-                else if (MainColorModel.M_PageIndex == 4)
-                    _controlpage.DataReceived(data);
-                else
-                {
-                    Console.WriteLine("this page:" + data.Length);
-                }
-                //_debug.ReceivePrint(data);
-                this.BeginInvoke(new MethodInvoker(delegate ()
-                {
-                    _debug.ReceivePrint(data);
-                }));
-            }
+                Reflash_Connect("");
+            }));
         }
         public void Reflash_Connect(string client)
         {
@@ -541,14 +527,6 @@ namespace Color_Calibration
             tcp_count.ForeColor = Color.FromArgb(74, 22, 124);
             if (count == MainColorModel.H_Row * MainColorModel.V_Colu)
                 FrmTips.ShowTips(this, "All devices have completed a TCP connection : " + count, 2000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Large, new Size(300, 50), TipsState.Info);
-        }
-        public void Re_Connect(IOCPClient client)
-        {
-            if (!_setpage.SetReConnect(client))
-            {
-                int count = _setpage.GetConnectCount();
-                tcp_count.Text = "Count : " + count;
-            }
         }
 
         #endregion

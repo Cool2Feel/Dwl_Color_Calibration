@@ -45,7 +45,6 @@ F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\C
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.GenerateResource.Cache
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.exe
 F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.pdb
-F:\1000_Application_Softwarewc\SVN_src\KTC_Color Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csprojResolveAssemblyReference.cache
 F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\bin\x86\Debug\Color Calibration.exe.config
 F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Interop.CA200SRVRLib.dll
 F:\Code\GitHub\Git_Color_Calibration\Dwl_Color_Calibration\Color Calibration\Color Calibration\obj\x86\Debug\Color Calibration.csproj.ResolveComReference.cache

@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using Color_Calibration.ComLib;
+using static Color_Calibration.ComLib.LANNetEvent;
 
 namespace Color_Calibration.NetCommand.IOCPServer
 {
@@ -30,6 +31,10 @@ namespace Color_Calibration.NetCommand.IOCPServer
 
         //private List<Socket> SockList = new List<Socket>();
         public List<AsyncUserToken> m_clients; //客户端列表
+        
+        public TCPDataReceivedHandler DataReceived;
+
+        public TCPConnectdHandler ConnectReceived;
         /// <summary>
         /// 当前的连接的客户端数
         /// </summary>
@@ -178,11 +183,10 @@ namespace Color_Calibration.NetCommand.IOCPServer
         /// <summary>
         /// 启动
         /// </summary>
-        public bool Start(MainForm f)
+        public bool Start()
         {
             if (!IsRunning)
             {
-                mf = f;
                 Init();
                 m_clients.Clear();
                 //mf.Rs232Con = true;
@@ -311,15 +315,17 @@ namespace Color_Calibration.NetCommand.IOCPServer
                         userToken.IPAddress = ((IPEndPoint)(e.AcceptSocket.RemoteEndPoint)).Address;
                         //userToken.SendEventArgs = asyniar;
                         lock (m_clients) { m_clients.Add(userToken); }  
-                        Log4Debug(String.Format("客户 {0} 连入, 共有 {1} 个连接。", s.RemoteEndPoint.ToString(), _clientCount));
+                        //Log4Debug(String.Format("客户 {0} 连入, 共有 {1} 个连接。", s.RemoteEndPoint.ToString(), _clientCount));
                         //SockList.Add(s);
                         //byte [] buf = Encoding.Default.GetBytes("%1IP " + s.RemoteEndPoint.ToString() + "\r");
                         //Send(e.AcceptSocket, buf, 0, buf.Length, 10);
-                        
+                        ConnectReceived(this,true);
+                        /*
                         mf.Invoke(new MethodInvoker(delegate()
                         {
                             mf.Reflash_Connect(s.RemoteEndPoint.ToString());
                         }));
+                        */
                         if (!s.ReceiveAsync(asyniar))//投递接收请求
                         {
                             ProcessReceive(asyniar);
@@ -461,8 +467,7 @@ namespace Color_Calibration.NetCommand.IOCPServer
         #endregion
 
         #region 接收数据
-
-
+        
         /// <summary>
         ///接收完成时处理函数
         /// </summary>
@@ -494,12 +499,15 @@ namespace Color_Calibration.NetCommand.IOCPServer
                         }
                         //Console.WriteLine(_serverSock.LocalEndPoint.ToString());
                         string info = Encoding.ASCII.GetString(data);
-                        Log4Debug(String.Format("收到 {0} 数据为 {1}", token.Remote.ToString(), info));
-                        
+                        //Log4Debug(String.Format("收到 {0} 数据为 {1}", token.Remote.ToString(), info));
+
+                        DataReceived(this, data);
+                        /*
                         mf.Invoke(new MethodInvoker(delegate ()
                         {
                             mf.Receive_data(data, data.Length, token.Remote.ToString());
                         }));
+                        */
                     }
 
                     if (!token.Socket.ReceiveAsync(e))//为接收下一段数据，投递接收请求，这个函数有可能同步完成，这时返回false，并且不会引发SocketAsyncEventArgs.Completed事件
@@ -570,10 +578,14 @@ namespace Color_Calibration.NetCommand.IOCPServer
                         //mf.com_List.Items.Remove(s.RemoteEndPoint);
                     }
                 }
+
+                ConnectReceived(this,false);
+                /*
                 mf.Invoke(new MethodInvoker(delegate ()
                 {
                     mf.Reflash_Connect(s.RemoteEndPoint.ToString());
                 }));
+                */
                 CloseClientSocket(s, e);
 
             }
